@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Randaberghallen prototyper</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Archivo:wght@400;500;600&display=swap">
+<style>
+/* Layout: én kolonne på mobil, to kort side om side på PC. Mørkt bassengrom, samme farger som selve siden. */
+:root{
+  --bunn:#06142E;        /* dypt bassengvann om kvelden */
+  --flate:#0C2147;       /* kortene */
+  --kant:#24406F;
+  --tekst:#F2F7FF;
+  --dempet:#A9BDDB;
+  --vann:#1583EE;
+  --vann-mork:#0A3A8C;
+  --tau-rod:#EF6351;
+  --tau-hvit:#F6F9FC;
+  --tau-bla:#2E8FF7;
+  --oransje:#D07726;
+  --display:'Bricolage Grotesque','Archivo',system-ui,sans-serif;
+  --brod:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{background:var(--bunn);color:var(--tekst)}
+body{font-family:var(--brod);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:calc(28px + env(safe-area-inset-top,0px)) calc(40px + env(safe-area-inset-bottom,0px));margin:0;
+  background:radial-gradient(120% 60% at 50% -10%,#123068 0%,var(--bunn) 60%) var(--bunn)}
+.ramme{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.topp{display:flex;flex-direction:column;gap:10px;max-width:40em}
+.over{font-size:.78rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#CFE6FF}
+h1{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,9vw,4rem);line-height:.95;letter-spacing:-.04em;text-wrap:balance}
+.topp p{margin:0;color:var(--dempet);font-size:1.02rem}
+.valg{display:grid;grid-template-columns:1fr;gap:18px}
+@media (min-width:760px){.valg{grid-template-columns:1fr 1fr;gap:24px}}
+.kort{display:flex;flex-direction:column;gap:16px;min-width:0;padding:16px 16px 18px;border-radius:22px;background:var(--flate);border:1px solid var(--kant);color:inherit;text-decoration:none;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .25s,background .25s}
+.kort:hover{transform:translateY(-3px);border-color:#4C77B8;background:#0F2853}
+.kort:focus-visible{outline:3px solid #8CC8FF;outline-offset:3px}
+.kort__rad{display:flex;align-items:center;gap:16px}
+.kort__tekst{display:flex;flex-direction:column;gap:6px;min-width:0}
+.nr{font-size:.74rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#8CC8FF}
+.kort h2{margin:0;font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.1;letter-spacing:-.02em;text-wrap:balance}
+.kort p{margin:0;color:var(--dempet);font-size:.95rem}
+.knapp{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:10px 20px;border-radius:40px;background:var(--tekst);color:var(--bunn);font-weight:700;font-size:.98rem}
+.kort:hover .knapp{background:#fff}
+
+/* Skisser av forsidene, tegnet som en liten mobilskjerm */
+.skjerm{flex:0 0 auto;width:104px;aspect-ratio:9/18.5;max-width:100%;border-radius:16px;overflow:hidden;position:relative;border:3px solid #021029;box-shadow:0 14px 30px -14px rgba(0,0,0,.8);background:var(--bunn)}
+.skjerm__nav{position:absolute;inset:0 0 auto;height:11%;background:#030B1C}
+.skjerm__nav::after{content:"";position:absolute;left:10%;top:42%;width:42%;height:16%;border-radius:3px;background:rgba(255,255,255,.75)}
+.vann{position:absolute;left:0;right:0;bottom:0;overflow:hidden;
+  background:
+    radial-gradient(40% 18% at 30% 30%,rgba(140,220,255,.45),transparent 70%),
+    radial-gradient(35% 14% at 75% 62%,rgba(140,220,255,.38),transparent 70%),
+    radial-gradient(30% 12% at 20% 85%,rgba(140,220,255,.32),transparent 70%),
+    linear-gradient(200deg,var(--vann),var(--vann-mork))}
+.tau{position:absolute;left:0;right:0;height:3px;
+  background:repeating-linear-gradient(90deg,var(--tau-hvit) 0 4px,transparent 4px 6px,var(--tau-bla) 6px 10px,transparent 10px 12px)}
+.tau::before,.tau::after{content:"";position:absolute;top:0;width:14%;height:100%;background:repeating-linear-gradient(90deg,var(--tau-rod) 0 4px,transparent 4px 6px)}
+.tau::before{left:0}.tau::after{right:0}
+.svommer{position:absolute;width:30%;height:5px;border-radius:4px;background:linear-gradient(90deg,#E9BE9A 0 62%,#0B1F4D 62% 76%,#E9BE9A 76%)}
+.svommer::before{content:"";position:absolute;right:-3px;top:-1.5px;width:8px;height:8px;border-radius:50%;background:var(--hette,#F4F6F8)}
+.linje{position:absolute;left:10%;height:5%;border-radius:3px;background:rgba(255,255,255,.95)}
+.linje--tynn{height:2.4%;background:rgba(255,255,255,.6)}
+.pille{position:absolute;left:10%;height:4.2%;border-radius:20px;background:rgba(255,255,255,.9)}
+
+/* Prototype 1: info øverst, basseng nederst */
+.p1 .info{position:absolute;left:0;right:0;top:11%;bottom:40%;background:#071630}
+.p1 .tk{position:absolute;bottom:4%;height:30%;width:37%;border-radius:6px}
+.p1 .tk--a{left:10%;background:radial-gradient(120% 90% at 80% 0%,var(--oransje),#3A1D08)}
+.p1 .tk--b{right:10%;background:radial-gradient(110% 90% at 20% 0%,#3A4A73,#0A0F1C)}
+.p1 .vann{top:60%}
+
+/* Prototype 2: hele skjermen er vann */
+.p2 .vann{top:11%}
+
+.fot{display:flex;flex-direction:column;gap:6px;color:var(--dempet);font-size:.86rem;border-top:1px solid var(--kant);padding-top:16px;max-width:46em}
+.fot b{color:var(--tekst);font-weight:600}
+@media (prefers-reduced-motion:reduce){.kort{transition:none}.kort:hover{transform:none}}
+</style>
+
+</head>
+<body>
+<main class="ramme">
+  <header class="topp">
+    <span class="over">Randaberghallen · forslag til ny nettside</span>
+    <h1>To prototyper</h1>
+    <p>Trykk på en for å åpne den. Øverst på begge sidene er det en lenke som bytter til den andre.</p>
+  </header>
+
+  <section class="valg" aria-label="Prototyper">
+    <a class="kort" href="prototype-1.html">
+      <div class="kort__rad">
+        <div class="skjerm p1" aria-hidden="true">
+          <div class="skjerm__nav"></div>
+          <div class="info">
+            <span class="pille" style="top:9%;width:52%"></span>
+            <span class="linje" style="top:24%;width:70%"></span>
+            <span class="linje linje--tynn" style="top:36%;width:62%"></span>
+            <span class="tk tk--a"></span><span class="tk tk--b"></span>
+          </div>
+          <div class="vann">
+            <span class="tau" style="top:48%"></span>
+            <span class="svommer" style="top:24%;left:22%"></span>
+            <span class="svommer" style="top:72%;left:54%;--hette:#FFC53D"></span>
+          </div>
+        </div>
+        <div class="kort__tekst">
+          <span class="nr">Prototype 1</span>
+          <h2>Delt forside</h2>
+          <p>Velkomst, idrettshall og trimrom med bilder øverst. Bassenget med svømmere under.</p>
+        </div>
+      </div>
+      <span class="knapp">Åpne prototype 1 →</span>
+    </a>
+
+    <a class="kort" href="prototype-2.html">
+      <div class="kort__rad">
+        <div class="skjerm p2" aria-hidden="true">
+          <div class="skjerm__nav"></div>
+          <div class="vann">
+            <span class="svommer" style="top:7%;left:46%"></span>
+            <span class="tau" style="top:16%"></span>
+            <span class="pille" style="top:20%;width:56%"></span>
+            <span class="linje" style="top:30%;width:72%"></span>
+            <span class="linje" style="top:38%;width:44%"></span>
+            <span class="tau" style="top:47%"></span>
+            <span class="linje linje--tynn" style="top:51%;width:74%"></span>
+            <span class="linje linje--tynn" style="top:56%;width:60%"></span>
+            <span class="pille" style="top:64%;width:80%;height:6%"></span>
+            <span class="tau" style="top:76%"></span>
+            <span class="svommer" style="top:86%;left:28%;--hette:#FFC53D"></span>
+          </div>
+        </div>
+        <div class="kort__tekst">
+          <span class="nr">Prototype 2</span>
+          <h2>Hele forsiden er vann</h2>
+          <p>Velkomsten ligger oppå bassenget, med svømmere i flere baner. Ingen bilder på forsiden.</p>
+        </div>
+      </div>
+      <span class="knapp">Åpne prototype 2 →</span>
+    </a>
+  </section>
+
+  <footer class="fot">
+    <span><b>Demo.</b> Dette er forslag, ikke den offisielle nettsiden til Randaberghallen.</span>
+    <span>Bildene og logoen hentes fra randaberghallen.no. Hvis de ikke vises her, står det en beskjed om det øverst på siden.</span>
+  </footer>
+</main>
+</body>
+</html>
