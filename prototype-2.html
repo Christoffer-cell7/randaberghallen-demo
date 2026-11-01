@@ -510,7 +510,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 @media (max-width:479px){.logo{font-size:1.14rem;gap:8px;letter-spacing:-.03em}.nav .knapp{padding:10px 13px;gap:6px}.menyknapp{padding:8px 13px}.nav__hoyre{gap:6px}.nav__inn{column-gap:8px}}
 @media (max-width:599px){.demo>span{display:none}}
 @media (max-width:374px){.nav__hoyre .knapp{display:none}}
-@media (min-width:1060px){
+@media (min-width:1180px){
   .menyknapp{display:none}
   .meny{display:flex;flex:0 1 auto;gap:2px;padding:0;margin-left:auto;font-size:1rem}
   .meny a{border:0;min-height:40px;padding:9px 14px;border-radius:30px;color:rgba(255,255,255,.8);transition:.18s}
@@ -617,6 +617,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .okt{display:grid;grid-template-columns:14px 6.6em minmax(0,1fr);column-gap:10px;align-items:baseline;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.13)}
 .okt i{width:12px;height:12px;border-radius:4px;background:var(--farge);align-self:start;margin-top:.42em}
 .okt__tid{font-weight:700;white-space:nowrap}
+.okt__merk{grid-column:3;margin-top:4px;font-size:.86rem;line-height:1.45;color:rgba(255,255,255,.7)}
 .okt--ferdig>*{opacity:.5}
 .lapp{display:inline-block;margin-left:8px;padding:1px 9px;border-radius:30px;font-size:.72rem;font-weight:800;vertical-align:2px;background:var(--gronn);color:#04331C}
 .tomt{margin-top:16px;color:rgba(255,255,255,.84)}
@@ -779,7 +780,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 
 /* ---------- Nytt: logo, lysbilder, snarveier, vanlig uke ---------- */
 :root{--anker:150px}
-@media (min-width:1060px){:root{--anker:94px}}
+@media (min-width:1180px){:root{--anker:94px}}
 .logo.harbilde .logo__navn{display:none}
 
 .hero__over{margin-bottom:14px;font-size:.8125rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#CFE6FF;text-shadow:0 1px 10px rgba(3,10,28,.7)}
@@ -795,7 +796,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .snarvei__inn::-webkit-scrollbar{display:none}
 .snarvei a{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:30px;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.9);font-weight:600;font-size:.92rem;text-decoration:none;white-space:nowrap;transition:background .2s,color .2s}
 .snarvei a.aktiv{background:#fff;border-color:#fff;color:var(--blekk)}
-@media (min-width:1060px){.snarvei{display:none}}
+@media (min-width:1180px){.snarvei{display:none}}
 
 .tavle__valg{display:flex;flex-direction:column;gap:14px;min-width:0}
 .bytt{display:inline-flex;align-self:flex-start;padding:4px;border-radius:40px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)}
@@ -902,6 +903,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .bane__navn{position:absolute;left:10px;top:5px;z-index:1;font-size:.7rem;font-weight:700;letter-spacing:.01em;color:rgba(255,255,255,.94);text-shadow:0 1px 6px rgba(4,20,60,.9);pointer-events:none;white-space:nowrap}
 .bane__navn small{display:none;font-size:inherit;font-weight:500;color:rgba(255,255,255,.7)}
 .bane__okt{position:absolute;top:21px;bottom:7px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,.36),rgba(255,255,255,0) 58%),var(--farge);color:var(--blekk);font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap;box-shadow:0 8px 14px -8px rgba(0,6,30,.85),inset 0 1px 0 rgba(255,255,255,.65)}
+.bane__okt{z-index:5}
 .bane__okt.forbi{opacity:.42}
 /* det som foregår akkurat nå, lyser */
 .bane__okt.pagar{box-shadow:0 0 0 2px rgba(255,255,255,.92),0 0 20px 1px var(--farge)}
@@ -1024,7 +1026,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 
 /* pila i snarveiene og menyen */
 .meny a{position:relative}
-@media (min-width:1060px){
+@media (min-width:1180px){
   .meny a::after{content:"";position:absolute;left:14px;right:14px;bottom:5px;height:2px;border-radius:2px;background:var(--aqua);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
   .meny a:hover::after,.meny a.aktiv::after{transform:scaleX(1)}
   .meny a.aktiv{color:#fff}
@@ -1060,6 +1062,27 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 
 /* Smale iPhoner (SE, mini): logo, Bestill her og Meny på én linje */
 @media (max-width:389px){.logo{font-size:1.02rem;gap:6px}.nav .knapp{padding:9px 11px;gap:5px;font-size:.92rem}.menyknapp{padding:8px 11px;font-size:.92rem}.nav__hoyre{gap:5px}.nav__inn{column-gap:6px}}
+/* Forsiden: ingen «Bestill her» i toppen. Den finnes på de andre sidene. */
+.paa-forside #bestill{display:none}
+/* Infolinja øverst på forsiden: litt tynnere enn på svømmehall-siden */
+.kant--forside{flex:0 0 auto;padding:12px 0}
+/* Toppmenyen på PC: litt større logo, lenker og knapp (fra 1240 px, så alt får plass på én linje) */
+@media (min-width:1240px){
+  .nav__inn{min-height:84px}
+  .logo__bilde{height:66px;max-width:310px}
+  .logo{font-size:1.7rem}
+  .meny{font-size:1.09rem;gap:4px}
+  .meny a{min-height:46px;padding:10px 16px}
+  .nav .bestill__knapp{min-height:50px;padding:12px 24px;font-size:1.03rem}
+}
+/* «Åpent nå»-merkelappen på smale telefoner: litt mindre tekst, og pen også over to linjer */
+#naatekst{text-wrap:balance}
+@media (max-width:420px){.naa{font-size:.9rem;line-height:1.25;padding:8px 14px 8px 12px;gap:9px;border-radius:18px;letter-spacing:-.005em}}
+/* Under timeplanen: «Dra over bassenget …» til venstre og regelen om stengetid til høyre, på samme linje */
+.plan__under{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2px 28px;margin-top:10px}
+.plan__under .plan__les{margin-top:0;flex:1 1 260px}
+.plan__regel{flex:0 1 auto;font-size:.88rem;line-height:1.35;color:rgba(255,255,255,.62);text-align:right}
+@media (max-width:759px){.plan__regel{text-align:left}}
 </style>
 </head>
 <body>
@@ -1083,11 +1106,11 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
   <label>Vis siden som om klokka er
     <select id="demotid">
       <option value="">nå</option>
-      <option value="2026-10-07T07:10">onsdag 07.10</option>
-      <option value="2026-10-07T09:40">onsdag 09.40</option>
-      <option value="2026-10-09T17:30">fredag 17.30</option>
-      <option value="2026-10-10T12:00">lørdag 12.00</option>
-      <option value="2026-10-13T12:00">tirsdag 13. okt. 12.00</option>
+      <option value="2026-11-11T07:10">onsdag 07.10</option>
+      <option value="2026-11-11T09:40">onsdag 09.40</option>
+      <option value="2026-11-13T17:30">fredag 17.30</option>
+      <option value="2026-11-14T12:00">lørdag 12.00</option>
+      <option value="2026-11-10T12:00">tirsdag 12.00</option>
       <option value="2026-12-24T12:00">julaften 12.00</option>
     </select>
   </label>
@@ -1138,6 +1161,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 
 <main id="innhold">
   <div class="side side--forside" data-side="topp">
+  <div class="kant kant--forside" data-kant="forside" aria-hidden="true"><div class="kant__spor"><ul></ul><ul></ul></div></div>
   <section class="hero morkt" id="topp" aria-label="Velkommen">
     <canvas id="vann" aria-hidden="true"></canvas>
     <canvas id="vann2" aria-hidden="true"></canvas>
@@ -1175,7 +1199,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
   </nav>
 
   <div class="side" data-side="svommehall" id="svommehall">
-  <div class="kant" id="kant" aria-hidden="true"><div class="kant__spor" id="kantspor"><ul id="kant1"></ul><ul id="kant2"></ul></div></div>
+  <div class="kant" data-kant="svommehall" aria-hidden="true"><div class="kant__spor"><ul></ul><ul></ul></div></div>
   <section class="seksjon dyp morkt" id="hvem">
     <div class="inn">
       <div class="hode rv">
@@ -1196,7 +1220,10 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
         </div>
         <div style="margin-top:30px"><h3 id="dagtittel"></h3></div>
         <div class="plan" id="plan" aria-hidden="true"></div>
-        <p class="plan__les" id="planles" aria-hidden="true"></p>
+        <div class="plan__under">
+          <p class="plan__les" id="planles" aria-hidden="true"></p>
+          <p class="plan__regel">Alle må opp av bassenget 15 minutter før stengetid og være ute av garderoben innen vi stenger.</p>
+        </div>
         <div id="dagliste" aria-live="polite"></div>
         <div class="tavle__fot" id="tavlefot"></div>
       </div>
@@ -1296,7 +1323,6 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
           <p class="fas__over">Idrettshallen</p>
           <h2 id="idrett-tittel">Leie av idrettshall</h2>
         </div>
-        <p>To store haller. På dagtid og kveld bruker skoler, lag og foreninger dem. Ledig tid kan alle leie til kompistrening.</p>
       </div>
 
       <div class="fas__topp">
@@ -1355,7 +1381,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
           <p class="fas__over">Trimrommet</p>
           <h2 id="trim-tittel">Tren når det passer deg</h2>
         </div>
-        <p>Styrkeapparater, tredemøller og ergometersykler. Åpent fra tidlig morgen til sen kveld, med halvårskort.</p>
+        <p>Styrkeapparater, tredemøller og ergometersykler. Åpent fra morgen til kveld alle dager, med halvårskort.</p>
       </div>
 
       <div class="fas__topp fas__topp--trim">
@@ -1377,7 +1403,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
         <div class="fas__kort fas__kort--hvit rv">
           <h3>Slik kommer du i gang</h3>
           <ol class="steg">
-            <li><b>Kjøp kort i resepsjonen</b><span>Resepsjonen er åpen når det er publikumsbading. Se tidene øverst på siden.</span></li>
+            <li><b>Kjøp kort i resepsjonen</b><span>Resepsjonen er åpen når det er publikumsbading. Trykk på «Når er resepsjonen åpen?» under, så får du tidene.</span></li>
             <li><b>Armbåndet er nøkkelen</b><span>Du får et armbånd som låser opp døra til trimrommet.</span></li>
             <li><b>Kom ferdig skiftet</b><span>Det er ikke garderobe eller dusj for trimrommet. Skift og dusj hjemme.</span></li>
           </ol>
@@ -1497,16 +1523,15 @@ const HALL = {
       bursdagVann: 'https://randaberg.bestille.no/OnCust2/#!/',
       idrettshall: 'https://randaberg.bestille.no/OnCust2/#!/'
     },
-    parkering: 'Gratis parkering rett utenfor. Flere plasser bak sandvolleyballbanene og på andre siden av Torvmyrveien, ved Vår Energi Arena Randaberg.'
+    parkering: 'Gratis parkering rett utenfor. Flere plasser foran sandvolleyballbanene og på andre siden av Torvmyrveien, ved Vår Energi Arena Randaberg.'
   },
 
   grupper: [
-    { id: 'familie', navn: 'Familiebading',
-      om: 'Sone for lek, sone for stup og hopp, og sone for rolig svømming, også for barn som øver til svømmemerker. Barnebassenget er åpent for de som ikke kan svømme, sammen med en voksen.' },
+    /* Familiebading er alltid sammen med mosjonssvømming: én bane er satt av til mosjon. */
     { id: 'familie-mosjon', navn: 'Familiebading og mosjonssvømming',
-      om: 'Vanligvis 2–3 baner til mosjonssvømmere, en sone for lek og en for stup og hopp. 5 m-tårnet er stengt. Barnebassenget er åpent for de som ikke kan svømme, sammen med en voksen.' },
+      om: 'Én bane er satt av til mosjonssvømming. Resten av bassenget er til lek, stup og hopp og rolig svømming, også for barn som øver til svømmemerker. Barnebassenget er åpent for de som ikke kan svømme, sammen med en voksen.' },
     { id: 'mosjon', navn: 'Mosjonssvømming for voksne', tillegg: '18+',
-      om: 'Én bane for raske, én for middels og en bred sone for rolig svømming. Barnebassenget er vanligvis stengt.' },
+      om: 'Hele 25 m-bassenget er for mosjonssvømmere over 18 år, med én bane for raske, én for middels og en bred sone for rolig svømming. Barn under 18 år kan ikke bade da, og barnebassenget er vanligvis stengt.' },
     { id: 'pensjonist', navn: 'Pensjonistsvømming',
       om: '25 m-bassenget er reservert pensjonister, uten baneskiller. Vanligvis vanngymnastikk på grunn del 10.00–10.30. Da kan du bare svømme på tvers på dyp del, eventuelt i én bane.' },
     { id: 'baby', navn: 'Babybading',
@@ -1530,21 +1555,19 @@ const HALL = {
         resepsjonStengt: { fra: '09.45', til: '11.00' } },
       { fra: '10.30', til: '11.00', pause: true, navn: 'Stengt (pause)' },
       { fra: '11.00', til: '14.00', gruppe: 'familie-mosjon' },
-      { fra: '17.00', til: '19.30', gruppe: 'familie' },
+      { fra: '17.00', til: '19.30', gruppe: 'familie-mosjon' },
       { fra: '19.30', til: '21.00', gruppe: 'mosjon' }
     ],
     torsdag: [],
     fredag: [
-      { fra: '15.00', til: '19.30', gruppe: 'familie' },
+      { fra: '15.00', til: '19.30', gruppe: 'familie-mosjon' },
       { fra: '19.30', til: '21.00', gruppe: 'mosjon' }
     ],
     lørdag: [
-      { fra: '10.00', til: '15.00', gruppe: 'familie', merknad: 'To baner i 25 m-bassenget er reservert RIL svømming 10–11.' },
-      { fra: '15.00', til: '16.00', gruppe: 'familie-mosjon' }
+      { fra: '10.00', til: '16.00', gruppe: 'familie-mosjon', merknad: 'To baner i 25 m-bassenget er reservert RIL svømming 10–11.' }
     ],
     søndag: [
-      { fra: '10.00', til: '15.00', gruppe: 'familie' },
-      { fra: '15.00', til: '16.00', gruppe: 'familie-mosjon' }
+      { fra: '10.00', til: '16.00', gruppe: 'familie-mosjon' }
     ]
   },
 
@@ -1553,24 +1576,22 @@ const HALL = {
   spesialuker: [
     { navn: 'Høstferien', fra: '2026-10-05', til: '2026-10-11', dager: {
       '2026-10-05': [
-        { fra: '11.00', til: '15.30', gruppe: 'familie' },
+        { fra: '11.00', til: '15.30', gruppe: 'familie-mosjon' },
         { fra: '19.00', til: '20.00', gruppe: 'familie-mosjon' },
         { fra: '20.00', til: '21.00', gruppe: 'mosjon' }
       ],
-      '2026-10-06': [{ fra: '11.00', til: '19.00', gruppe: 'familie' }],
+      '2026-10-06': [{ fra: '11.00', til: '19.00', gruppe: 'familie-mosjon' }],
       '2026-10-07': 'ordinær',
-      '2026-10-08': [{ fra: '11.00', til: '15.30', gruppe: 'familie' }],
+      '2026-10-08': [{ fra: '11.00', til: '15.30', gruppe: 'familie-mosjon' }],
       '2026-10-09': [
-        { fra: '11.00', til: '19.30', gruppe: 'familie' },
+        { fra: '11.00', til: '19.30', gruppe: 'familie-mosjon' },
         { fra: '19.30', til: '21.00', gruppe: 'mosjon' }
       ],
       '2026-10-10': [
-        { fra: '10.00', til: '15.00', gruppe: 'familie', merknad: 'To baner i 25 m-bassenget er reservert RIL svømming 10–11.' },
-        { fra: '15.00', til: '16.00', gruppe: 'familie-mosjon' }
+        { fra: '10.00', til: '16.00', gruppe: 'familie-mosjon', merknad: 'To baner i 25 m-bassenget er reservert RIL svømming 10–11.' }
       ],
       '2026-10-11': [
-        { fra: '10.00', til: '15.00', gruppe: 'familie' },
-        { fra: '15.00', til: '16.00', gruppe: 'familie-mosjon' }
+        { fra: '10.00', til: '16.00', gruppe: 'familie-mosjon' }
       ]
     } }
   ],
@@ -1616,9 +1637,9 @@ const HALL = {
       /* SJEKK: at babyer uten badekort betaler barnepris. Prislisten har ingen egen babypris. */
       svar: 'Ja, babyer betaler barnepris, 50 kr. Barn fra 0 til og med 9 år som bor i Randaberg kommune, bader gratis med Barnas badekort.' },
     { sp: 'Selger dere badehetter og badebukser?',
-      svar: 'Vi selger badebleier, svømmebriller, badehetter og armvinger i resepsjonen. Vi selger ikke badedrakter eller badebukser.' },
+      svar: 'Vi selger badebleier, badebukser til baby, svømmebriller, badehetter og armvinger i resepsjonen. Badedrakter, og badebukser til større barn og voksne, selger vi ikke.' },
     { sp: 'Når stenger dere?',
-      svar: 'Resepsjonen stenger cirka 45 minutter før stengetid. Alle må opp av bassenget 15 minutter før stengetid.',
+      svar: 'Resepsjonen stenger cirka 45 minutter før stengetid. Alle må opp av bassenget 15 minutter før stengetid og være ute av garderoben innen vi stenger.',
       lenke: { tekst: 'Se åpningstidene', til: '#hvem' } },
     { sp: 'Hva koster det å komme inn?',
       svar: 'Voksne betaler 70 kr. Barn, studenter, honnør og ikke-badende betaler 50 kr.',
@@ -1775,7 +1796,7 @@ const FORSIDE = {
     svomming: [
       { bilde: 'velkommen', alt: 'Familiebading i svømmehallen', tittel: 'Velkommen til publikumsbading', tekst: 'Familiebading, mosjon, pensjonist- og babybading.' },
       { bilde: 'basseng25', alt: '25 m-bassenget', tittel: '25 m-bassenget', tekst: '1,2 til 3,8 meter dypt. Cirka 28 grader.' },
-      { bilde: 'velkommen2', alt: 'Svømmehallen i Randaberghallen', tittel: 'Svømmehallen', tekst: '25 m basseng, barnebasseng og stupetårn.' },
+      { bilde: 'velkommen2', alt: 'Svømmehallen i Randaberghallen', tittel: 'Svømmehallen', tekst: '25 m-basseng, barnebasseng, stupetårn og badstue.' },
       { bilde: 'barnebasseng', alt: 'Barnebassenget', tittel: 'Barnebassenget', tekst: '30 til 50 centimeter dypt. Cirka 34 grader.' },
       { bilde: 'svommhall7', alt: 'Svømmehallen i Randaberghallen', tittel: 'Svømmehallen', tekst: 'Plass til lek, mosjon og rolig svømming.' },
       { bilde: 'svommpanorama', alt: 'Svømmehallen sett fra siden', tittel: 'Hele svømmehallen', tekst: '25 m-basseng og barnebasseng.' },
@@ -1806,13 +1827,14 @@ const FORSIDE = {
     ]
   },
   grupper: {
-    'familie':        { farge: '#FF9E80', kort: 'Familiebading',     a: '#1F8FEF', b: '#0A49B4' },
-    'familie-mosjon': { farge: '#F4C56A', kort: 'Familie og mosjon', a: '#1877E0', b: '#083C9A' },
+    'familie-mosjon': { farge: '#F4C56A', kort: 'Familiebading og mosjon', a: '#1877E0', b: '#083C9A' },
     'mosjon':         { farge: '#7CC7FF', kort: 'Mosjon, voksne',    a: '#0F58C2', b: '#05286E' },
     'pensjonist':     { farge: '#B9AEFF', kort: 'Pensjonist',        a: '#1C8FCB', b: '#0A4A86' },
     'baby':           { farge: '#7FE0B8', kort: 'Baby',              a: '#3DB4E6', b: '#1378C9' }
   },
-  kant: ['25 m basseng', '1,2 til 3,8 m dypt', 'Cirka 28 grader', 'Barnebasseng cirka 34 grader', 'Stupetårn', 'Familiebading', 'Mosjonssvømming', 'Babybading', 'Pensjonistsvømming', 'Bursdag', 'To idrettshaller', 'Trimrom'],
+  /* Infolinjene. Forsiden viser hele Randaberghallen, svømmehall-siden bare små fakta om svømmehallen. */
+  kant: ['Svømmehall', '25 m-basseng', 'Barnebasseng', 'Stupetårn', 'Badstue', 'Familiebading og mosjon', 'Mosjonssvømming', 'Babybading', 'Pensjonistsvømming', 'Bursdag', 'To idrettshaller', 'Bordtennis', 'Trimrom'],
+  kantSvommehall: ['25 m-basseng', '1,2 til 3,8 m dypt', 'Cirka 28 grader', 'Barnebasseng', '30 til 50 cm dypt', 'Cirka 34 grader', 'Stupebrett på 1 og 3 m', 'Stupetårn på 5 m', 'Badstue'],
   billetter: [
     { hvem: 'Voksen', note: '18 år og eldre', kr: 70, mork: true },
     { hvem: 'Barn, student og honnør', note: 'Gjelder også ikke-badende', kr: 50 },
@@ -1862,7 +1884,7 @@ function periode(fra, til) {
 }
 
 /* Nå, alltid i norsk tid, uansett hvor besøkeren er.
-   For å vise fram demoen kan tiden settes i adressen: ?tid=2026-10-07T09:40 */
+   For å vise fram demoen kan tiden settes i adressen: ?tid=2026-11-11T09:40 */
 function naa() {
   try {
     const q = new URLSearchParams(location.search).get('tid');
@@ -2065,7 +2087,7 @@ function visStatus(n) {
 
   /* Toppen følger hallen: åpent gir svømmere i vannet, stengt gir et stille basseng */
   $('naa').classList.toggle('apent', hall.apent);
-  sett('naatekst', hall.apent ? 'Åpent nå: ' + liten(kortNavn(hall.okt)) + ' til ' + kl(hall.slutt) : (hall.neste ? 'Stengt nå. Åpner ' + naar(hall.neste) : 'Se åpningstider'));
+  sett('naatekst', hall.apent ? 'Åpent nå: ' + liten(kortNavn(hall.okt)) + ' til\u00a0' + kl(hall.slutt) : (hall.neste ? 'Stengt nå. Åpner ' + naar(hall.neste) : 'Se åpningstider'));
   $('topp').classList.toggle('natt', !hall.apent);
   vann.modus(hall.apent);
 
@@ -2075,7 +2097,7 @@ function visStatus(n) {
     let t = esc(oktSetning(s));
     const res = resepsjonTekst(n, s);
     if (res) t += ' ' + res;
-    if (!s.etter) { const opp = s.slutt - 15; t += n.min < opp ? ' Alle må opp av bassenget ' + kl(opp) + '.' : ' Alle skal være oppe av bassenget nå.'; }
+    if (!s.etter) { const opp = s.slutt - 15; t += n.min < opp ? ' Alle må opp av bassenget ' + kl(opp) + ' og være ute av garderoben innen ' + kl(s.slutt) + '.' : ' Alle skal være oppe av bassenget nå og ute av garderoben innen ' + kl(s.slutt) + '.'; }
     h += '<p class="status__tekst">' + t + '</p>';
   } else {
     h += '<p class="status__merke"><span class="prikk" aria-hidden="true"></span>Stengt nå</p>';
@@ -2143,7 +2165,7 @@ function varighet(m) { const t = Math.floor(m / 60), r = m % 60; return t ? t + 
 
 /* Bassenget i timeplanen viser klokka 05.30 til 21.00 fra venstre mot høyre */
 const PLAN = { start: 330, lengde: 930, timer: [6, 9, 12, 15, 18, 21] };
-const LESHINT = 'Dra over bassenget for å se hva som skjer når.';
+const LESHINT = 'Dra over bassenget for å se hva som skjer.';
 let planData = null;
 
 /* Hva skjer i bassenget et gitt minutt på dagen som vises? Brukes av tidspekeren. */
@@ -2173,7 +2195,7 @@ function visUke(n) {
   });
   sett('dagliste', h + '</div>');
   const stengt = HALL.stengteDager.find(s => s.fra > n.dato);
-  sett('tavlefot', '<span>Alle må opp av bassenget 15 minutter før stengetid.</span>' +
+  sett('tavlefot', '<span>Alle må opp av bassenget 15 minutter før stengetid og være ute av garderoben innen vi stenger.</span>' +
     (stengt ? '<span>Neste stengte dag: ' + periode(stengt.fra, stengt.til) + ' (' + esc(liten(stengt.navn)) + ').</span>' : '') +
     '<span>Vil du vite mer om en dag? Trykk «Dag for dag».</span>');
 }
@@ -2305,8 +2327,8 @@ function visFast() {
   document.querySelectorAll('[data-bestill]').forEach(a => { a.href = (k.bestillValg && k.bestillValg[a.dataset.bestill]) || k.bestilling; });
   if ($('bestillpris')) $('bestillpris').textContent = HALL.idrettshall.leiePerTime + ' kr';
   document.querySelectorAll('[data-bursdagpris]').forEach(el => { const b = HALL.bursdag.typer.find(x => x.id === el.dataset.bursdagpris); if (b) el.textContent = b.krPerBarn + ' kr per barn, ' + b.kort; });
-  const kant = FORSIDE.kant.map((t, i) => '<li style="--i:' + i + '">' + esc(t) + '</li>').join('');
-  $('kant1').innerHTML = kant; $('kant2').innerHTML = kant;
+  const kantListe = l => l.map((t, i) => '<li style="--i:' + i + '">' + esc(t) + '</li>').join('');
+  document.querySelectorAll('[data-kant]').forEach(el => { const l = kantListe(el.dataset.kant === 'forside' ? FORSIDE.kant : FORSIDE.kantSvommehall); el.querySelectorAll('ul').forEach(u => { u.innerHTML = l; }); });
 
   $('billettliste').innerHTML = FORSIDE.billetter.map(b =>
     '<div class="billett rv' + (b.mork ? ' billett--mork' : '') + '"><div class="billett__hvem"><b>' + esc(b.hvem) + '</b><span>' + esc(b.note) + '</span></div>' +
@@ -3350,27 +3372,30 @@ function settOppBevegelse() {
     document.querySelectorAll('.rv').forEach(el => inn.observe(el));
   } else document.querySelectorAll('.rv').forEach(el => el.classList.add('inne'));
 
-  /* Infolinja ruller hele tiden. Den går fortere mens du ruller på siden og stopper når du peker på den. */
-  const kant = $('kant'), spor = $('kantspor');
-  let bredde = 0, x = 0, fart = 0, ekstra = 0, peker = false, kantSynlig = true, sistY = window.scrollY, sistT = 0;
+  /* Infolinjene ruller hele tiden. De går fortere mens du ruller på siden og stopper når du peker på dem. */
   const FART = rolig ? 16 : 44;                           /* piksler i sekundet */
-  const maal = () => { bredde = $('kant1').getBoundingClientRect().width; };
-  maal(); window.addEventListener('resize', maal);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(maal);
-  spor.classList.add('styrt');
-  kant.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') peker = true; });
-  kant.addEventListener('pointerleave', () => { peker = false; });
-  if (harIO) new IntersectionObserver(es => { kantSynlig = es[0].isIntersecting; }).observe(kant);
-  (function rull(na) {
-    requestAnimationFrame(rull);
-    const dt = Math.min(.05, (na - sistT) / 1000 || 0); sistT = na;
-    const y = window.scrollY, dy = Math.abs(y - sistY); sistY = y;
-    if (!kantSynlig || document.hidden || !bredde || !dt) return;
-    ekstra += ((rolig ? 0 : Math.min(520, dy / dt * .22)) - ekstra) * .1;
-    fart += ((peker ? 0 : FART) - fart) * .07;
-    x -= (fart + ekstra) * dt; if (x <= -bredde) x += bredde;
-    spor.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
-  })(0);
+  document.querySelectorAll('[data-kant]').forEach(kant => {
+    const spor = kant.querySelector('.kant__spor'), forste = spor.querySelector('ul');
+    let bredde = 0, x = 0, fart = 0, ekstra = 0, peker = false, synlig = true, sistY = window.scrollY, sistT = 0;
+    const maal = () => { bredde = forste.getBoundingClientRect().width; };
+    maal(); window.addEventListener('resize', maal);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(maal);
+    spor.classList.add('styrt');
+    kant.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') peker = true; });
+    kant.addEventListener('pointerleave', () => { peker = false; });
+    if (harIO) new IntersectionObserver(es => { synlig = es[0].isIntersecting; if (synlig) maal(); }).observe(kant);
+    (function rull(na) {
+      requestAnimationFrame(rull);
+      const dt = Math.min(.05, (na - sistT) / 1000 || 0); sistT = na;
+      const y = window.scrollY, dy = Math.abs(y - sistY); sistY = y;
+      if (!synlig || document.hidden || !dt) return;
+      if (!bredde) { maal(); if (!bredde) return; }
+      ekstra += ((rolig ? 0 : Math.min(520, dy / dt * .22)) - ekstra) * .1;
+      fart += ((peker ? 0 : FART) - fart) * .07;
+      x -= (fart + ekstra) * dt; if (x <= -bredde) x += bredde;
+      spor.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+    })(0);
+  });
 
   /* Ting som følger rullingen */
   const nav = $('nav'), fremdrift = $('fremdrift'), hero = $('topp'), herotekst = $('herotekst');
@@ -3443,19 +3468,41 @@ function settOppChat() {
   }
 
   function finnSvar(raa) {
-    const t = ' ' + raa.toLowerCase().replace(/[?!.,;:()«»"]/g, ' ').replace(/\s+/g, ' ') + ' ';
+    /* Dialekt og vanlige skrivemåter gjøres om til bokmål før chatten leter etter svar */
+    const DIALEKT = { ka: 'hva', kva: 'hva', kor: 'hvor', kordan: 'hvordan', korleis: 'hvordan', koss: 'hvordan', kossen: 'hvordan', kem: 'hvem', kæm: 'hvem',
+      dokker: 'dere', dokke: 'dere', dokk: 'dere', dåkker: 'dere', eg: 'jeg', æ: 'jeg', e: 'er', me: 'vi', ikkje: 'ikke', te: 'til', no: 'nå',
+      åpe: 'åpen', ope: 'åpen', parkera: 'parkere', bada: 'bade', symja: 'svømme', svømma: 'svømme', ungane: 'ungene', ongane: 'ungene', unga: 'ungene', onga: 'ungene',
+      kosta: 'koster', koste: 'koster', stenge: 'stenger', stengje: 'stenger', idag: 'i dag', imorgen: 'i morgen', imorra: 'i morgen', morra: 'morgen', gidder: 'kan' };
+    let t = ' ' + raa.toLowerCase().replace(/[?!.,;:()«»"`´]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+    t = t.replace(/\S+/g, o => DIALEKT[o] || o);
+    t = t.replace(/\S*garderob\S*/g, o => o.startsWith('garderob') ? o : o + ' garderobe');   /* «damegarderoben» skal også treffe «garderobe» */
     /* Søk på hele ord. Et ord som slutter med * kan ha hvilken som helst ending: «kost*» treffer «koster» og «kostnad». */
     const ordRe = o => new RegExp('(?:^|\\s)' + o.replace(/\*$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (o.endsWith('*') ? '[a-z0-9æøåé-]*' : '') + '(?=\\s|$)');
     const har = (...ord) => ord.some(o => ordRe(o).test(t));
     const n = tid(), s = finnStatus(n, 'alle'), pl = HALL.priser.grupper, ih = HALL.idrettshall, tr = HALL.trimrom;
     const bestill = id => ' <a href="' + esc(k.bestillValg[id] || k.bestilling) + '" target="_blank" rel="noopener">Bestill her</a>';
-    const ringTlf = 'Ring oss på ' + esc(k.telefon) + ', så hjelper vi deg.';
+    const ringTlf = 'Ring oss på ' + esc(k.telefon) + ', så hjelper vi deg gjerne.';
 
-    if (/^ (hei|hallo|heisann|hei hei|god dag|morn|halla) $/.test(t)) return 'Hei! Hva kan jeg hjelpe deg med?';
+    /* Hilsen: alene får den et svar, foran et spørsmål tas den bort */
+    const HILS = /^ (hei hei|heisann|hei|hallo|halla|heia|hoi|god morgen|god dag|god ettermiddag|god kveld|morn|yo) /;
+    if (HILS.test(t) && t.replace(HILS, ' ').trim() === '') { const g = t.match(/god (morgen|dag|ettermiddag|kveld)/); return (g ? 'God ' + g[1] : n.min < 600 ? 'God morgen' : n.min >= 1080 ? 'God kveld' : 'Hei') + '! Hva kan jeg hjelpe deg med?'; }
+    t = t.replace(HILS, ' ');
+
+    /* Småprat */
+    const ordene = t.trim().split(' ');
+    if (ordene.length <= 4 && ordene.every(o => ['ok', 'okei', 'okay', 'oki', 'greit', 'flott', 'supert', 'perfekt', 'skjønner', 'den', 'er', 'grei', 'fint', 'ja', 'nei', 'ålreit', 'nice', 'kult', 'aha', 'åh', 'ah', 'jaha', 'javel', 'da', 'så'].includes(o)))
+      return 'Flott! Lurer du på noe mer, er det bare å spørre.';
+    if (har('ha det', 'hadet', 'snakkes', 'adjø', 'farvel', 'ha en fin dag', 'ha en fin kveld') && !raa.includes('?')) return 'Ha det bra, og velkommen til oss!';
+    if (har('robot', 'chatbot', 'bot', 'ai', 'kunstig intelligens', 'ekte person', 'et menneske', 'hvem er du', 'hva er du', 'hva heter du'))
+      return 'Jeg er den digitale assistenten til Randaberghallen, så jeg er ikke et menneske. Men jeg svarer gjerne på det jeg kan, og vil du snakke med en av oss, kan du ringe ' + esc(k.telefon) + '.';
+    if (har('ansatt', 'ansatte', 'en person', 'noen', 'kundeservice', 'resepsjonist*') && har('snakke', 'prate', 'kontakt*', 'ringe'))
+      return 'Vil du snakke med en av oss, ringer du ' + esc(k.telefon) + ' eller sender en e-post til ' + esc(k.epost) + '. Vi hjelper deg gjerne.';
+    if (har('mye folk', 'mange folk', 'fullt', 'folksomt', 'travelt', 'kø', 'køen', 'stappfullt'))
+      return 'Det kan jeg dessverre ikke se herfra. Ring oss på ' + esc(k.telefon) + ', så sier vi hvordan det ser ut akkurat nå.';
 
     /* Takk: bare når meldingen ikke også spør om noe */
     const takkOrd = ['tusen', 'takk', 'for', 'hjelpen', 'svaret', 'så', 'mye', 'ok', 'okei', 'flott', 'supert', 'bra', 'fint', 'da', 'hei', 'skal', 'du', 'ha', 'mange'];
-    if (har('takk*') && !raa.includes('?') && t.trim().split(' ').every(o => takkOrd.includes(o))) return 'Bare hyggelig. Velkommen til oss!';
+    if (har('takk*') && !raa.includes('?') && t.trim().split(' ').every(o => takkOrd.includes(o))) return 'Bare hyggelig! Velkommen til oss.';
 
     /* Svømmeskolen: tidene har vi ikke, klubben har dem */
     const klubbLenke = ' <a href="' + HALL.klubb.nettsted + '" target="_blank" rel="noopener">Gå til ' + esc(HALL.klubb.navn) + '</a>';
@@ -3473,16 +3520,21 @@ function settOppChat() {
 
     /* Bursdag */
     if (har('bursdag*', 'barnebursdag*', 'vanntastisk', 'selskap*', 'feire*')) {
+      if (har('ring*', 'telefon*', 'kontakt*', 'spørre noen'))
+        return 'Har du spørsmål om bursdag, kan du ringe oss på ' + esc(k.telefon) + '. Selve bestillingen gjør du på nett.' + lenke('Se bursdagene', '#bursdag');
+      if (har('hvor mange', 'antall', 'maks*', 'maksimalt', 'mange barn'))
+        return 'Det har jeg ikke et fast tall på. Ring oss på ' + esc(k.telefon) + ', så finner vi ut av det sammen.' + lenke('Se bursdagene', '#bursdag');
       const bd = HALL.bursdag, vann = bd.typer.find(b => b.id === 'bursdagVann'), hall = bd.typer.find(b => b.id === 'bursdagHall');
       const omVann = har('svømmehall*', 'bade*', 'bading', 'basseng*', 'vann*', 'svømme*');
       const omHall = har('idrettshall*', 'hallen', 'aktivitet*', 'gymsal*');
-      const beskriv = b => esc(b.navn) + ': ' + b.krPerBarn + ' kr per barn. ' + esc(bd.voksne) + ' ' + esc(b.innhold.map((x, i) => i ? liten(x) : x).join(', ')) + '. ' +
-        b.tider.map(x => esc(x.dager) + ': ' + esc(liten(x.tid))).join('. ') + '. ' + esc(b.hvem);
-      const felles = ' ' + esc(bd.felles.join(' '));
-      if (omVann && !omHall) return 'Ja! ' + beskriv(vann) + felles + bestill(vann.id);
-      if (omHall && !omVann) return 'Ja! ' + beskriv(hall) + felles + bestill(hall.id);
+      const beskriv = b => esc(b.navn) + ' koster ' + b.krPerBarn + ' kr per barn, og voksne i følget er gratis. Dere får ' + esc(liten(b.innhold[0])) + ' og ' + esc(liten(b.innhold[1])) + ', og tar med egen mat og drikke. ' +
+        'Den kan holdes ' + b.tider.map(x => esc(liten(x.dager)) + ' (' + esc(liten(x.tid)) + ')').join(' eller ') + '. ' + esc(b.hvem);
+      const felles = ' Husk å ta med nok voksne til å passe på barna. Dere betaler når dere kommer, bare for de barna som er med, og avbestiller senest 24 timer før.';
+      const ja = har('kan vi', 'kan man', 'kan jeg', 'har dere', 'er det', 'går det', 'tilbyr dere') ? 'Ja! ' : '';
+      if (omVann && !omHall) return ja + beskriv(vann) + felles + bestill(vann.id);
+      if (omHall && !omVann) return ja + beskriv(hall) + felles + bestill(hall.id);
       if (har('kost*', 'pris*', 'betal*')) return 'Bursdag i svømmehallen (Vanntastisk bursdag) koster ' + vann.krPerBarn + ' kr per barn, og bursdag i idrettshallen koster ' + hall.krPerBarn + ' kr per barn. ' + esc(bd.voksne) + ' Dere betaler ved oppmøte, bare for de barna som kommer.' + lenke('Se begge bursdagene', '#bursdag');
-      return 'Vi har to typer bursdag. ' + beskriv(vann) + ' ' + beskriv(hall) + felles + lenke('Se begge bursdagene', '#bursdag');
+      return 'Vi har to typer bursdag å velge mellom: ' + esc(vann.navn) + ' i svømmehallen, ' + vann.krPerBarn + ' kr per barn, og bursdag i idrettshallen, ' + hall.krPerBarn + ' kr per barn. Begge har 1 time med aktivitet og 1 time i et selskapsrom der dere tar med egen mat og drikke, og voksne i følget er gratis. Spør gjerne om den ene, så forteller jeg mer.' + lenke('Se begge bursdagene', '#bursdag');
     }
 
     /* Babyer og Barnas badekort */
@@ -3491,7 +3543,9 @@ function settOppChat() {
       return 'Babyer betaler barnepris, ' + kr(pl[0].linjer[1].kr) + '. Bor dere i Randaberg kommune, bader barn fra 0 til og med 9 år gratis med Barnas badekort. Kortet henter dere på servicetorget på kommunehuset.';
 
     /* Trimrommet */
-    if (har('trimrom*', 'trimmen', 'trim', 'styrkerom*', 'treningsrom*', 'tredemølle*', 'ergometer*', 'gym', 'treningsstudio*')) {
+    if (har('trimrom*', 'trimmen', 'trim', 'styrkerom*', 'treningsrom*', 'tredemølle*', 'ergometer*', 'gym', 'treningsstudio*', 'trene', 'trening', 'treningskort*')) {
+      if (har('uten kort', 'uten halvårskort', 'drop-in', 'dropin', 'enkeltbillett*', 'dagspass*', 'engangs*', 'prøvetime*', 'prøve'))
+        return 'For å trene i trimrommet trenger du halvårskort. Det kjøper du i resepsjonen, og da får du et armbånd som låser opp døra.' + lenke('Se trimrommet', '#trimrom');
       if (har('garderobe*', 'dusj*', 'skifte*', 'skift', 'omkledning*'))
         return 'Nei, det er ikke garderobe eller dusj for trimrommet. Kom ferdig skiftet og dusj hjemme. Ta med rene sko, som du bytter til før du går inn.';
       if (har('kost*', 'pris*', 'kort', 'halvårskort*', 'betal*', 'billett*', 'kjøpe*', 'kjøp'))
@@ -3517,44 +3571,135 @@ function settOppChat() {
 
     /* Betaling i svømmehallen: det har vi ikke fakta om */
     if (har('vipps', 'kontant*', 'bankkort*', 'kortbetaling', 'betalingsmåte*', 'apple pay') || (har('betale', 'betaler', 'betaling') && har('kort', 'mobil*', 'med')))
-      return 'Hvilke betalingsmåter vi tar i resepsjonen, kan vi svare på hvis du ringer ' + esc(k.telefon) + '.';
+      return 'Det er jeg ikke helt sikker på, og jeg vil ikke svare feil. ' + ringTlf;
+
+    /* Svømme baner: hvor mye av bassenget er til mosjon akkurat nå? */
+    if (har('svømme baner', 'baner', 'banesvømming', 'svømme lengder', 'lengder', 'langbane*') && !har('deles', 'deling', 'hvor mange baner', 'inndeling')) {
+      let dagB = har('i morgen') ? pluss(n.dato, 1) : null;
+      UKEDAGER.forEach((navn, i) => { if (dagB === null && har(navn)) dagB = pluss(n.dato, (i - ukedag(n.dato) + 7) % 7 || 7); });
+      if (dagB) {
+        const o = dagsplan(dagB).okter.filter(x => !x.pause && grupperI(x).some(g => g === 'mosjon' || g === 'familie-mosjon'));
+        const navnD = (dagB === pluss(n.dato, 1) ? 'i morgen' : 'på ' + UKEDAGER[ukedag(dagB)]);
+        if (!o.length) return 'Nei, ' + navnD + ' har vi dessverre ikke bading.';
+        return 'Ja! ' + stor(navnD) + ' kan du svømme baner ' + o.map(x => x.fra + '–' + x.til + (grupperI(x).includes('mosjon') ? ' (hele bassenget)' : ' (én bane, under familiebading og mosjon)')).join(', ') + '.';
+      }
+      const m = finnStatus(n, 'mosjon');
+      const nesteM = m.neste ? ' Vil du ha hele bassenget, er neste mosjonssvømming for voksne ' + naarTekst(m.neste) + '.' : '';
+      if (s.apent && grupperI(s.okt).includes('mosjon')) return 'Ja, nå er det mosjonssvømming for voksne, og hele 25 m-bassenget er til mosjonssvømmere, til ' + kl(s.slutt) + '.';
+      if (s.apent && grupperI(s.okt).includes('familie-mosjon')) return 'Ja, nå er det familiebading og mosjon, og da er én bane satt av til mosjonssvømming.' + nesteM;
+      if (s.apent) return 'Akkurat nå er det ' + esc(liten(oktNavn(s.okt))) + ', så det passer ikke så godt å svømme baner.' + nesteM;
+      return m.neste ? 'Neste mosjonssvømming for voksne, med hele bassenget, er ' + naarTekst(m.neste) + '. Når det er familiebading og mosjon, er det også én bane til mosjonssvømming.' : 'Jeg finner ingen tider for mosjonssvømming akkurat nå. ' + ringTlf;
+    }
 
     /* Når er det familiebading, mosjon, pensjonist eller babybading? */
-    const gid = har('babybading', 'babysvømming') ? 'baby' : har('pensjonist*') ? 'pensjonist' : har('mosjon*') ? 'mosjon' : har('familiebading') ? 'familie' : null;
+    const gid = har('babybading', 'babysvømming') ? 'baby' : har('pensjonist*') ? 'pensjonist' : har('familiebading', 'familie') ? 'familie-mosjon' : har('mosjon*') ? 'mosjon' : null;
     if (gid) {
       const g = gruppe(gid), st = finnStatus(n, gid);
       const naa = st.apent ? 'Det er ' + esc(liten(g.navn)) + ' akkurat nå, til ' + kl(st.slutt) + '.'
         : st.neste ? 'Neste ' + esc(liten(g.navn)) + ' er ' + naarTekst(st.neste) + ', til ' + st.neste.okt.til + '.' : 'Jeg finner ingen tider for ' + esc(liten(g.navn)) + ' akkurat nå.';
-      return naa + ' ' + esc(g.om);
+      const enBane = gid === 'mosjon' && !st.apent && s.apent && grupperI(s.okt).includes('familie-mosjon') ? ' Akkurat nå er det familiebading og mosjon, og da er én bane satt av til mosjonssvømming.' : '';
+      return naa + enBane + ' ' + esc(g.om);
     }
+
+    /* Håndkle: står ikke blant det vi selger */
+    if (har('håndkle*', 'håndklær', 'badehåndkle*'))
+      return 'Håndklær selger vi ikke, så ta med ditt eget. I resepsjonen selger vi badebleier, badebukser til baby, svømmebriller, badehetter og armvinger.';
 
     /* Salg i resepsjonen */
     if (har('selg*', 'kjøp*', 'har dere', 'låne*', 'leie*') && har('hette*', 'badehette*', 'bukse*', 'badebukse*', 'drakt*', 'badedrakt*', 'brille*', 'svømmebrille*', 'bleie*', 'badebleie*', 'badetøy', 'artikl*', 'badeartikl*', 'armving*', 'håndkle*'))
-      return 'Vi selger badebleier, svømmebriller, badehetter og armvinger i resepsjonen. Badedrakter og badebukser har vi dessverre ikke.';
+    {
+      const alle = ['badebleier', 'badebukser til baby', 'svømmebriller', 'badehetter', 'armvinger'], og = l => l.slice(0, -1).join(', ') + ' og ' + l[l.length - 1];
+      const varer = [{ ord: ['hette*', 'badehette*'], navn: 'badehetter' }, { ord: ['brille*', 'svømmebrille*'], navn: 'svømmebriller' }, { ord: ['bleie*', 'badebleie*'], navn: 'badebleier' }, { ord: ['armving*', 'armring*'], navn: 'armvinger' }];
+      const baby = har('baby*', 'spedbarn*', 'babybadebukse*'), v = varer.find(x => har(...x.ord)), laane = har('låne*', 'leie*');
+      if (har('drakt*', 'badedrakt*', 'bikini*') || (har('bukse*', 'badebukse*', 'badeshorts') && !baby))
+        return 'Badedrakter og badebukser til voksne og større barn selger vi dessverre ikke, så de må du ha med selv. Badebukser til baby har vi, og i tillegg ' + og(alle.filter(x => x !== 'badebukser til baby')) + '.';
+      if (har('bukse*', 'badebukse*') && baby) return 'Ja, badebukser til baby selger vi i resepsjonen, og badebleier også.';
+      if (v) return (laane ? stor(v.navn) + ' selger vi i resepsjonen, så har du glemt, ordner vi det der.' : 'Ja, ' + v.navn + ' selger vi i resepsjonen.') + ' Der har vi også ' + og(alle.filter(x => x !== v.navn)) + '.';
+      return 'I resepsjonen selger vi ' + og(alle) + '. Badedrakter, og badebukser til større barn og voksne, har vi dessverre ikke.';
+    }
 
-    /* Stupetårn */
-    if (har('stupetårn*', 'tårn*', 'tårnet', 'stupebrett*', 'stupe', 'stup', 'stuping', 'hoppe*'))
-      return 'Ja, vi har stupebrett og 5 m stupetårn. Tårnet er stengt når det er familiebading og mosjonssvømming samtidig. Stup bare fra stupebrettene, og bare når de ansatte sier det er lov.';
+    /* Hva svømmehallen har. «Ja» foran svaret bare når spørsmålet kan besvares med ja eller nei. */
+    const janei = har('har dere', 'har dokker', 'har de', 'har dere noe', 'finnes', 'fins', 'er det', 'er der', 'kan man', 'kan jeg', 'kan vi');
+    const anlegg = 'Svømmehallen har et 25 m-basseng (1,2 til 3,8 meter dypt, cirka 28 grader), et barnebasseng (30 til 50 centimeter dypt, cirka 34 grader), to 1-meters stupebrett, ett 3-meters stupebrett, et 5-meters stupetårn og badstue.';
+
+    /* Kaldkulp og isbad: det har vi ikke */
+    if (har('kaldkulp*', 'kalkulp*', 'kulp*', 'cold', 'plunge', 'isbad*', 'kaldbad*', 'kaldtvannsbasseng*', 'kaldtvannskar*', 'kaldt basseng', 'kaldt kar', 'isbading'))
+      return 'Nei, vi har dessverre ikke kaldkulp eller isbad. Vi har badstue, et 25 m-basseng på cirka 28 grader og et barnebasseng på cirka 34 grader.';
+
+    /* Badstue */
+    /* SJEKK: svom.no skriver at anlegget har to badstuer. Står ikke på randaberghallen.no, så svaret nevner ikke antallet. */
+    if (har('badstu*', 'sauna*'))
+      return (janei ? 'Ja, vi har badstue, og den' : 'Badstuen') + ' kan du bruke når du bader hos oss. Dusj uten badetøy før du går inn i badstuen, og dusj igjen etter.';
+
+    /* Stupebrett og stupetårn: 1, 3 og 5 meter */
+    const hoyde = /(?:^|\s)[135](?:\s|-)?(?:m|meter\w*|meters\w*)(?=\s|$)/.test(t) && !har('dyp*', 'dybde*', 'lang*', 'lengde*');
+    if (hoyde || har('stupetårn*', 'tårn*', 'tårnet', 'stupebrett*', 'brett', 'brettet', 'brettene', 'stupe', 'stup', 'stuping', 'hoppe*', 'hopptårn*', 'hoppetårn*', 'stupeanlegg*')) {
+      /* SJEKK: når 5 m-tårnet er åpent. Tidligere sto det at det er stengt under familiebading og mosjon. */
+      return (janei ? 'Ja! ' : '') + 'Vi har to 1-meters stupebrett, ett 3-meters stupebrett og et 5-meters stupetårn. Du kan stupe fra stupebrettene når de ansatte sier det er greit.';
+    }
+
+    /* Barnebassenget */
+    if (har('barnebasseng*', 'babybasseng*', 'småbarnsbasseng*', 'plaskebasseng*', 'baby basseng*', 'barne basseng*', 'barnas basseng', 'lille basseng*', 'lite basseng', 'grunt basseng', 'grunne basseng*'))
+      return (har('grader', 'temperatur*', 'varm*', 'kald*', 'dyp*', 'dybde*') ? 'Barnebassenget holder cirka 34 grader og er 30 til 50 centimeter dypt. Det er åpent'
+        : (janei ? 'Ja, vi har barnebasseng. Det' : 'Barnebassenget') + ' er 30 til 50 centimeter dypt og holder cirka 34 grader. Bassenget er åpent') + ' når det er familiebading og mosjon, og under babybading. Barn som ikke kan svømme, bader der sammen med en voksen. Når det bare er mosjonssvømming, er det vanligvis stengt.';
+
+    /* Leker i bassenget */
+    if (har('leke', 'leker', 'lekene', 'leketøy*', 'lekesaker', 'badeleke*', 'badering*', 'flyteleke*', 'flytematte*', 'baderinger')) {
+      if (har('ta med', 'tar med', 'ha med', 'medbrakt*', 'egne', 'egen', 'eget', 'hjemmefra'))
+        return 'Store badeleker må dessverre bli hjemme, men armringer er lov. Vi har babyleker i barnebassenget og store baderinger i det store bassenget, så det er nok å leke med.';
+      return (janei ? 'Ja! ' : '') + 'I barnebassenget har vi babyleker til de minste, og i det store bassenget har vi store baderinger. Egne store badeleker må bli hjemme, men armringer er lov.';
+    }
+
+    /* Hva har dere? */
+    if (har('fasilitet*', 'hva har dere', 'hva finnes', 'hva er det i svømmehallen', 'hvilke basseng*', 'hvor mange basseng*'))
+      return anlegg + ' I Randaberghallen er det også to idrettshaller, trimrom og bordtennis.' + lenke('Se svømmehallen', '#svommehall');
+
+    /* Badetøy */
+    if (har('shorts', 'burkini*', 'badetøy*', 'badeklær', 'klær', 't-skjorte*', 'tskjorte*', 'undertøy', 'bikini*', 'badeshorts', 'tights', 'leggings', 'heldekkende'))
+      return (har('burkini*', 'heldekkende') ? 'Ja, burkini er lov. ' : '') + 'Alle som bader må bruke badehette og egnet badetøy: badedrakt, badebukse eller burkini. Er du usikker på om det du har er egnet, spør oss i resepsjonen.';
+
+    /* Sykdom, sår og plaster (fra badereglene) */
+    if (har('syk', 'syke', 'sykdom*', 'smitte*', 'smittsom*', 'forkjølet', 'feber', 'omgangssyke', 'sår', 'såret', 'sårene', 'plaster', 'bandasje*', 'gips'))
+      return 'Har du en smittsom sykdom, åpne sår eller bandasjer, kan du ikke bade. Vent til du er frisk og såret har grodd.';
+
+    /* Snus, tyggegummi, røyk og alkohol (fra badereglene) */
+    if (har('snus*', 'snuse', 'tyggis', 'tyggegummi', 'røyk*', 'røyke', 'vape*', 'alkohol*', 'øl', 'beruset', 'berusede'))
+      return 'Nei. Tyggegummi, snus, røyk og alkohol er ikke lov i svømmehallen, og berusede personer blir avvist.';
+
+    /* Hjertestarter (fra randaberghallen.no/faq-items) */
+    if (har('hjertestarter*', 'defibrillator*', 'hjertestans'))
+      return 'Ja. Hjertestarteren henger ved inngangen til herregarderoben ved bassenget, til venstre for resepsjonen.';
 
     /* Regler */
-    if (har('kamera*', 'filme*', 'filming', 'bilde', 'bilder', 'foto*', 'fotografere*')) return 'Nei, det er ikke lov å bruke kamera eller mobil med kamera i svømmehallen.';
-    if (har('badehette*', 'hette*')) return 'Ja, alle som bader må bruke badehette og egnet badetøy: badedrakt, badebukse eller burkini. Mangler du badehette, selger vi det i resepsjonen.';
-    if (har('bleie*', 'badebleie*')) return 'Barn under 3 år må ha badebleie. Det selger vi i resepsjonen.';
-    if (har('garderobe*') && har('kjønn', 'gutt*', 'jente*', 'sønn*', 'datter*', 'mamma', 'pappa', 'mor', 'far'))
-      return 'Fra barna begynner på skolen, og senest når de fyller 7 år, bruker de garderoben for sitt eget kjønn. Blir det vanskelig, hjelper vi dere gjerne med å finne en løsning.';
+    if (har('kamera*', 'filme*', 'filming', 'bilde', 'bilder', 'foto*', 'fotografere*', 'mobil', 'mobilen', 'mobiltelefon*', 'telefonen')) return 'Nei, det er ikke lov å bruke kamera eller mobil med kamera i svømmehallen.';
+    if (har('badehette*', 'hette*')) return har('glem*', 'mangler', 'ikke har', 'ikke med', 'ikke en')
+      ? 'Ingen fare, badehetter selger vi i resepsjonen. Alle som bader må bruke badehette og egnet badetøy: badedrakt, badebukse eller burkini.'
+      : 'Ja, alle som bader må bruke badehette og egnet badetøy: badedrakt, badebukse eller burkini. Mangler du badehette, selger vi det i resepsjonen.';
+    if (har('bleie*', 'badebleie*')) return 'Barn under 3 år må ha badebleie. Badebleier og badebukser til baby selger vi i resepsjonen.';
+    if (har('garderobe*') && har('kjønn', 'gutt*', 'jente*', 'sønn*', 'datter*', 'mamma', 'pappa', 'mor', 'far', 'dame*', 'herre*', 'motsatt')) {
+      const al = t.match(/(?:^|\s)(\d{1,2})(?:\s|-)?(?:år\w*|åring\w*)?(?=\s|$)/), a = al ? +al[1] : null;
+      const regel = 'Fra barna begynner på skolen, og senest når de fyller 7 år, bruker de garderoben for sitt eget kjønn.';
+      if (a !== null && a >= 7) return 'Nei, dessverre. ' + regel + ' Blir det vanskelig, hjelper vi dere gjerne med å finne en løsning.';
+      if (a !== null && a <= 5) return 'Ja, det går fint. ' + regel;
+      return regel + ' Blir det vanskelig, hjelper vi dere gjerne med å finne en løsning.';
+    }
     if (har('skap*', 'garderobeskap*', 'låse*')) return 'Skapene i garderoben låser du med billettarmbåndet du får i resepsjonen.';
-    if (har('alene', 'uten voksen', 'hvor gammel', 'hvor gamle', 'aldersgrense*'))
+    const alder = t.match(/(?:^|\s)(\d{1,2})(?:\s|-)?(?:år|åring\w*|års\w*)(?=\s|$)/);
+    if (har('alene', 'uten voksen', 'uten foreldre', 'hvor gammel', 'hvor gamle', 'aldersgrense*') || (alder && har('bade*', 'svømme*'))) {
+      if (alder) return +alder[1] < 10 ? 'Nei, barn under 10 år må ha med en badende voksen over 18 år.' : 'Ja, barn som har fylt 10 år og kan svømme, kan bade alene.';
       return 'Barn som har fylt 10 år og kan svømme, kan bade alene. Yngre barn må ha med en badende voksen over 18 år.';
+    }
     if (har('regel', 'regler', 'reglene', 'lov', 'tillatt', 'forbud*', 'forbudt', 'snorkel', 'dykkermaske', 'dusje*', 'dusj', 'badeleke*'))
       return 'De viktigste reglene: Dusj uten badetøy før du bader, bruk badehette, og barn under 10 år må ha med en badende voksen. Dykkermaske, snorkel og store badeleker må bli hjemme.' + lenke('Se alle badereglene', '#alleregler');
     if (har('deles', 'deling', 'inndeling', 'soner', 'sone', 'baner', 'bane', 'baneskiller*'))
       return HALL.grupper.map(g => '<b>' + esc(g.navn) + ':</b> ' + esc(g.om)).join('<br>') + lenke('Se det i timeplanen', '#tavle');
 
     /* Finn fram og kontakt */
-    if (har('parkere*', 'parkering*', 'parkeringsplass*')) return 'Ja, det er gratis parkering rett utenfor hallen. Er det fullt, finner du flere plasser bak sandvolleyballbanene og på andre siden av Torvmyrveien, ved Vår Energi Arena Randaberg.';
+    if (har('parkere*', 'parkering*', 'parkeringsplass*')) return 'Ja, det er gratis parkering rett utenfor hallen. Er det fullt, finner du flere plasser foran sandvolleyballbanene og på andre siden av Torvmyrveien, ved Vår Energi Arena Randaberg.';
+    if (har('buss*', 'bussen', 'kolumbus', 'kollektiv*')) return 'Vi ligger i ' + esc(k.adresse) + ', ' + esc(k.poststed) + '. Bussruter og -tider finner du hos Kolumbus.' + ' <a href="https://www.kolumbus.no/" target="_blank" rel="noopener">Gå til Kolumbus</a>';
     if (har('adresse*', 'hvor ligger', 'hvor er dere', 'hvor holder', 'finne dere', 'finner jeg dere', 'veibeskrivelse*', 'kart')) return 'Du finner oss i ' + esc(k.adresse) + ', ' + esc(k.poststed) + '.' + lenke('Se «Finn fram»', '#her');
     if (har('telefon*', 'ringe', 'telefonnummer*', 'nummer*', 'e-post', 'epost', 'mail', 'kontakt', 'kontakte')) return 'Du kan ringe oss på ' + esc(k.telefon) + ' eller skrive til ' + esc(k.epost) + '.';
-    if (har('grader', 'temperatur*', 'varmt', 'varm', 'kaldt', 'kald', 'dypt', 'dyp', 'dybde*')) return '25 m-bassenget holder cirka 28 grader og er 1,2 til 3,8 meter dypt. Barnebassenget holder cirka 34 grader og er 30 til 50 centimeter dypt.';
+    if (har('grader', 'temperatur*', 'varmt', 'varm', 'kaldt', 'kald', 'dypt', 'dyp', 'dybde*', 'langt', 'lang', 'lengde*', 'hvor stort', 'størrelse*', '25 meter', '25 m', '25m')) return 'Det store bassenget er 25 meter langt, 1,2 til 3,8 meter dypt og holder cirka 28 grader. Barnebassenget holder cirka 34 grader og er 30 til 50 centimeter dypt.';
 
     /* Stengte dager og ferier. Hvert sett med ord peker på én periode i HALL.stengteDager. */
     const HOYTIDER = [
@@ -3571,7 +3716,7 @@ function settOppChat() {
     if (hoytid) {
       const p = HALL.stengteDager.find(x => x.navn === hoytid.navn);
       if (p) {
-        let svar = 'Vi har stengt ' + periode(p.fra, p.til) + ' (' + esc(liten(p.navn)) + ').';
+        let svar = 'Vi holder stengt ' + periode(p.fra, p.til) + ' (' + esc(liten(p.navn)) + '). Utenom det har vi de vanlige åpningstidene.' + (hoytid.navn === 'Jul' ? ' God jul!' : '');
         if (hoytid.navn === 'Sommerstengt' && har('juni', 'august')) svar = 'Vi har sommerstengt fra ' + dagMnd(p.fra) + ' til og med ' + dagMnd(p.til) + ' ' + p.til.slice(0, 4) + '. Utenom det følger vi de vanlige tidene.';
         if (hoytid.navn === 'Svømmestevne') svar += ' Trimrommet er likevel åpent den dagen.';
         return svar;
@@ -3587,15 +3732,33 @@ function settOppChat() {
         : 'Åpningstidene i ferier legger vi inn i timeplanen så snart de er klare.' + lenke('Se timeplanen', '#tavle');
     }
 
+    /* Kjøpe billett nå: det handler om resepsjonen er åpen */
+    if (har('kjøp*') && har('billett*', 'klippekort*', 'halvårskort*', 'armbånd*') && har('nå', 'i dag', 'akkurat', 'kan jeg', 'kan vi', 'hvor')) return resepsjonSvar(true);
+
+    /* Hvor lenge billetten gjelder */
+    if (har('hvor lenge', 'hvor mange timer', 'hvor lang tid') && har('kan jeg', 'kan vi', 'kan man', 'får', 'billett*', 'gjelder', 'varer', 'bade', 'være', 'svømme') && !har('åpent', 'åpen', 'stenger', 'dere'))
+      return 'En billett gjelder i 1,5 time, inkludert tiden i garderoben. Er det lite folk, kan du være lenger etter avtale med de ansatte.' + (s.apent ? ' I dag har vi åpent til ' + kl(s.hallSlutt) + '.' : '');
+
+    /* De som ikke bader */
+    if (har('ikke bader', 'ikke-badende', 'ikkebadende', 'ikke skal bade', 'ikke bade', 'bare se på', 'se på', 'tilskuer*', 'bare være med', 'bare følge'))
+      return 'Også de som ikke skal bade, må ha billett. Ikke-badende betaler ' + kr(pl[0].linjer[1].kr) + ', det samme som barn, studenter og honnør.';
+
     /* Priser */
     if (har('klipp*', 'klippekort*', 'halvår*', 'halvårskort*', 'periodebillett*', 'periodekort*', 'månedskort*', 'årskort*', 'armbånd*'))
       return '12 klipp koster ' + kr(pl[1].linjer[0].kr) + ' for voksne og ' + kr(pl[1].linjer[1].kr) + ' for barn, studenter og honnør. Halvårskort koster ' + kr(pl[1].linjer[2].kr) + ' og ' + kr(pl[1].linjer[3].kr) + '. Har du ikke billettarmbånd fra før, koster det 60 kr. Halvårskort som også gjelder trimrommet, koster ' + kr(tr.kort[1].kr) + ' for voksne og ' + kr(tr.kort[2].kr) + ' for ungdom, studenter og honnør.';
+    if (har('kost*', 'pris*', 'priser', 'billett*', 'betale', 'dyrt', 'rabatt*', 'student*', 'honnør*', 'gratis')) {
+      const L = pl[0].linjer;
+      const start = har('barn', 'barna', 'barnet', 'unger', 'ungene', 'ungen', 'barnebillett*') && !har('voksen*', 'voksne') ? 'Barn betaler ' + kr(L[1].kr) + '. Bor dere i Randaberg, bader barn fra 0 til og med 9 år gratis med Barnas badekort.'
+        : har('honnør*', 'pensjonist*', 'student*') ? 'Studenter og honnør betaler ' + kr(L[1].kr) + '.'
+        : har('voksen*', 'voksne') && !har('barn', 'barna') ? 'En voksenbillett koster ' + kr(L[0].kr) + '.' : '';
+      if (start) return start + ' Billetten gjelder i 1,5 time, inkludert tiden i garderoben.' + prisKort();
+    }
     if (har('kost*', 'pris*', 'priser', 'billett*', 'betale', 'dyrt', 'rabatt*', 'student*', 'honnør*', 'gratis'))
       return 'En enkeltbillett koster ' + kr(pl[0].linjer[0].kr) + ' for voksne og ' + kr(pl[0].linjer[1].kr) + ' for barn, studenter og honnør. Billetten gjelder i 1,5 time, inkludert tiden i garderoben. Bader du ofte, lønner det seg med klippekort eller halvårskort.' + prisKort();
 
     /* Barn og familie: er det en økt for dem nå? */
     const medBarn = har('barn', 'barna', 'barnet', 'ungene', 'unger', 'ungen', 'familie*', 'datter*', 'døtre*', 'sønn*', 'småbarn*', 'baby', 'babyen', 'babyer');
-    const barnIder = har('baby', 'babyen', 'babyer') ? ['familie', 'familie-mosjon', 'baby'] : ['familie', 'familie-mosjon'];
+    const barnIder = har('baby', 'babyen', 'babyer') ? ['familie-mosjon', 'baby'] : ['familie-mosjon'];
     const sporNaa = har('åpen', 'åpent', 'åpner', 'åpning*', 'åpne', 'bade', 'bading', 'svømme', 'komme', 'nå', 'når');
 
     /* En bestemt dag */
@@ -3606,47 +3769,75 @@ function settOppChat() {
     if (dag === null && har('helg*', 'helgen')) { const l = pluss(n.dato, (5 - ukedag(n.dato) + 7) % 7), so = pluss(l, 1); return 'Lørdag ' + dagMnd(l) + ' ' + dagTekst(l) + '. Søndag ' + dagMnd(so) + ' ' + dagTekst(so) + '.'; }
     if (dag === n.dato && !(medBarn && sporNaa)) {
       const resten = dagsplan(n.dato).okter.filter(x => !x.pause && tilMin(x.til) > n.min);
-      if (s.apent) return 'Ja, vi har åpent nå. ' + esc(oktSetning(s)) + ' Vi stenger ' + kl(s.hallSlutt) + '.' + tiderKort(n, s);
-      if (!resten.length) return 'Vi har stengt for i dag.' + (s.neste ? ' Vi åpner igjen ' + naarTekst(s.neste) + ' med ' + esc(liten(oktNavn(s.neste.okt))) + '.' : '') + tiderKort(n, s);
+      if (s.apent) return aapentNaa() + tiderKort(n, s);
+      if (!resten.length) return (ingenIDag() ? stengtNa() : 'Vi har stengt for i dag.') + (s.neste ? ' Vi åpner igjen ' + naarTekst(s.neste) + ' med ' + esc(liten(oktNavn(s.neste.okt))) + '.' : '') + tiderKort(n, s);
       return 'Akkurat nå har vi stengt. I dag ' + dagTekstFra(n.dato, n.min) + '.' + tiderKort(n, s);
     }
-    if (dag !== null && dag !== n.dato) return stor(UKEDAGER[ukedag(dag)] + ' ' + dagMnd(dag)) + ' ' + dagTekst(dag) + '.';
+    if (dag !== null && dag !== n.dato) {
+      const svar = stor(UKEDAGER[ukedag(dag)] + ' ' + dagMnd(dag)) + ' ' + dagTekst(dag) + '.';
+      if (dagsplan(dag).okter.some(x => !x.pause)) return (har('åpent', 'åpen', 'åpne', 'svømming', 'bading', 'bade', 'er det', 'kan vi', 'kan jeg') ? 'Ja! ' : '') + svar;
+      for (let i = 1; i < 40; i++) { const d2 = pluss(dag, i), o2 = dagsplan(d2).okter.filter(x => !x.pause); if (o2.length) return svar + ' Neste gang vi har åpent, er ' + UKEDAGER[ukedag(d2)] + ' ' + dagMnd(d2) + ' klokka ' + o2[0].fra + '.'; }
+      return svar;
+    }
 
     /* Med barn: er det en økt der barn kan være med? */
     if (medBarn && sporNaa) {
       const forBarn = o => grupperI(o).some(g => barnIder.includes(g));
+      if (har('i kveld', 'ikveld', 'i ettermiddag', 'etter skolen', 'etter jobb')) {
+        const fra = har('i kveld', 'ikveld') ? 960 : 720, kveld = dagsplan(n.dato).okter.filter(o => !o.pause && forBarn(o) && tilMin(o.til) > Math.max(n.min, fra));
+        if (kveld.length) return 'Ja! ' + (har('i kveld', 'ikveld') ? 'I kveld' : 'Senere i dag') + ' er det ' + kveld.map(o => esc(liten(oktNavn(o))) + ' ' + o.fra + '–' + o.til).join(', og ') + '. Barn under 10 år må ha med en badende voksen over 18 år.';
+      }
       const neste = nesteFor(n, barnIder, false);
-      const nesteTekst = neste ? ' Neste ' + (barnIder.includes('baby') ? 'tid for barn og baby' : 'familiebading') + ' er ' + naarTekst(neste) + ' (' + esc(liten(oktNavn(neste.okt))) + ').' : '';
+      const nesteTekst = neste ? ' Barna kan bade igjen ' + naarTekst(neste) + ', da er det ' + esc(liten(oktNavn(neste.okt))) + '.' : '';
       if (s.apent && forBarn(s.okt)) return 'Ja, nå er det ' + esc(liten(oktNavn(s.okt))) + ', til ' + kl(s.slutt) + '. Barn under 10 år må ha med en badende voksen over 18 år.' + tiderKort(n, s);
-      if (s.apent) return 'Nei, akkurat nå er det ' + esc(liten(oktNavn(s.okt))) + ', og da kan ikke barna bade.' + nesteTekst + tiderKort(n, s);
-      return 'Akkurat nå har vi stengt.' + nesteTekst + tiderKort(n, s);
+      if (s.apent) return 'Nei, akkurat nå er det ' + esc(liten(oktNavn(s.okt))) + (grupperI(s.okt).includes('mosjon') ? ', og da er bassenget bare for voksne over 18 år.' : ', og da kan ikke barna bade.') + nesteTekst + tiderKort(n, s);
+      return stengtNa() + nesteTekst + tiderKort(n, s);
     }
 
     /* Resepsjonen: åpen når det er publikumsbading, stenger cirka 45 minutter før bassenget, og har noen egne stengte tidsrom */
-    if (har('resepsjon*', 'skranke*', 'skranken', 'kassa', 'kassen')) {
-      const res = resepsjonTekst(n, s), vanlig = s.hallSlutt - 45;
-      const pause = res.match(/stengt (\d\d\.\d\d)–(\d\d\.\d\d)/), stengtTil = res.match(/stengt til (\d\d\.\d\d)/);
-      const kjop = ' Der kjøper du billetter og halvårskort til trimrommet.';
-      if (s.apent && stengtTil) return 'Resepsjonen er stengt akkurat nå, men åpner igjen klokka ' + stengtTil[1] + '. Bassenget er åpent.' + kjop;
-      if (s.apent && n.min < vanlig) return 'Ja, resepsjonen er åpen nå. ' + (pause ? 'Den tar pause ' + pause[1] + ' og åpner igjen ' + pause[2] + '.' : 'Den stenger cirka ' + kl(vanlig) + '.') + kjop;
-      const nesteTid = s.neste ? ' Den åpner igjen ' + naarTekst(s.neste) + '.' : '';
-      return (s.apent ? 'Resepsjonen har stengt for i dag.' : 'Resepsjonen er stengt nå.') + nesteTid + ' Resepsjonen er åpen når det er publikumsbading, og stenger cirka 45 minutter før bassenget.' + kjop;
-    }
+    if (har('resepsjon*', 'skranke*', 'skranken', 'kassa', 'kassen')) return resepsjonSvar(false);
 
     /* Når stenger dere? Er det åpent nå? */
     if (har('steng*')) {
       if (s.apent) {
         const igjen = dagsplan(n.dato).okter.find(x => !x.pause && tilMin(x.fra) > s.hallSlutt);
         const res = resepsjonTekst(n, s);
-        return 'Vi stenger ' + kl(s.hallSlutt) + (igjen ? ' og åpner igjen ' + igjen.fra : ' i dag') + '. ' + (s.etter ? esc(oktSetning(s)) + ' ' : '') + (res && res.indexOf('stengt') > -1 ? res + ' ' : 'Resepsjonen stenger cirka 45 minutter før stengetid. ') + 'Alle må opp av bassenget 15 minutter før stengetid.' + tiderKort(n, s);
+        const slutt = s.hallSlutt, resTekst = res && res.indexOf('stengt') > -1 ? res : 'Resepsjonen stenger cirka ' + kl(slutt - 45) + '.';
+        return 'Vi stenger ' + kl(slutt) + (igjen ? ' og åpner igjen klokka ' + igjen.fra : ' i dag') + '. ' + resTekst + ' Alle må opp av bassenget ' + kl(slutt - 15) + ' og være ute av garderoben innen ' + kl(slutt) + '.' + tiderKort(n, s);
       }
-      return (s.neste && s.neste.omDager === 0 ? 'Akkurat nå har vi stengt, men vi åpner igjen klokka ' + s.neste.okt.fra + ' i dag.' : 'Vi har stengt for i dag.' + (s.neste ? ' Vi åpner igjen ' + naarTekst(s.neste) + '.' : '')) + tiderKort(n, s);
+      return (s.neste && s.neste.omDager === 0 ? 'Akkurat nå har vi stengt, men vi åpner igjen klokka ' + s.neste.okt.fra + ' i dag.' : (ingenIDag() ? stengtNa() : 'Vi har stengt for i dag.') + (s.neste ? ' Vi åpner igjen ' + naarTekst(s.neste) + '.' : '')) + tiderKort(n, s);
     }
+    if (har('kan jeg bade', 'kan vi bade', 'kan man bade', 'kan han bade', 'kan hun bade', 'kan barnet bade', 'får jeg bade') && har('med', 'når jeg', 'hvis', 'om jeg', 'uten', 'etter', 'selv om') && !har('nå', 'i dag', 'i morgen', 'klokka', 'kl'))
+      return 'Det vil jeg ikke svare feil på. ' + ringTlf;
     if (har('åpen', 'åpent', 'åpner', 'åpning*', 'åpne', 'når kan', 'bade nå', 'kan jeg bade', 'kan vi bade', 'kan man bade', 'komme nå')) {
-      if (s.apent) { const res = resepsjonTekst(n, s); return 'Ja, vi har åpent nå. ' + esc(oktSetning(s)) + (res && res.indexOf('stengt') > -1 ? ' ' + res : '') + tiderKort(n, s); }
-      return 'Akkurat nå har vi stengt.' + (s.neste ? ' Vi åpner ' + naarTekst(s.neste) + ' med ' + esc(liten(oktNavn(s.neste.okt))) + '.' : '') + tiderKort(n, s);
+      if (s.apent && har('når', 'åpningstid*', 'tider', 'tidene', 'hvor lenge')) return aapentNaa() + ' Her er tidene for i dag:' + tiderKort(n, s);
+      if (s.apent) { const res = resepsjonTekst(n, s); return 'Ja, vi har åpent nå! ' + esc(oktSetning(s)) + (res && res.indexOf('stengt') > -1 ? ' ' + res : '') + tiderKort(n, s); }
+      return stengtNa() + (s.neste ? ' Vi åpner ' + naarTekst(s.neste) + ' med ' + esc(liten(oktNavn(s.neste.okt))) + '.' : '') + tiderKort(n, s);
     }
-    return 'Det har jeg dessverre ikke svaret på. ' + ringTlf;
+    return 'Det vet jeg dessverre ikke sikkert, og jeg vil ikke gi deg feil svar. ' + ringTlf;
+
+    /* Resepsjonen: åpen når det er publikumsbading, stenger cirka 45 minutter før bassenget, og har noen egne stengte tidsrom */
+    function resepsjonSvar(forKjop) {
+      const res = resepsjonTekst(n, s), vanlig = s.hallSlutt - 45;
+      const pause = res.match(/stengt (\d\d\.\d\d)–(\d\d\.\d\d)/), stengtTil = res.match(/stengt til (\d\d\.\d\d)/);
+      const inn = forKjop ? 'Billetter kjøper du i resepsjonen. ' : '', kjop = forKjop ? '' : ' I resepsjonen kjøper du billetter og halvårskort til trimrommet.';
+      if (s.apent && stengtTil) return inn + 'Resepsjonen er stengt akkurat nå, men åpner igjen klokka ' + stengtTil[1] + '. Bassenget er åpent.' + kjop;
+      if (s.apent && n.min < vanlig) {
+        if (pause) return inn + (forKjop ? 'Resepsjonen' : 'Ja, resepsjonen') + ' er åpen nå. Den tar pause ' + pause[1] + ' og åpner igjen ' + pause[2] + '.' + kjop;
+        return inn + (forKjop || har('når', 'hvor lenge') ? 'Resepsjonen er åpen nå og stenger cirka ' + kl(vanlig) + ' i dag.' : 'Ja, resepsjonen er åpen nå. Den stenger cirka ' + kl(vanlig) + '.') + kjop;
+      }
+      const nesteTid = s.neste ? ' Den åpner igjen ' + naarTekst(s.neste) + '.' : '';
+      return inn + (s.apent ? 'Resepsjonen har stengt for i dag.' : 'Resepsjonen er stengt nå.') + nesteTid + ' Den er åpen når det er publikumsbading, og stenger cirka 45 minutter før bassenget.' + kjop;
+    }
+    /* Stengt nå: på en helligdag, en dag uten bading eller mellom øktene */
+    function stengtNa() { const p = dagsplan(n.dato); return p.stengt ? 'I dag holder vi stengt (' + esc(liten(p.stengt.navn)) + ').' : ingenIDag() ? 'I dag har vi ikke åpent for bading.' : 'Akkurat nå har vi stengt.'; }
+    /* Er det ingen bading i det hele tatt i dag? */
+    function ingenIDag() { return !dagsplan(n.dato).okter.some(x => !x.pause); }
+    /* «Vi har åpent nå, til …», med pause i løpet av dagen hvis det er det */
+    function aapentNaa() {
+      const igjen = dagsplan(n.dato).okter.find(x => !x.pause && tilMin(x.fra) > s.hallSlutt);
+      return 'Vi har åpent nå, til ' + kl(s.hallSlutt) + (igjen ? ', og så åpner vi igjen klokka ' + igjen.fra : '') + '. Akkurat nå er det ' + esc(liten(oktNavn(s.okt))) + '.';
+    }
   }
 
   const rolig = ROLIG;
@@ -3690,7 +3881,7 @@ function settOppChat() {
       if (ko.length) setTimeout(() => { if (r === runde) besvar(); }, 600); else opptatt = false; }, SVARTID);
   }
 
-  const hilsen = () => boble('Hei, og velkommen til Randaberghallen! Jeg er den digitale assistenten i resepsjonen. Spør meg om åpningstider, priser eller baderegler.');
+  const hilsen = () => boble('Hei, og velkommen til Randaberghallen! Jeg er den digitale assistenten vår. Spør meg om åpningstider, priser, bursdag eller baderegler, så svarer jeg så godt jeg kan.');
   hilsen();
   /* Lukket i mer enn 15 sekunder: chatten starter på nytt, uten den gamle samtalen.
      Lukker du den ved et uhell og åpner igjen innen 15 sekunder, står alt der fortsatt. */
