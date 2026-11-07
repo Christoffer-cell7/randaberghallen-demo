@@ -184,6 +184,15 @@ a:hover .pil,button:hover .pil{transform:translateX(5px)}
 .bursdag__felles{list-style:none;margin:16px 0 0;padding:16px 20px;border-radius:20px;border:1px dashed rgba(255,255,255,.22);display:grid;gap:8px}
 .bursdag__felles li{display:flex;gap:10px;align-items:flex-start;color:rgba(255,255,255,.86)}
 .bursdag__felles svg{flex:0 0 auto;margin-top:.35em;color:var(--gronn)}
+/* Godt å vite om bursdag: små fliser */
+.bursdag__felles.bfakta{display:grid;padding:0;border:0;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:10px}
+.bfakta__tittel{grid-column:1/-1;font-family:var(--display);font-weight:800;font-size:1.35rem;letter-spacing:-.02em;color:#fff;margin:10px 0 2px}
+.bursdag__felles .bfakta__flis{gap:14px;padding:16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);line-height:1.45;transition:transform .25s,background .25s}
+.bursdag__felles .bfakta__flis:hover{transform:translateY(-2px);background:rgba(255,255,255,.08)}
+.bfakta__flis i{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:rgba(92,200,255,.12);color:var(--aqua)}
+.bursdag__felles .bfakta__flis svg{margin:0;color:currentColor}
+.bfakta__flis b{display:block;color:#fff;margin-bottom:2px}
+.bfakta__flis span{color:rgba(255,255,255,.76);font-size:.9375rem}
 @media (min-width:760px){
   .bursdag__kort{grid-template-columns:1fr 1fr;gap:16px}
   .bkort{padding:32px}
@@ -1063,8 +1072,8 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
   .paa-forside .side--forside{height:auto}
   .paa-forside .hero--basseng{flex:0 0 auto;height:62vh;height:62svh}
 }
-/* Forsiden: ingen «Bestill her» i toppen. Den finnes på de andre sidene. */
-.paa-forside #bestill{display:none}
+/* Svømmehall-siden: ingen «Bestill her» i toppen. Den finnes på forsiden og de andre sidene. */
+html[data-side="svommehall"] #bestill{display:none}
 /* Infolinja øverst på forsiden: litt tynnere enn på svømmehall-siden */
 .kant--forside{flex:0 0 auto;padding:12px 0}
 /* Toppmenyen på PC: litt større logo, lenker og knapp (fra 1240 px, så alt får plass på én linje) */
@@ -1229,6 +1238,132 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .bvis{animation:bvis .35s cubic-bezier(.2,.7,.2,1)}
 @keyframes bvis{from{opacity:0;transform:translateY(10px)}}
 @media (prefers-reduced-motion:reduce){.bvis,.bkvitt__hake svg path{animation:none;stroke-dashoffset:0}.btype{transition:none}}
+/* ---------- Bestilling: nye valg og animasjoner ---------- */
+.bestilling{overflow:hidden;isolation:isolate}
+.bestilling>.inn{position:relative;z-index:1}
+/* Lys som beveger seg sakte, som sol gjennom vann */
+.bestilling::before{content:"";position:absolute;inset:-20% -10% auto;height:70%;z-index:0;pointer-events:none;opacity:.55;
+  background:radial-gradient(38% 30% at 20% 40%,rgba(92,200,255,.14),transparent 70%),radial-gradient(30% 26% at 75% 30%,rgba(10,132,255,.16),transparent 70%),radial-gradient(26% 22% at 50% 70%,rgba(74,222,155,.07),transparent 70%);
+  animation:bLys 18s ease-in-out infinite alternate}
+@keyframes bLys{0%{transform:translate3d(-4%,0,0) scale(1)}50%{transform:translate3d(3%,3%,0) scale(1.08)}100%{transform:translate3d(5%,-2%,0) scale(1.02)}}
+/* Bobler som stiger rolig i bakgrunnen */
+.bobler{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bobler span{position:absolute;bottom:-40px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;border:1px solid rgba(200,235,255,.4);background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.55) 0 18%,rgba(170,225,255,.12) 40%,rgba(170,225,255,.04) 70%);
+  animation:bBoble var(--t) linear infinite;animation-delay:var(--d);opacity:0}
+@keyframes bBoble{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:.8}50%{transform:translate3d(14px,-55vh,0)}90%{opacity:.5}100%{transform:translate3d(-8px,-110vh,0);opacity:0}}
+
+/* Stegene: linje som fylles når du går videre */
+.bsteg{position:relative}
+.bsteg::after{content:"";position:absolute;left:8px;right:8px;bottom:-10px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--aqua),var(--bla-knapp));transform-origin:left;transform:scaleX(var(--fram,0));transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.bsteg::before{content:"";position:absolute;left:8px;right:8px;bottom:-10px;height:3px;border-radius:3px;background:rgba(255,255,255,.08)}
+.bsteg li.naa i{animation:bPuls 2.4s ease-in-out infinite}
+@keyframes bPuls{0%,100%{box-shadow:0 0 0 0 rgba(10,132,255,.55)}50%{box-shadow:0 0 0 7px rgba(10,132,255,0)}}
+.bsteg li.ferdig i{animation:bPop .4s cubic-bezier(.3,1.6,.5,1)}
+
+/* Inn-animasjon: elementene glir inn ett etter ett når et nytt steg vises */
+.animer .ba{animation:bInn .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 55ms)}
+.animer.tilbake .ba{animation-name:bInnV}
+@keyframes bInn{from{opacity:0;transform:translate3d(0,16px,0)}}
+@keyframes bInnV{from{opacity:0;transform:translate3d(-18px,0,0)}}
+.animer .bsum{animation:bInn .6s .18s cubic-bezier(.2,.7,.2,1) both}
+.bny{animation:bInn .45s cubic-bezier(.2,.7,.2,1) both}
+.bny .btime{animation:bInn .4s cubic-bezier(.2,.7,.2,1) both}
+.bny .btime:nth-child(2){animation-delay:30ms}.bny .btime:nth-child(3){animation-delay:60ms}.bny .btime:nth-child(4){animation-delay:90ms}.bny .btime:nth-child(5){animation-delay:120ms}.bny .btime:nth-child(6){animation-delay:150ms}.bny .btime:nth-child(n+7){animation-delay:180ms}
+.bkal__dag.valgt,.btime.valgt,.bvalg button[aria-pressed="true"]{animation:bPop .35s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bPop{0%{transform:scale(.86)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+.bsum__pris b.ny{display:inline-block;animation:bPris .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bPris{0%{transform:scale(.8);color:var(--aqua)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+/* Typekortene: glans som sveiper over ved hover */
+.btype{overflow:hidden}
+.btype::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.2) 50%,transparent 65%);transform:translateX(-130%);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.btype:hover::after{transform:translateX(130%)}
+.btype__velg svg,.btype__pil svg{transition:transform .25s}
+.btype:hover .btype__velg svg,.btype:hover .btype__pil svg{transform:translateX(4px)}
+
+/* Barnehage, skole og lag */
+.borg{display:grid;gap:6px;margin-top:6px;padding:20px;border-radius:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.borg__tittel{font-family:var(--display);font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+.borg__tekst{font-size:.9375rem;color:rgba(255,255,255,.7);margin-bottom:8px}
+.borg__valg{display:grid;gap:10px}
+@media (min-width:700px){.borg__valg{grid-template-columns:repeat(3,1fr)}}
+.btype--org{flex-direction:row;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;--bg:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
+.btype--org:hover{--bg:rgba(255,255,255,.1)}
+.btype__ikon{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:rgba(92,200,255,.14);color:var(--aqua)}
+.btype__tekst{display:grid;gap:2px;min-width:0;flex:1}
+.btype__tekst b{font-family:var(--display);font-size:1.15rem;line-height:1.1}
+.btype__tekst small{font-size:.8125rem;color:rgba(255,255,255,.62)}
+.btype__pil{flex:none;color:rgba(255,255,255,.7)}
+.binfo{display:grid;gap:4px;padding:16px 18px;border-radius:18px;background:rgba(92,200,255,.08);border:1px solid rgba(92,200,255,.24);font-size:.9375rem;line-height:1.5}
+.binfo b{font-weight:700}
+.binfo span{color:rgba(255,255,255,.78)}
+/* Innlogging (demo) */
+.blogg{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:18px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);transition:background .3s,border-color .3s}
+.blogg>div{flex:1 1 220px;display:grid;gap:3px;min-width:0}
+.blogg b{font-weight:700}
+.blogg>div span{font-size:.875rem;line-height:1.45;color:rgba(255,255,255,.68)}
+.blogg__ikon{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);color:#fff}
+.blogg.inne{background:rgba(74,222,155,.1);border-color:rgba(74,222,155,.4)}
+.blogg.inne .blogg__ikon{background:var(--mint);color:var(--blekk);animation:bPop .45s cubic-bezier(.3,1.6,.5,1)}
+.blogg.feil{border-color:var(--korall);box-shadow:inset 0 0 0 1px var(--korall)}
+.boversikt{margin:0;display:grid}
+.boversikt div{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid rgba(255,255,255,.12)}
+.boversikt div:first-child{border-top:0}
+.boversikt dt{flex:none;color:rgba(255,255,255,.66)}
+.boversikt dd{margin:0;text-align:right;font-weight:700;min-width:0;overflow-wrap:anywhere}
+
+/* Kvittering: ringer og bobler */
+.bkvitt{position:relative;overflow:hidden;animation:bInn .6s cubic-bezier(.2,.7,.2,1) both}
+.bkvitt>*:not(.bkvitt__bobler){position:relative;z-index:1}
+.bkvitt__hake{position:relative}
+.bkvitt__hake::before,.bkvitt__hake::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,255,255,.7);animation:bRing 1.6s .35s cubic-bezier(.2,.7,.2,1) 2 both}
+.bkvitt__hake::after{animation-delay:.75s}
+@keyframes bRing{from{transform:scale(1);opacity:.9}to{transform:scale(2.4);opacity:0}}
+.bkvitt__bobler{position:absolute;inset:0;z-index:0;pointer-events:none}
+.bkvitt__bobler span{position:absolute;bottom:-20px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;background:rgba(255,255,255,.35);animation:bStig 2.4s var(--d) cubic-bezier(.2,.6,.3,1) both}
+@keyframes bStig{0%{transform:translate3d(0,0,0);opacity:0}15%{opacity:.9}100%{transform:translate3d(0,-420px,0) scale(.6);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  .bestilling::before,.bobler span,.bkvitt__bobler span,.bsteg li.naa i,.bkvitt__hake::before,.bkvitt__hake::after{animation:none!important}
+  .bobler,.bkvitt__bobler{display:none}
+  .animer .ba,.bny,.bny .btime,.bkal__dag.valgt,.btime.valgt,.bsum__pris b.ny,.bkvitt,.animer .bsum,.blogg.inne .blogg__ikon,.bvalg button{animation:none!important}
+  .bsteg::after,.btype::after{transition:none}
+}
+/* ---------- Idrettshall: velg hvem som skal bruke hallen ---------- */
+.ivelg{margin-top:26px}
+.ivelg__over{font-size:.95rem;color:rgba(255,255,255,.72);margin-bottom:10px}
+.ivelg__knapper{display:flex;gap:8px;flex-wrap:wrap}
+.ivelg__knapper button{all:unset;box-sizing:border-box;cursor:pointer;min-height:46px;padding:11px 20px;border-radius:40px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);font-weight:700;font-size:.98rem;color:#fff;transition:background .2s,color .2s,border-color .2s}
+.ivelg__knapper button:hover{background:rgba(255,255,255,.13)}
+.ivelg__knapper button[aria-selected="true"]{background:var(--aksent);color:#140A03;border-color:var(--aksent)}
+.ivelg__knapper button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media (max-width:599px){.ivelg__knapper{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 calc(-1 * var(--pad,16px));padding:2px var(--pad,16px) 6px;scroll-snap-type:x proximity}.ivelg__knapper::-webkit-scrollbar{display:none}.ivelg__knapper button{flex:none;scroll-snap-align:start}}
+.ipanel{animation:ipanel .45s cubic-bezier(.2,.7,.2,1)}
+.ipanel[hidden]{display:none}
+@keyframes ipanel{from{opacity:0;transform:translateY(10px)}}
+.ipris{margin:-8px 0 18px;color:rgba(255,255,255,.8)}
+.ipris b{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;margin-right:4px}
+.ilag__over{margin:22px 0 10px;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--aksent)}
+.ilag{display:flex;flex-wrap:wrap;gap:6px}
+.ilag a{display:inline-flex;align-items:center;min-height:36px;padding:7px 13px;border-radius:30px;background:rgba(255,255,255,.07);color:#fff;font-size:.88rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:background .2s}
+.ilag a:hover{background:rgba(255,255,255,.14);color:#fff}
+.ifaq{margin-top:14px;padding:26px 22px;border-radius:26px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1)}
+.ifaq h3{font-family:var(--display);font-weight:800;font-size:1.5rem;letter-spacing:-.02em;margin-bottom:10px}
+.ifaq__sp{border-top:1px solid rgba(255,255,255,.12)}
+.ifaq__sp summary{display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:56px;padding:12px 0;cursor:pointer;list-style:none;font-weight:700;font-size:1.02rem}
+.ifaq__sp summary::-webkit-details-marker{display:none}
+.ifaq__sp summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);font-size:1.15rem;transition:transform .25s}
+.ifaq__sp[open] summary::after{transform:rotate(45deg)}
+.ifaq__sp p{padding:0 0 16px;max-width:46em;line-height:1.55;color:rgba(255,255,255,.8)}
+.ifaq__mer{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:14px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
+.ifaq__mer span{color:rgba(255,255,255,.75)}
+@media (min-width:900px){.ifaq{padding:30px 32px}}
+@media (prefers-reduced-motion:reduce){.ipanel{animation:none}}
+/* Bestill-menyen: barnehage, skole og lag */
+.bestill__tittel--skille{margin-top:10px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1)}
+.bestill__smaa{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 4px 4px}
+.bestill__liten{display:grid;place-items:center;min-height:46px;padding:8px 6px;border-radius:12px;background:rgba(255,255,255,.06);color:#fff;font-weight:700;font-size:.875rem;line-height:1.2;text-align:center;text-decoration:none;transition:background .18s}
+.bestill__liten:hover,.bestill__liten:focus-visible{background:rgba(255,255,255,.12);color:#fff}
 </style>
 </head>
 <body>
@@ -1289,6 +1424,12 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
             <span><b>Leie av idrettshall</b><small>Kompistrening, <span id="bestillpris">300 kr</span> per time</small></span>
             <span class="vh"> (åpnes i ny fane)</span>
           </a>
+          <p class="bestill__tittel bestill__tittel--skille">Barnehage, skole og lag</p>
+          <div class="bestill__smaa">
+            <a class="bestill__liten" data-bestill="barnehage" href="#bestill-barnehage">Barnehage</a>
+            <a class="bestill__liten" data-bestill="skole" href="#bestill-skole">Skole</a>
+            <a class="bestill__liten" data-bestill="lag" href="#bestill-lag">Lag og forening</a>
+          </div>
           <a class="bestill__vilkar" href="#bursdag">Pris og vilkår for bursdag</a>
         </div>
       </div>
@@ -1455,7 +1596,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
       </div>
       <div class="bursdag">
         <div class="bursdag__kort" id="bursdagkort"></div>
-        <ul class="bursdag__felles rv" id="bursdagfelles"></ul>
+        <ul class="bursdag__felles bfakta rv" id="bursdagfelles"></ul>
         <div class="bursdag__bilder">
         <div class="slider slider--bursdag rv" data-slider="bursdag" data-modus="flyt" role="region" aria-roledescription="karusell" aria-label="Bilder fra bursdag i Randaberghallen">
           <div class="slider__vindu"><div class="slider__spor"></div></div>
@@ -1497,20 +1638,20 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
         <div class="fas__fakta rv" id="idrettfakta"></div>
       </div>
 
-      <div class="fas__rad">
-        <div class="fas__kort rv">
-          <h3>Slik leier du en hall</h3>
+      <div class="ivelg rv"><p class="ivelg__over">Hvem skal bruke hallen? Velg det som passer.</p><div class="ivelg__knapper" role="tablist" aria-label="Hvem skal bruke hallen"><button type="button" role="tab" id="it-kompis" aria-controls="ip-kompis" aria-selected="true">Kompistrening</button><button type="button" role="tab" id="it-bursdag" aria-controls="ip-bursdag" aria-selected="false" tabindex="-1">Bursdag</button><button type="button" role="tab" id="it-barnehage" aria-controls="ip-barnehage" aria-selected="false" tabindex="-1">Barnehage</button><button type="button" role="tab" id="it-skole" aria-controls="ip-skole" aria-selected="false" tabindex="-1">Skole</button><button type="button" role="tab" id="it-lag" aria-controls="ip-lag" aria-selected="false" tabindex="-1">Lag og foreninger</button></div></div><div class="ipanel" role="tabpanel" id="ip-kompis" aria-labelledby="it-kompis"><div class="fas__rad">
+        <div class="fas__kort">
+          <h3>Kompistrening: slik leier du en hall</h3>
           <ol class="steg">
-            <li><b>Finn ledig tid</b><span>Se kalenderen i bestillingssystemet til kommunen og velg hall og tidspunkt.</span></li>
+            <li><b>Finn ledig tid</b><span>Velg hall og dag i bestillingen. Grønne timer er ledige. Bestill senest dagen før.</span></li>
             <li><b>Bestill på nett</b><span>Du får bekreftelse på e-post. Avbestill senest <span data-hall="avbestillTimer"></span> timer før.</span></li>
             <li><b>Betal når du kommer</b><span>Helst med kort i automaten, ellers med nøyaktig beløp i kontanter til vaktmesteren.</span></li>
           </ol>
           <div class="fas__knapper">
-            <a class="knapp" data-bestill="idrettshall" href="#" target="_blank" rel="noopener">Se ledig tid og bestill<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="vh"> (åpnes i ny fane)</span></a>
+            <a class="knapp" data-bestill="idrettshall" href="#">Se ledig tid og bestill<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="vh"> (åpnes i ny fane)</span></a>
             <span class="fas__pris"><b><span data-hall="leiePerTime"></span> kr</b> per time per hall</span>
           </div>
         </div>
-        <div class="fas__kort fas__kort--lys rv">
+        <div class="fas__kort fas__kort--lys">
           <h3>Godt å vite</h3>
           <ul class="sjekk">
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Gruppeleder må være <span data-hall="lederAlder"></span> år eller eldre.</span></li>
@@ -1521,13 +1662,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>All trening er på eget ansvar. Følg hallreglene og vaktmesterens beskjeder.</span></li>
           </ul>
         </div>
-      </div>
-
-
-      <div class="fas__lag rv">
-        <div><b>Lag, foreninger og skoler</b><span>Fast treningstid tildeles for en sesong om gangen. Tildeling og andre saker går gjennom lagets leder til avdelingsleder idrett. Vaktmester tar seg av den daglige driften i hallen.</span></div>
-        <a class="knapp knapp--glass knapp--liten" id="lagtlf" href="#">Ring vaktmester</a>
-      </div>
+      </div></div><div class="ipanel" role="tabpanel" id="ip-bursdag" aria-labelledby="it-bursdag" hidden><div class="fas__rad"><div class="fas__kort"><h3>Bursdag i idrettshallen</h3><p class="ipris"><b>60 kr</b> per barn. Voksne er gratis.</p><ol class="steg"><li><b>14.30 Rigging og pynting</b><span>En halv time før selskapet.</span></li><li><b>15.00 Aktivitet i hallen</b><span>1 time med lek og ballspill.</span></li><li><b>16.00 Selskap i møtesalen</b><span>1 time med egen mat og drikke.</span></li><li><b>17.00 Rydding</b><span>En halv time etterpå.</span></li></ol><div class="fas__knapper"><a class="knapp" data-bestill="bursdagHall" href="#bestill-bursdagHall">Bestill bursdag<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="knapp knapp--glass" href="#bursdag">Alt om bursdag</a></div></div><div class="fas__kort fas__kort--lys"><h3>Godt å vite</h3><ul class="sjekk"><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Lørdag og søndag.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Dere kan låne innebandykøller, innefotballer og små mål.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Møtesalen har bord, stoler, projektor og høyttaler.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Ta med mat, drikke, tallerkener, bestikk og pynt. Kjøleskap, fryser og mikro kan lånes.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Ta med nok voksne til å passe på barna.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Betal når dere kommer, bare for barna som er med. Avbestill senest 24 timer før.</span></li></ul></div></div></div><div class="ipanel" role="tabpanel" id="ip-barnehage" aria-labelledby="it-barnehage" hidden><div class="fas__rad"><div class="fas__kort"><h3>For barnehager</h3><ol class="steg"><li><b>Se avtalene deres</b><span>Hallen er åpen etter avtalene dere har. Logg inn i bestillingen for å se dem.</span></li><li><b>Bestill ledig tid</b><span>Når fordelingen er ferdig og sesongen har startet, kan dere bestille ledige timer senest dagen før.</span></li><li><b>Avbestill i tide</b><span>Senest 24 timer før avtalt tid. Det gjør dere i bestillingen.</span></li></ol><div class="fas__knapper"><a class="knapp" data-bestill="barnehage" href="#bestill-barnehage">Bestill for barnehage<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="knapp knapp--glass" href="mailto:post@randaberghallen.no?subject=Brukernavn%20til%20bestilling%20(barnehage)">Be om brukernavn</a></div></div><div class="fas__kort fas__kort--lys"><h3>Godt å vite</h3><ul class="sjekk"><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Styreren får brukernavn og passord ved å be om det på e-post. Barnehagene kan ikke lage bruker selv.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Lederen kan bestille selv eller dele passordet med andre ansatte.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Hallen er stengt om sommeren og på helligdager.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Hjertestarteren står ved inngangen til herregarderoben i svømmehallen, til venstre for resepsjonen.</span></li></ul></div></div></div><div class="ipanel" role="tabpanel" id="ip-skole" aria-labelledby="it-skole" hidden><div class="fas__rad"><div class="fas__kort"><h3>For skoler</h3><ol class="steg"><li><b>Se avtalene deres</b><span>Hallen er åpen etter avtalene skolen har. Logg inn i bestillingen for å se dem.</span></li><li><b>Bestill ledig tid</b><span>Når fordelingen er ferdig og sesongen har startet, kan skolen bestille ledige timer senest dagen før.</span></li><li><b>Avbestill i tide</b><span>Senest 24 timer før avtalt tid. Det gjør dere i bestillingen.</span></li></ol><div class="fas__knapper"><a class="knapp" data-bestill="skole" href="#bestill-skole">Bestill for skole<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="knapp knapp--glass" href="mailto:post@randaberghallen.no?subject=Bruker%20til%20bestilling%20(skole)">Spør om bruker</a></div></div><div class="fas__kort fas__kort--lys"><h3>Godt å vite</h3><ul class="sjekk"><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Rektor eller inspektør har brukernavn og passord.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>De kan bestille selv eller dele passordet med andre lærere.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Hallen er stengt om sommeren og på helligdager.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Hjertestarteren står ved inngangen til herregarderoben i svømmehallen, til venstre for resepsjonen.</span></li></ul></div></div></div><div class="ipanel" role="tabpanel" id="ip-lag" aria-labelledby="it-lag" hidden><div class="fas__rad"><div class="fas__kort"><h3>For lag og foreninger</h3><ol class="steg"><li><b>Fast treningstid</b><span>Rammetider fordeles for en sesong etter søknad fra idrettsforbundene. Fristen for 2026/27 er ute. Skjema for 2027/28 kommer i januar 2027.</span></li><li><b>Ledige timer og møterom</b><span>Når fordelingen er ferdig, kan lagets leder bestille ledig tid og møterom senest dagen før.</span></li><li><b>Flytte en kamp</b><span>Innenfor rammetiden: kontakt forbundet. Utenfor: sjekk ledig tid og bestill selv.</span></li></ol><div class="fas__knapper"><a class="knapp" data-bestill="lag" href="#bestill-lag">Bestill ledig time<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="knapp knapp--glass" id="lagtlf" href="#">Ring vaktmester</a></div></div><div class="fas__kort fas__kort--lys"><h3>Hvem kontakter vi?</h3><ul class="sjekk"><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Daglig drift, som åpning og låsing: trener eller gruppeleder kontakter vaktmesteren.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Større saker går til avdelingsleder idrett, via lagets leder.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Ny leder? Få kontaktinfo fra forrige leder eller vaktmesteren.</span></li><li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg><span>Brukstid: hall 1 og 2 mandag–torsdag 15–22 (tirsdag fra 15.30), fredag 15–22 (hall 2 til 20). Kamper: lørdag 8–17, søndag 10–16.30.</span></li></ul><p class="ilag__over">Lagene i hallen</p><div class="ilag"><a href="https://randaberghk.no" target="_blank" rel="noopener">Randaberg håndballklubb<span class="vh"> (åpnes i ny fane)</span></a><a href="https://randabergvolleyball.no" target="_blank" rel="noopener">Randaberg volleyball<span class="vh"> (åpnes i ny fane)</span></a><a href="https://randabergturn.no" target="_blank" rel="noopener">Randaberg turnforening<span class="vh"> (åpnes i ny fane)</span></a><a href="https://randabergsvommerne.no" target="_blank" rel="noopener">RIL svømming<span class="vh"> (åpnes i ny fane)</span></a><a href="https://stupskole.no/randabergstup" target="_blank" rel="noopener">Randaberg stupeklubb<span class="vh"> (åpnes i ny fane)</span></a><a href="https://krtkd.no" target="_blank" rel="noopener">Kvitsøy og Randaberg Taekwon-Do<span class="vh"> (åpnes i ny fane)</span></a><a href="https://randabergmusikkorps.no" target="_blank" rel="noopener">Randaberg musikkorps<span class="vh"> (åpnes i ny fane)</span></a><a href="https://randenkoret.mono.net" target="_blank" rel="noopener">Kor på Randen<span class="vh"> (åpnes i ny fane)</span></a></div></div></div></div><div class="ifaq rv"><h3>Spørsmål om idrettshallen</h3><details class="ifaq__sp"><summary>Når er hallen åpen?</summary><p>Mandag–fredag 08.00–22.15, lørdag 08.00–17.00 og søndag 10.00–17.00. I helgen stenger vi klokka 17 hvis ingen aktiviteter varer lenger. Rigging og nedrigging må skje innenfor tiden dere har fått.</p></details><details class="ifaq__sp"><summary>Hvordan får vi oversikt over avtalene våre?</summary><p>Logg inn i bestillingen. Der ser dere alle avtalene deres, og der kan dere også avbestille.</p></details><details class="ifaq__sp"><summary>Hvordan flytter vi en kamp?</summary><p>Innenfor forbundets rammetid tar dere kontakt med forbundet. Trenger dere tid utenfor rammetiden, sjekker forbundet eller klubben ledig tid og bestiller selv.</p></details><details class="ifaq__sp"><summary>Kan vi bestille møterom?</summary><p>Ja. Møterom bestilles på samme måte som ledige timer i hallen. Lederen har brukernavn og passord.</p></details><details class="ifaq__sp"><summary>Jeg trenger hjelp. Hva gjør jeg?</summary><p>Daglige ting, som åpning og låsing, tar dere med vaktmesteren på 958 98 295. Større saker går til avdelingsleder idrett, via lagets leder.</p></details><details class="ifaq__sp"><summary>Har dere hjertestarter?</summary><p>Ja. Den står ved inngangen til herregarderoben i svømmehallen, rett til venstre for resepsjonen.</p></details><div class="ifaq__mer"><span>Lurer du på noe annet?</span><button type="button" class="knapp knapp--glass knapp--liten" data-apnechat>Spør chatten</button></div></div>
     </div>
   </section>
 
@@ -1618,14 +1753,14 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 
   <div class="side" data-side="bestilling">
   <section class="seksjon dyp2 morkt bestilling" id="bestilling" aria-labelledby="bestilling-tittel">
-    <span class="bestilling__anker" id="bestill-bursdagVann"></span><span class="bestilling__anker" id="bestill-bursdagHall"></span><span class="bestilling__anker" id="bestill-idrettshall"></span>
+    <span class="bestilling__anker" id="bestill-bursdagVann"></span><span class="bestilling__anker" id="bestill-bursdagHall"></span><span class="bestilling__anker" id="bestill-idrettshall"></span><span class="bestilling__anker" id="bestill-barnehage"></span><span class="bestilling__anker" id="bestill-skole"></span><span class="bestilling__anker" id="bestill-lag"></span>
+    <div class="bobler" aria-hidden="true"><span style="--x:32%;--s:15px;--t:15s;--d:-12s"></span><span style="--x:63%;--s:10px;--t:15s;--d:-2s"></span><span style="--x:4%;--s:18px;--t:22s;--d:-9s"></span><span style="--x:9%;--s:13px;--t:22s;--d:-17s"></span><span style="--x:48%;--s:14px;--t:26s;--d:-5s"></span><span style="--x:15%;--s:14px;--t:17s;--d:-0s"></span><span style="--x:84%;--s:14px;--t:26s;--d:-8s"></span><span style="--x:26%;--s:11px;--t:18s;--d:-9s"></span><span style="--x:82%;--s:17px;--t:15s;--d:-19s"></span><span style="--x:45%;--s:18px;--t:22s;--d:-7s"></span><span style="--x:24%;--s:13px;--t:21s;--d:-8s"></span><span style="--x:13%;--s:15px;--t:14s;--d:-9s"></span></div>
     <div class="inn">
       <div class="hode rv">
         <div>
           <p class="fas__over">Bestilling</p>
           <h2 id="bestilling-tittel">Bestill hos oss</h2>
         </div>
-        <p>Bursdag eller leie av idrettshall. Velg hva du vil bestille, finn en ledig dag og send. Det tar et par minutter.</p>
       </div>
       <ol class="bsteg" id="bestillsteg" aria-label="Steg i bestillingen"></ol>
       <div class="bflyt" id="bestillflyt" aria-live="polite"></div>
@@ -1700,7 +1835,10 @@ const HALL = {
     bestillValg: {
       bursdagHall: '#bestill-bursdagHall',
       bursdagVann: '#bestill-bursdagVann',
-      idrettshall: '#bestill-idrettshall'
+      idrettshall: '#bestill-idrettshall',
+      barnehage: '#bestill-barnehage',
+      skole: '#bestill-skole',
+      lag: '#bestill-lag'
     },
     parkering: 'Gratis parkering rett utenfor. Flere plasser foran sandvolleyballbanene og på andre siden av Torvmyrveien, ved Vår Energi Arena Randaberg.'
   },
@@ -1921,7 +2059,8 @@ const HALL = {
         merInfo: 'https://randaberghallen.no/barnebursdag-idrettshall/' }
     ],
     voksne: 'Voksne i følget er gratis.',
-    felles: ['Ta med nok voksne til å passe på barna.', 'Betal ved oppmøte, bare for de barna som kommer.', 'Avbestill senest 24 timer før.']
+    /* Godt å vite, hentet og forkortet fra bursdagssidene på randaberghallen.no 7. november 2026 */
+    felles: [{ tittel: 'Ta med', tekst: 'Mat, drikke, tallerkener, bestikk, duk og pynt.', ikon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v8a3 3 0 0 0 6 0V3M9 3v18M17 3c-1.7 1.5-2.5 3.5-2.5 6s.8 3.5 2.5 3.5V21"/></svg>' }, { tittel: 'I rommet', tekst: 'Bord, stoler, projektor og høyttaler. Cirka 150 m².', ikon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>' }, { tittel: 'Kan lånes', tekst: 'Kjøleskap, fryser og mikro. I idrettshallen også innebandykøller, fotballer og små mål.', ikon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M6 10h12M9 6.5v1M9 13v2"/></svg>' }, { tittel: 'Oppmøte', tekst: 'Cirka 10 minutter før. Meld dere i resepsjonen eller ring vaktmester.', ikon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' }, { tittel: 'Voksne', tekst: 'Ta med nok voksne til å passe på barna. Voksne er gratis.', ikon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c.6-3.4 2.8-5.5 5.5-5.5s4.9 2.1 5.5 5.5"/><circle cx="17" cy="9" r="2.3"/><path d="M15.5 14.6c2.3.1 4.2 2 4.8 5.4"/></svg>' }, { tittel: 'Betaling', tekst: 'Når dere kommer, bare for barna som er med. Avbestill senest 24 timer før.', ikon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg>' }]
   },
 
   /* Idrettshallen og kompistrening. Hentet fra randaberghallen.no/kompistrening 8. oktober 2026. */
@@ -2541,9 +2680,9 @@ function visFast() {
     '<h4>' + esc(b.navn) + '</h4><p class="bkort__pris"><b class="tall">' + b.krPerBarn + '</b> kr per barn <span>' + esc(bd.voksne) + '</span></p>' +
     '<ul class="bkort__liste">' + b.innhold.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' +
     '<dl class="bkort__tider">' + b.tider.map(x => '<div><dt>' + esc(x.dager) + '</dt><dd>' + esc(x.tid) + '</dd></div>').join('') + '</dl>' +
-    '<p class="bkort__hvem">' + esc(b.hvem) + '</p>' +
+    '<p class="bkort__hvem">' + esc(b.hvem) + ' Dere har rommet en halv time før og etter til pynting og rydding.</p>' +
     '<a class="knapp knapp--liten" data-bestill="' + b.id + '" href="' + esc(k.bestillValg[b.id] || k.bestilling) + '">Bestill ' + esc(liten(b.navn)) + '</a></article>').join('');
-  $('bursdagfelles').innerHTML = bd.felles.map(x => '<li>' + HAKE + '<span>' + esc(x) + '</span></li>').join('');
+  $('bursdagfelles').innerHTML = '<li class="bfakta__tittel">Godt å vite</li>' + bd.felles.map(x => '<li class="bfakta__flis"><i>' + x.ikon + '</i><span><b>' + esc(x.tittel) + '</b>' + esc(x.tekst) + '</span></li>').join('');
 
   /* Bildesliderne: hvert bilde, og en kopi av alle bak, så slideren kan gå rundt uten hopp */
   const slide = (b, kopi) => '<figure class="slide"' + (kopi ? ' aria-hidden="true"' : '') + '><img data-bilde="' + b.bilde + '" alt="' + (kopi ? '' : esc(b.alt)) + '" loading="lazy">' +
@@ -2576,7 +2715,7 @@ function visFast() {
     { b: ih.garderobeMin + '<small>min</small>', t: 'garderobe før og etter timen' },
     { b: ih.lederAlder + '<small>år</small>', t: 'aldersgrense for gruppeleder' }
   ].map(f => '<div class="fakta' + (f.aksent ? ' fakta--aksent' : '') + '"><b class="tall">' + f.b + '</b><span>' + esc(f.t) + '</span></div>').join('');
-  $('lagtlf').textContent = 'Ring vaktmester, ' + k.telefon; $('lagtlf').href = 'tel:+47' + k.telefon.replace(/\s/g, '');
+  $('lagtlf').textContent = 'Ring vaktmester'; $('lagtlf').href = 'tel:+47' + k.telefon.replace(/\s/g, '');
   $('trimkort').innerHTML = tr.kort.map(b =>
     '<div class="billett rv' + (b.mork ? ' billett--mork' : '') + '"><div class="billett__hvem"><b>' + esc(b.hvem) + '</b><span>' + esc(b.note) + '</span></div>' +
     '<div class="billett__pris tall"><span data-tell="' + b.kr + '">' + krf(b.kr) + '</span><small>kr</small></div></div>').join('');
@@ -3448,6 +3587,7 @@ function settOppSider() {
     if (ny) {
       sider.forEach(s => { const aktiv = s === side; s.hidden = !aktiv; s.classList.toggle('aktiv', aktiv); });
       document.documentElement.classList.toggle('paa-forside', navn === 'topp');
+      document.documentElement.dataset.side = navn;
       lenker.forEach(a => { const ja = a.dataset.side === navn; a.classList.toggle('aktiv', ja); if (ja) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
       naa = navn;
       /* ting som måler seg selv, må måles på nytt når siden blir synlig */
@@ -3674,12 +3814,12 @@ function settOppChat() {
   const SPR_PL = ['czy', 'jest', 'jak', 'ile', 'kiedy', 'gdzie', 'otwarte', 'otwarty', 'basen', 'basenu', 'dzieci', 'dziecko', 'cena', 'ceny', 'kosztuje', 'koszt', 'bilet',
     'bilety', 'godziny', 'dzisiaj', 'dzis', 'jutro', 'dzien', 'dobry', 'czesc', 'dziekuje', 'prosze', 'moge', 'mozna', 'tak', 'dla', 'jestem', 'urodziny',
     'zamkniete', 'sobota', 'niedziela', 'poniedzialek', 'wtorek', 'sroda', 'czwartek', 'piatek', 'hala', 'silownia', 'plywanie', 'plywac', 'czepek', 'recznik', 'szatnia',
-    'pies', 'witam', 'mam', 'masz', 'macie', 'jaka', 'jakie', 'ktora', 'gdzie', 'co', 'albo', 'oraz', 'czy', 'wejscie', 'wstep', 'otwieracie', 'zamykacie', 'macie', 'czynne'];
+    'pies', 'witam', 'mam', 'masz', 'macie', 'jaka', 'jakie', 'ktora', 'gdzie', 'co', 'albo', 'oraz', 'czy', 'wejscie', 'wstep', 'otwieracie', 'zamykacie', 'macie', 'czynne', 'wody', 'woda', 'skoki', 'widzenia', 'gdzie', 'czym', 'mozna', 'jakie', 'jaki', 'jest'];
   /* Bokstaver uten polske tegn, så «dziękuję» og «dziekuje» telles likt */
   const utenPolske = s => s.replace(/ą/g, 'a').replace(/ć/g, 'c').replace(/ę/g, 'e').replace(/ł/g, 'l').replace(/ń/g, 'n').replace(/ó/g, 'o').replace(/ś/g, 's').replace(/[źż]/g, 'z');
 
   /* Hvilket språk er teksten skrevet på? Gir 'no', 'en', 'pl', 'ar', 'uk', 'annet' eller null (vet ikke, behold språket vi har). */
-  function finnSpraak(tekst) {
+  function finnSpraak(tekst, naa) {
     const r = tekst.toLowerCase();
     if (/[پچژگ]/.test(r)) return 'annet';                                  /* persisk */
     if (/[؀-ۿ]/.test(r)) return 'ar';
@@ -3691,7 +3831,7 @@ function settOppChat() {
     const no = tell(SPR_NO), en = tell(SPR_EN.filter(o => !SPR_NO.includes(o))), plA = tell(SPR_PL.filter(o => !SPR_NO.includes(o) && !SPR_EN.includes(o)));
     if (/[ąćęłńśźż]/.test(r) && plA + 1 > no) return 'pl';
     if (plA >= 1 && plA >= en && plA > no) return 'pl';
-    if (en >= 1 && en > no && en > plA) return (en >= 2 || ord.length <= 2) ? 'en' : (no === 0 ? 'en' : null);
+    if (en >= 1 && en > no && en > plA) { if (en < 2 && naa && naa !== 'no' && naa !== 'en') return null; return (en >= 2 || ord.length <= 2) ? 'en' : (no === 0 ? 'en' : null); }
     if (no >= 1) return 'no';
     return null;
   }
@@ -3711,24 +3851,32 @@ function settOppChat() {
       fri: { Jul: 'Christmas', Nyttår: 'New Year', Påske: 'Easter', Svømmestevne: 'swimming competition', 'Arbeidernes dag': 'Labour Day', 'Kristi himmelfartsdag': 'Ascension Day', 'Pinse og 17. mai': 'Whitsun and 17 May', Sommerstengt: 'summer closure' },
       bestill: 'Book here', kart: 'Open in map',
       ord: {
-        dagI: ['today', 'tonight', 'now'], dagM: ['tomorrow'], helg: ['weekend'],
+        dagI: ['today', 'tonight', '=now', 'this evening', 'this afternoon', 'this morning'], dagM: ['tomorrow'], helg: ['weekend'],
         uke: [['monday'], ['tuesday'], ['wednesday'], ['thursday'], ['friday'], ['saturday'], ['sunday']],
-        hils: ['=hi', '=hello', '=hey', 'good morning', 'good evening', 'good afternoon'], takk: ['thank', '=thx', '=ty'], hade: ['bye', 'goodbye', 'see you'],
-        spraak: ['english', 'speak', 'language'], hitte: ['lost', 'forgot', 'left my'], hund: ['=dog', '=dogs', '=pet', '=pets'],
-        rullestol: ['wheelchair', 'disab', 'accessib', 'handicap', 'hoist'], betaling: ['vipps', 'cash', 'pay by', 'payment', 'apple pay', 'pay with', 'credit card', 'debit card'],
-        bursdag: ['birthday', 'party'], trim: ['=gym', 'fitness', 'workout', 'weights', 'treadmill', 'training room'],
-        hall: ['sports hall', 'rent a hall', 'rent the hall', 'hall rental', 'hire a hall', 'football', 'floorball', 'basketball', 'volleyball', 'badminton', 'hire a hall', 'book a hall'], bestill: ['=book', 'reserv', 'booking'],
-        kiosk: ['kiosk', 'cafe', 'café', 'snack', 'ice cream', 'hot dog', 'waffle', 'sandwich', 'noodle', 'candy', 'sweets', 'buy food', 'buy something to eat'],
-        mat: ['food', '=eat', 'drink', 'bottle', 'lunch'], badstue: ['sauna', 'steam'], stup: ['diving', '=dive', '=jump', 'board', 'tower', ' 5 m ', ' 5m ', ' 5 meter', 'springboard', 'platform'],
-        vakt: ['lifeguard', '=safe', 'supervis'], kontakt: ['phone number', '=call', 'email', 'e-mail', 'contact'], mobil: ['phone', 'camera', 'photo', 'picture', '=film', 'video', 'record'],
-        royk: ['smok', 'alcohol', 'beer', 'vape', 'snus', 'drunk'], barnAlene: ['alone', 'how old', 'age limit', 'years old', 'what age'],
-        baby: ['baby', 'babies', 'infant', 'nappy', 'nappies', 'diaper', 'toddler'], badetoy: ['swimwear', 'swimsuit', 'bikini', 'shorts', 'trunks', 'burkini', 'clothes', 't-shirt', '=wear'],
-        hette: ['=cap', 'swim cap', 'swimming cap', '=hat'], handkle: ['towel'], dusj: ['shower'], salg: ['goggles', '=buy', '=sell', '=shop'],
-        garderobe: ['locker', 'changing', 'dressing room', 'hairdryer', 'hair dryer', 'toilet', 'changing table'], vogn: ['stroller', 'pram', 'buggy', 'pushchair'],
-        bane: ['=lane', 'lanes', '=lap', 'laps'], basseng: ['deep', 'depth', 'temperature', 'warm', 'cold', 'how big', 'length', 'size'], pensjonist: ['senior', 'pensioner', 'elderly', 'retired'],
-        fri: ['christmas', 'easter', 'holiday', 'summer', 'new year'], pris: ['price', 'cost', 'how much', 'ticket', '=fee', '=free', 'season'],
-        adresse: ['where', 'address', 'location', 'find you', '=map', 'directions'], parkering: ['=park', 'parking'], buss: ['=bus', 'public transport'],
-        aapen: ['open', 'hours', 'close', 'closing', '=when', '=time', 'today', 'tomorrow', '=now', 'weekend']
+        hils: ['=hi', '=hello', '=hey', '=hiya', 'good morning', 'good evening', 'good afternoon'], takk: ['thank', '=thx', '=ty', 'cheers', 'appreciate'], hade: ['bye', 'goodbye', 'see you', 'good night'],
+        spraak: ['english', 'speak', 'language', 'norwegian'], hitte: ['lost', 'forgot', 'left my', 'left something', 'lost and found'], hund: ['=dog', '=dogs', '=pet', '=pets', 'puppy', 'guide dog', 'service dog'],
+        rullestol: ['wheelchair', 'disab', 'accessib', 'handicap', 'hoist', 'lift into', 'mobility', 'walker'],
+        betaling: ['vipps', 'cash', 'pay by', 'pay with', 'payment method', 'apple pay', 'credit card', 'debit card', 'how can i pay', 'how do i pay', 'by card', 'accept card', 'take card'],
+        bursdag: ['birthday', 'party', 'celebrat'], org: ['kindergarten', 'nursery', 'preschool', 'school', 'sports club', 'our club', 'our team', 'association', 'federation', 'training time', 'training slot', '=match', 'league', '=club', '=team'],
+        trim: ['=gym', 'fitness', 'workout', 'work out', 'weights', 'treadmill', 'training room', '=trim', 'trimrom', 'trim rom', 'exercise room', 'strength', '=train', 'training'],
+        hall: ['sports hall', 'rent a hall', 'rent the hall', 'hire a hall', 'book a hall', 'hall rental', 'football', 'floorball', 'basketball', 'volleyball', 'badminton', 'handball', '=hall', '=court'],
+        bestill: ['=book', 'reserv', 'booking'],
+        kiosk: ['kiosk', 'cafe', 'café', 'snack', 'ice cream', 'hot dog', 'hotdog', 'waffle', 'sandwich', 'noodle', 'candy', 'sweets', 'buy food', 'buy something', 'coffee', 'buy a drink', 'buy drinks'],
+        mat: ['food', '=eat', 'eating', 'drink', 'bottle', 'lunch'], badstue: ['sauna', 'steam room'],
+        stup: ['diving', '=dive', '=jump', 'jumping', 'board', 'tower', ' 5 m ', ' 5m ', ' 5 meter', 'springboard', 'platform'],
+        vakt: ['lifeguard', '=safe', 'safety', 'supervis', '=guard', 'guards'], hjerte: ['defibrillator', '=aed', 'heart starter', 'first aid'],
+        kontakt: ['phone number', '=call', 'email', 'e-mail', 'contact', 'reach you', 'telephone'], mobil: ['phone', 'camera', 'photo', 'picture', '=film', 'filming', 'video', '=record', 'selfie'],
+        royk: ['smok', 'alcohol', 'beer', 'vape', 'snus', 'drunk', 'cigarette', '=wine'],
+        barnAlene: ['alone', 'by himself', 'by herself', 'by themselves', 'on their own', 'on his own', 'on her own', 'without an adult', 'without adult', 'without a parent', 'without parents'],
+        alder: ['how old', 'age limit', 'years old', 'what age', '=age', 'minimum age', 'old enough', 'year old'],
+        baby: ['baby', 'babies', 'infant', 'nappy', 'nappies', 'diaper', 'toddler'], badetoy: ['swimwear', 'swimsuit', 'bikini', 'shorts', 'trunks', 'burkini', 'clothes', 't-shirt', '=wear', 'wetsuit', 'costume'],
+        hette: ['=cap', 'swim cap', 'swimming cap', '=hat', 'bathing cap'], handkle: ['towel'], dusj: ['shower'], salg: ['goggles', '=buy', '=sell', '=shop', 'armband', '=float', 'floats'],
+        garderobe: ['locker', 'changing', '=change', 'get changed', 'dressing room', 'hairdryer', 'hair dryer', 'toilet', 'bathroom', 'changing table', '=wc'], vogn: ['stroller', 'pram', 'buggy', 'pushchair'],
+        bane: ['=lane', 'lanes', '=lap', 'laps', 'lap swimming'], basseng: ['deep', 'depth', 'temperature', '=warm', '=cold', 'how big', 'length', '=size', 'metres', 'meters', 'kids pool', 'children\'s pool', 'baby pool', 'water temp'],
+        pensjonist: ['senior', 'pensioner', 'elderly', 'retired', 'aqua aerobics', 'water aerobics'],
+        fri: ['christmas', 'easter', 'holiday', 'summer', 'new year'], pris: ['price', 'cost', 'how much', 'ticket', '=fee', '=free', 'season', '=pay', 'paying', 'charge', 'admission', 'entry', 'discount', 'student'],
+        adresse: ['where', 'address', 'location', 'find you', '=map', 'directions', 'located'], parkering: ['=park', 'parking', '=car'], buss: ['=bus', 'public transport'],
+        aapen: ['open', 'hours', 'close', 'closing', '=when', '=time', 'today', 'tomorrow', '=now', 'weekend', 'schedule', 'timetable']
       },
       s: {
         hils: () => 'Hi! Welcome to Randaberghallen. Ask me about opening hours, prices, birthdays or the pool rules.',
@@ -3768,6 +3916,8 @@ function settOppChat() {
         adresse: v => 'You will find us at ' + v.adresse + '.',
         parkering: () => 'There is free parking right outside, and more spaces in front of the beach volleyball courts and across Torvmyrveien, at Vår Energi Arena Randaberg.',
         buss: () => 'You can check the bus times on the Kolumbus website.',
+        org: () => 'Kindergartens, schools and sports clubs with an agreement book free hours in the sports hall themselves, at least the day before, with the login they got from the hall. Regular training times for clubs are allocated for a season after applications from the sports federations. For help on the day, call the caretaker on ' + tlfL() + '.',
+        hjerte: () => 'Yes. The defibrillator (AED) is at the entrance to the men\'s changing room in the swimming hall, just to the left of the reception.',
         aapenNaa: (til, navn, ja) => (ja ? 'Yes, we are' : 'We are') + ' open now until ' + til + ' (' + navn + ').',
         igjen: naar => 'We open again ' + naar + '.',
         stengtNaa: neste => 'We are closed right now.' + (neste ? ' We open ' + neste + '.' : ''),
@@ -3788,24 +3938,29 @@ function settOppChat() {
       fri: { Jul: 'Boże Narodzenie', Nyttår: 'Nowy Rok', Påske: 'Wielkanoc', Svømmestevne: 'zawody pływackie', 'Arbeidernes dag': 'Święto Pracy', 'Kristi himmelfartsdag': 'Wniebowstąpienie', 'Pinse og 17. mai': 'Zielone Świątki i 17 maja', Sommerstengt: 'przerwa wakacyjna' },
       bestill: 'Zarezerwuj', kart: 'Otwórz mapę',
       ord: {
-        dagI: ['dziś', 'dzis', 'dzisiaj', 'teraz', 'wieczorem'], dagM: ['jutro'], helg: ['weekend'],
+        dagI: ['dziś', 'dzis', 'dzisiaj', 'teraz', 'wieczorem'], dagM: ['jutro'], helg: ['weekend', 'sobotę i niedzielę', 'sobota i niedziela'],
         uke: [['poniedzia'], ['wtor'], ['środ', 'srod'], ['czwart'], ['piąt', 'piat'], ['sobot'], ['niedziel']],
-        hils: ['cześć', 'czesc', 'dzień dobry', 'dzien dobry', 'witam', '=hej', 'dobry wieczór', 'dobry wieczor'], takk: ['dzięk', 'dziek'], hade: ['do widzenia', 'na razie', 'do zobaczenia'],
-        spraak: ['po polsku', 'polski', 'mówisz', 'mowisz', 'język', 'jezyk'], hitte: ['zgubi', 'zostawi', 'zapomnia'], hund: ['=pies', '=psa', 'psem', 'zwierz'],
-        rullestol: ['wózek inwalidzki', 'wozek inwalidzki', 'niepełnospraw', 'niepelnospraw', 'inwalid', 'podnośnik', 'podnosnik'], betaling: ['płaci', 'placi', 'płatność', 'platnosc', 'gotówk', 'gotowk', 'kartą', 'karta', 'vipps', 'zapłaci', 'zaplaci'],
-        bursdag: ['urodzin', 'przyjęci', 'przyjeci'], trim: ['siłowni', 'silowni', 'siłownia', 'silownia', 'fitness'],
-        hall: ['hala sportow', 'hali sportow', 'halę', 'wynaj', 'piłk', 'pilk', 'sala gimnast'], bestill: ['rezerw', 'zarezerw'],
-        kiosk: ['kiosk', 'kawiar', 'lody', 'hot dog', 'gofr', 'kanapk', 'słodycz', 'slodycz', 'przekąs', 'przekas', 'zupk', 'makaron'],
-        mat: ['jedzeni', 'jeść', 'jesc', 'picie', 'pić', 'napój', 'napoj', 'butelk', 'wodę', 'wode', 'woda'], badstue: ['saun'], stup: ['skok', 'skocz', 'trampolin', 'wieża', 'wieza', 'wieży', 'wiezy', 'desk'],
-        vakt: ['ratown', 'bezpieczn'], kontakt: ['numer', 'zadzwoni', 'email', 'e-mail', '=mail', 'kontakt'], mobil: ['komórk', 'komork', 'zdjęc', 'zdjec', 'aparat', 'nagryw', 'filmow', 'telefon'],
-        royk: ['pali', 'papieros', 'alkohol', 'piwo', 'pijan'], barnAlene: ['=sam', '=sama', '=sami', 'bez dorosł', 'bez dorosl', 'ile lat', 'wiek'],
-        baby: ['niemowl', 'dzidzi', 'pieluch', 'bobas', 'baby'], badetoy: ['strój', 'stroj', 'bikini', 'kąpielówk', 'kapielowk', 'szort', 'spodenk', 'burkini', 'ubrani', 'koszulk'],
-        hette: ['czepek', 'czepk'], handkle: ['ręcznik', 'recznik'], dusj: ['prysznic'], salg: ['okular', 'sprzeda', 'kupi', 'sklep'],
-        garderobe: ['szafk', 'szatni', 'przebiera', 'suszark', 'toalet', 'łazienk', 'lazienk', 'przewijak'], vogn: ['wózek', 'wozek', 'wózkiem', 'wozkiem'],
-        bane: ['=tor', '=tory', 'torów', 'torow'], basseng: ['głębok', 'glebok', 'temperatur', 'ciepł', 'ciepl', 'zimn', 'stopni', 'długi', 'dlugi'], pensjonist: ['senior', 'emeryt'],
-        fri: ['święt', 'swiet', 'boże narodzenie', 'boze narodzenie', 'wielkanoc', 'wakacj', 'latem', 'nowy rok'], pris: ['cen', 'koszt', 'bilet', 'opłat', 'oplat', 'darmo', 'karnet'],
-        adresse: ['gdzie', 'adres', 'dojazd', 'mapa', 'lokalizacj'], parkering: ['parking', 'parkow', 'zaparkow'], buss: ['autobus', 'komunikac'],
-        aapen: ['otwar', 'godzin', 'czynne', 'czynny', 'kiedy', 'zamyka', 'dzisiaj', 'jutro', 'teraz', 'weekend']
+        hils: ['cześć', 'czesc', 'dzień dobry', 'dzien dobry', 'witam', 'witaj', '=hej', 'dobry wieczór', 'dobry wieczor', 'siema'], takk: ['dzięk', 'dziek'], hade: ['do widzenia', 'na razie', 'do zobaczenia', '=pa'],
+        spraak: ['po polsku', 'polski', 'mówisz', 'mowisz', 'język', 'jezyk', 'rozumiesz'], hitte: ['zgubi', 'zostawi', 'zapomnia', 'rzeczy znalezione'], hund: ['=pies', '=psa', 'psem', 'zwierz', 'piesek'],
+        rullestol: ['wózek inwalidzki', 'wozek inwalidzki', 'wózku inwalidzkim', 'wozku inwalidzkim', 'niepełnospraw', 'niepelnospraw', 'inwalid', 'podnośnik', 'podnosnik'],
+        betaling: ['gotówk', 'gotowk', 'kartą', 'karta', 'kartę', 'karte', 'vipps', 'jak zapłac', 'jak zaplac', 'jak płac', 'jak plac', 'czym zapłac', 'czym zaplac', 'czym płac', 'forma płatności', 'forma platnosci'],
+        bursdag: ['urodzin', 'przyjęci', 'przyjeci', 'imprez'], org: ['przedszk', 'szkoł', 'szkol', 'klub', 'drużyn', 'druzyn', 'stowarzysz', 'związ', 'zwiaz', 'czas treningow', '=mecz', 'mecze'],
+        trim: ['siłowni', 'silowni', 'siłownia', 'silownia', 'fitness', 'trening', 'ćwicz', 'cwicz', '=trim', 'trimrom'],
+        hall: ['hala sportow', 'hali sportow', 'halę', 'wynaj', 'piłk', 'pilk', 'sala gimnast', 'boisk', '=hala', '=hali'], bestill: ['rezerw', 'zarezerw', 'zamów', 'zamow'],
+        kiosk: ['kiosk', 'kawiar', '=lody', 'loda', 'hot dog', 'gofr', 'kanapk', 'słodycz', 'slodycz', 'przekąs', 'przekas', 'zupk', 'makaron', '=kawa', '=kawę', 'kupić coś do jedzenia', 'kupic cos do jedzenia'],
+        mat: ['jedzeni', 'jeść', 'jesc', 'picie', 'pić', 'napój', 'napoj', 'napoje', 'butelk', 'wodę', 'wode', '=woda', 'przekąsk'], badstue: ['saun'],
+        stup: ['skok', 'skocz', 'trampolin', 'wieża', 'wieza', 'wieży', 'wiezy', 'desk'], vakt: ['ratown', 'bezpieczn', 'nadzor', 'nadzór'], hjerte: ['defibrylator', '=aed', 'pierwsza pomoc', 'pierwszej pomocy'],
+        kontakt: ['numer', 'zadzwoni', 'email', 'e-mail', '=mail', 'kontakt'], mobil: ['komórk', 'komork', 'zdjęc', 'zdjec', 'aparat', 'nagryw', 'filmow', 'telefon'],
+        royk: ['pali', 'papieros', 'alkohol', 'piwo', 'pijan', '=wino'], barnAlene: ['=sam', '=sama', '=sami', '=samo', 'bez dorosł', 'bez dorosl', 'bez rodzic', 'samodzielnie'],
+        alder: ['ile lat', '=wiek', 'wieku', 'od ilu lat', '=lat', 'letni', 'latek'],
+        baby: ['niemowl', 'dzidzi', 'pieluch', 'bobas', 'baby', 'maluch'], badetoy: ['strój', 'stroj', 'bikini', 'kąpielówk', 'kapielowk', 'szort', 'spodenk', 'burkini', 'ubrani', 'koszulk', 'ubrać', 'ubrac', 'w czym'],
+        hette: ['czepek', 'czepk'], handkle: ['ręcznik', 'recznik'], dusj: ['prysznic'], salg: ['okular', 'sprzeda', 'kupi', 'sklep', 'rękaw', 'rekaw'],
+        garderobe: ['szafk', 'szatni', 'przebiera', 'przebra', 'suszark', 'toalet', 'łazienk', 'lazienk', 'przewijak', '=wc'], vogn: ['wózek', 'wozek', 'wózkiem', 'wozkiem', 'wózka', 'wozka'],
+        bane: ['=tor', '=tory', 'torów', 'torow', 'torze'], basseng: ['głębok', 'glebok', 'temperatur', 'ciepł', 'ciepl', 'zimn', 'stopni', 'długi', 'dlugi', 'duży', 'duzy', 'basen dla dzieci', 'brodzik'],
+        pensjonist: ['senior', 'emeryt', 'aerobik'], fri: ['święt', 'swiet', 'boże narodzenie', 'boze narodzenie', 'wielkanoc', 'wakacj', 'latem', 'w lecie', 'nowy rok', 'sylwest'],
+        pris: ['=cena', '=ceny', 'cenę', 'cennik', 'koszt', 'bilet', 'opłat', 'oplat', 'darmo', 'karnet', 'płac', 'zapłac', 'zaplac', 'ile kosztuje', 'ile trzeba', 'zniżk', 'znizk'],
+        adresse: ['gdzie', 'adres', 'dojazd', 'mapa', 'lokalizacj', 'jak dojechać', 'jak dojechac'], parkering: ['parking', 'parkow', 'zaparkow', 'samochod'], buss: ['autobus', 'komunikac'],
+        aapen: ['otwar', 'godzin', 'czynne', 'czynny', 'kiedy', 'zamyka', 'zamknię', 'zamknie', 'dzisiaj', 'jutro', 'teraz', 'weekend', 'harmonogram']
       },
       s: {
         hils: () => 'Cześć! Witamy w Randaberghallen. Zapytaj mnie o godziny otwarcia, ceny, urodziny albo zasady na basenie.',
@@ -3845,6 +4000,8 @@ function settOppChat() {
         adresse: v => 'Znajdziesz nas pod adresem ' + v.adresse + '.',
         parkering: () => 'Bezpłatny parking jest tuż przed budynkiem. Więcej miejsc jest przed boiskami do siatkówki plażowej i po drugiej stronie Torvmyrveien, przy Vår Energi Arena Randaberg.',
         buss: () => 'Rozkład autobusów sprawdzisz na stronie Kolumbus.',
+        org: () => 'Przedszkola, szkoły i kluby z umową same rezerwują wolne godziny w hali, najpóźniej dzień wcześniej, logując się danymi otrzymanymi z hali. Stałe godziny treningów dla klubów są przydzielane na sezon na podstawie wniosków związków sportowych. Jeśli potrzebujesz pomocy w danym dniu, zadzwoń do dozorcy: ' + tlfL() + '.',
+        hjerte: () => 'Tak. Defibrylator (AED) znajduje się przy wejściu do męskiej szatni na basenie, tuż na lewo od recepcji.',
         aapenNaa: (til, navn, ja) => (ja ? 'Tak, teraz' : 'Teraz') + ' jest otwarte do ' + til + ' (' + navn + ').',
         igjen: naar => 'Otwieramy ponownie ' + naar + '.',
         stengtNaa: neste => 'Teraz jest zamknięte.' + (neste ? ' Otwieramy ' + neste + '.' : ''),
@@ -3865,24 +4022,31 @@ function settOppChat() {
       fri: { Jul: 'عيد الميلاد', Nyttår: 'رأس السنة', Påske: 'عيد الفصح', Svømmestevne: 'بطولة سباحة', 'Arbeidernes dag': 'عيد العمال', 'Kristi himmelfartsdag': 'عيد الصعود', 'Pinse og 17. mai': 'عيد العنصرة والعيد الوطني 17 مايو', Sommerstengt: 'الإغلاق الصيفي' },
       bestill: 'احجز هنا', kart: 'افتح الخريطة',
       ord: {
-        dagI: ['اليوم', 'الليلة', 'الآن', 'الان', 'هلق', 'هسه'], dagM: ['غدا', 'غداً', 'بكرة', 'بكره', 'باكر'], helg: ['نهاية الأسبوع', 'نهاية الاسبوع', 'الويكند', 'عطلة الأسبوع'],
+        dagI: ['اليوم', 'الليلة', 'الآن', 'الان', 'هلق', 'هسه', 'هلأ'], dagM: ['غدا', 'غداً', 'بكرة', 'بكره', 'باكر', 'بكرا'], helg: ['نهاية الأسبوع', 'نهاية الاسبوع', 'الويكند', 'عطلة الأسبوع', 'العطلة الأسبوعية'],
         uke: [['الاثنين', 'الإثنين'], ['الثلاثاء'], ['الأربعاء', 'الاربعاء'], ['الخميس'], ['الجمعة'], ['السبت'], ['الأحد', 'الاحد']],
-        hils: ['مرحبا', 'مرحباً', 'السلام عليكم', '=سلام', 'اهلا', 'أهلا', 'صباح الخير', 'مساء الخير', '=هاي'], takk: ['شكرا', 'شكراً', 'مشكور', 'يعطيك العافية'], hade: ['مع السلامة', 'وداعا', 'وداعاً', '=باي'],
-        spraak: ['عربي', 'العربية', 'تتكلم', 'لغة'], hitte: ['فقدت', 'ضاع', 'نسيت', 'مفقود'], hund: ['كلب', 'الكلاب', 'حيوان'],
-        rullestol: ['كرسي متحرك', 'كرسي', 'إعاقة', 'اعاقة', 'معاق', 'الاحتياجات الخاصة', 'رافعة'], betaling: ['دفع', 'ادفع', 'أدفع', 'نقدا', 'نقداً', 'كاش', 'بطاقة', 'فيبس', 'vipps'],
-        bursdag: ['عيد ميلاد', 'عيد الميلاد لابني', 'عيد ميلاد', 'حفلة', 'حفل'], trim: ['جيم', 'لياقة', 'أثقال', 'اثقال', 'تمارين'],
-        hall: ['قاعة', 'صالة رياضية', 'استئجار', 'تأجير', 'إيجار', 'ايجار', 'كرة القدم', 'كرة السلة', 'كرة الطائرة'], bestill: ['حجز', 'احجز', 'أحجز'],
-        kiosk: ['كشك', 'مقهى', 'كافيه', 'آيس كريم', 'ايس كريم', 'بوظة', 'نقانق', 'هوت دوغ', 'وافل', 'ساندويتش', 'سندويش', 'نودلز', 'حلويات', 'سناك'],
-        mat: ['طعام', 'اكل', 'أكل', 'شرب', 'مشروب', 'زجاجة', 'قنينة', 'ماء'], badstue: ['ساونا', 'سونا', 'بخار'], stup: ['قفز', 'غطس', 'منصة', 'برج', 'لوح القفز'],
-        vakt: ['منقذ', 'حارس', 'أمان', 'امان', 'آمن'], kontakt: ['رقم', 'اتصل', 'اتصال', 'ايميل', 'إيميل', 'بريد', 'تواصل'], mobil: ['كاميرا', 'تصوير', 'صور', 'فيديو', 'موبايل', 'جوال', 'هاتف'],
-        royk: ['تدخين', 'سجائر', 'سيجارة', 'كحول', 'بيرة', 'مخمور', 'سكران', 'شيشة'], barnAlene: ['وحده', 'وحدها', 'لوحده', 'لوحدها', 'بمفرده', 'بمفردها', 'بدون كبير', 'كم عمر', 'العمر', 'عمر'],
-        baby: ['رضيع', 'حفاض', 'بيبي', 'طفل صغير'], badetoy: ['ملابس سباحة', 'مايوه', 'بكيني', 'شورت', 'بوركيني', 'ملابس', 'لباس'],
-        hette: ['قبعة', 'طاقية', 'غطاء الرأس', 'غطاء شعر'], handkle: ['منشفة', 'فوطة', 'بشكير'], dusj: ['دش', 'استحمام', 'الاستحمام'], salg: ['نظارات', 'تبيعون', 'تبيع', 'شراء', 'اشتري', 'أشتري'],
-        garderobe: ['خزانة', 'خزائن', 'غرفة تغيير', 'غرف تغيير', 'تبديل الملابس', 'مجفف', 'سشوار', 'مرحاض', 'دورة مياه', 'تواليت', 'طاولة تغيير'], vogn: ['عربة'],
-        bane: ['مسار', 'حارة', 'حارات'], basseng: ['عمق', 'عميق', 'حرارة', 'درجة', 'دافئ', 'بارد', 'طول', 'حجم'], pensjonist: ['متقاعد', 'كبار السن', 'مسن'],
-        fri: ['=عيد', '=العيد', 'الأعياد', 'الكريسماس', 'عطلة', 'إجازة', 'اجازة', 'صيف', 'رأس السنة', 'الفصح'], pris: ['سعر', 'أسعار', 'اسعار', 'تكلفة', 'ثمن', 'تذكرة', 'مجان', 'بكم', 'كم يكلف', 'كم سعر'],
-        adresse: ['أين', 'اين', 'وين', 'عنوان', 'موقع', 'خريطة', 'كيف أصل', 'كيف اصل'], parkering: ['موقف', 'مواقف', 'باركنج', 'باركينج', 'سيارة'], buss: ['باص', 'حافلة', 'مواصلات'],
-        aapen: ['مفتوح', 'دوام', 'ساعات', 'متى', 'يفتح', 'تفتح', 'يغلق', 'تغلق', 'مغلق', 'مسكر', 'اليوم', 'غدا', 'الآن', 'الان', 'وقت', 'مواعيد', 'أوقات', 'اوقات']
+        hils: ['مرحبا', 'مرحباً', 'السلام عليكم', '=سلام', 'اهلا', 'أهلا', 'صباح الخير', 'مساء الخير', '=هاي', '=هلا'], takk: ['شكرا', 'شكراً', 'مشكور', 'يعطيك العافية', 'تسلم'], hade: ['مع السلامة', 'وداعا', 'وداعاً', '=باي', 'إلى اللقاء', 'الى اللقاء'],
+        spraak: ['عربي', 'العربية', 'تتكلم', 'لغة', 'تفهم'], hitte: ['فقدت', 'ضاع', 'ضيعت', 'نسيت', 'مفقود'], hund: ['كلب', 'الكلاب', 'حيوان'],
+        rullestol: ['كرسي متحرك', 'كرسي', 'إعاقة', 'اعاقة', 'معاق', 'الاحتياجات الخاصة', 'رافعة', 'ذوي الهمم'],
+        betaling: ['بطاقة', 'نقدا', 'نقداً', 'كاش', 'فيبس', 'vipps', 'كيف أدفع', 'كيف ادفع', 'طريقة الدفع', 'بالبطاقة', 'فيزا'],
+        bursdag: ['عيد ميلاد', 'حفلة', 'حفل'], org: ['روضة', 'حضانة', 'مدرسة', 'المدرسة', 'نادي', 'فريق', 'جمعية', 'اتحاد', 'مباراة'],
+        trim: ['جيم', 'لياقة', 'أثقال', 'اثقال', 'تمارين', 'صالة التمارين', 'صالة الألعاب', 'صالة الالعاب', 'صالة الرياضية', 'نادي رياضي', '=ترم', 'تريم', 'حديد'],
+        hall: ['قاعة', 'صالة رياضية', 'استئجار', 'تأجير', 'إيجار', 'ايجار', 'كرة القدم', 'كرة السلة', 'كرة الطائرة', 'كرة اليد', 'ملعب'], bestill: ['حجز', 'احجز', 'أحجز'],
+        kiosk: ['كشك', 'مقهى', 'كافيه', 'آيس كريم', 'ايس كريم', 'بوظة', 'نقانق', 'هوت دوغ', 'هوت دوج', 'وافل', 'ساندويتش', 'سندويش', 'نودلز', 'حلويات', 'سناك', 'قهوة', 'شيبس'],
+        mat: ['طعام', 'الأكل', 'الاكل', '=أكل', '=اكل', 'آكل', 'شرب', 'مشروب', 'زجاجة', 'قنينة', '=ماء', 'الماء', 'مياه'], badstue: ['ساونا', 'سونا', 'بخار'],
+        stup: ['قفز', 'غطس', 'منصة', 'برج', 'لوح القفز'], vakt: ['منقذ', 'حارس', 'أمان', 'امان', 'آمن', '=امن', 'آمنة', 'امنة', 'مراقب', 'رقابة'], hjerte: ['رجفان', 'مزيل الرجفان', 'جهاز القلب', 'إسعاف', 'اسعاف'],
+        kontakt: ['رقم', 'اتصل', 'اتصال', 'ايميل', 'إيميل', 'بريد', 'تواصل'], mobil: ['كاميرا', 'تصوير', '=صور', 'فيديو', 'موبايل', 'جوال', 'هاتف', 'تلفون'],
+        royk: ['تدخين', 'سجائر', 'سيجارة', 'كحول', 'بيرة', 'مخمور', 'سكران', 'شيشة'],
+        barnAlene: ['وحده', 'وحدها', 'لوحده', 'لوحدها', 'بمفرده', 'بمفردها', 'بدون كبير', 'بدون أهل', 'بدون اهل', 'بدون والد', 'بدون شخص بالغ'],
+        alder: ['كم عمر', 'العمر', '=عمر', '=سن', 'عمره', 'عمرها', 'سنوات', 'سنين'],
+        baby: ['رضيع', 'حفاض', 'بيبي', 'طفل صغير', 'الرضع', 'رضع'], badetoy: ['ملابس سباحة', 'مايوه', 'بكيني', 'شورت', 'بوركيني', 'ملابس', 'لباس', 'البس', 'ألبس', 'نلبس'],
+        hette: ['قبعة', 'طاقية', 'غطاء الرأس', 'غطاء شعر', 'غطاء الشعر'], handkle: ['منشفة', 'فوطة', 'بشكير', 'مناشف'], dusj: ['=دش', 'استحمام', 'الاستحمام', '=دوش'],
+        salg: ['نظارات', 'تبيعون', 'تبيع', 'شراء', 'اشتري', 'أشتري', 'عوامات', 'أكمام'],
+        garderobe: ['خزانة', 'خزائن', 'اغير', 'أغير', 'نغير', 'غرفة الملابس', 'غرفة تغيير', 'غرف تغيير', 'تبديل الملابس', 'غرفة تبديل', 'غرف تبديل', 'غرفة لتبديل', 'مجفف', 'سشوار', 'مرحاض', 'دورة مياه', 'تواليت', 'طاولة تغيير', 'حمامات'], vogn: ['عربة'],
+        bane: ['مسار', 'حارة', 'حارات'], basseng: ['عمق', 'عميق', 'حرارة', 'درجة', 'دافئ', 'بارد', '=طول', 'حجم', 'مسبح الأطفال', 'مسبح الاطفال'], pensjonist: ['متقاعد', 'كبار السن', 'مسن', 'المسنين'],
+        fri: ['=عيد', '=العيد', 'الأعياد', 'الكريسماس', 'عطلة', 'إجازة', 'اجازة', 'الصيف', '=صيف', 'رأس السنة', 'الفصح'],
+        pris: ['سعر', 'أسعار', 'اسعار', 'تكلفة', 'تكلف', 'ثمن', 'تذكرة', 'تذاكر', 'مجان', 'بكم', 'كم يكلف', 'رسوم', 'خصم', 'يدفع', 'ندفع', 'أدفع', 'ادفع'],
+        adresse: ['أين', 'اين', 'وين', 'عنوان', 'موقع', 'خريطة', 'كيف أصل', 'كيف اصل', 'مكان'], parkering: ['موقف', 'مواقف', 'باركنج', 'باركينج', 'سيارة', 'سيارات'], buss: ['باص', 'حافلة', 'مواصلات'],
+        aapen: ['مفتوح', 'دوام', 'ساعات', 'متى', 'يفتح', 'تفتح', 'يغلق', 'تغلق', 'مغلق', 'مسكر', 'اليوم', 'غدا', 'الآن', 'الان', 'وقت', 'مواعيد', 'أوقات', 'اوقات', 'جدول']
       },
       s: {
         hils: () => 'مرحباً بك في Randaberghallen! اسألني عن مواعيد العمل أو الأسعار أو حفلات أعياد الميلاد أو قواعد المسبح.',
@@ -3922,6 +4086,8 @@ function settOppChat() {
         adresse: v => 'تجدنا في العنوان: ' + v.adresse + '.',
         parkering: () => 'يوجد موقف سيارات مجاني أمام المبنى مباشرة، ومواقف إضافية أمام ملاعب الكرة الطائرة الشاطئية وعلى الجانب الآخر من شارع Torvmyrveien عند Vår Energi Arena Randaberg.',
         buss: () => 'يمكنك معرفة مواعيد الحافلات على موقع Kolumbus.',
+        org: () => 'رياض الأطفال والمدارس والأندية التي لديها اتفاق تحجز الساعات المتاحة في القاعة بنفسها، قبل يوم على الأقل، باستخدام بيانات الدخول التي حصلت عليها من القاعة. تُوزَّع أوقات التدريب الثابتة للأندية لكل موسم بناءً على طلبات الاتحادات الرياضية. للمساعدة في يوم النشاط اتصل بمسؤول المبنى على الرقم ' + tlfL() + '.',
+        hjerte: () => 'نعم. جهاز مزيل الرجفان (AED) موجود عند مدخل غرفة تبديل ملابس الرجال في المسبح، على يسار الاستقبال مباشرة.',
         aapenNaa: (til, navn, ja) => (ja ? 'نعم، ' : '') + 'نحن مفتوحون الآن حتى الساعة ' + til + ' (' + navn + ').',
         igjen: naar => 'نفتح مجدداً ' + naar + '.',
         stengtNaa: neste => 'نحن مغلقون الآن.' + (neste ? ' نفتح ' + neste + '.' : ''),
@@ -3943,23 +4109,29 @@ function settOppChat() {
       bestill: 'Забронювати', kart: 'Відкрити карту',
       ord: {
         dagI: ['сьогодні', 'сегодня', 'зараз', 'сейчас', 'ввечері', 'вечером'], dagM: ['завтра'], helg: ['вихідн', 'выходн'],
-        uke: [['понеділ', 'понедельн'], ['вівтор', 'вторник'], ['серед', 'сред'], ['четвер'], ['п’ятниц', 'п\'ятниц', 'пятниц'], ['субот', 'суббот'], ['неділ', 'воскресен']],
-        hils: ['привіт', 'привет', 'добрий день', 'добрый день', 'доброго дня', 'вітаю', 'здравствуйте', 'добрий вечір', 'добрый вечер', 'доброго ранку', 'доброе утро'], takk: ['дякую', 'спасибі', 'спасибо', 'дякуємо'], hade: ['до побачення', 'до свидания', 'бувай', '=пока'],
-        spraak: ['українськ', 'украинск', 'російськ', 'русск', 'мовою', 'язык'], hitte: ['загуби', 'забу', 'потеря', 'втрати', 'залиши', 'оставил'], hund: ['собак', '=пес', 'тварин', 'животн'],
-        rullestol: ['інвалід', 'инвалид', 'підйомник', 'подъемник', 'обмеженими', 'ограниченными'], betaling: ['оплат', 'плати', 'платит', 'готівк', 'наличн', 'картк', 'карт', 'vipps'],
-        bursdag: ['день народження', 'день рождения', 'народжен', 'рождени', 'свято', 'святкув', 'вечірк'], trim: ['тренажер', 'фітнес', 'фитнес', 'качалк'],
-        hall: ['спортивний зал', 'спортивного залу', 'спортивный зал', 'спортзал', 'оренд', 'аренд', 'футбол', 'волейбол'], bestill: ['заброн', 'бронюв', 'бронир'],
-        kiosk: ['кіоск', 'киоск', 'кафе', 'морозиво', 'мороженое', 'хот-дог', 'хот дог', 'вафл', 'сендвіч', 'сэндвич', 'бутерброд', 'локшин', 'лапш', 'солодощ', 'сладост', 'цукерк', 'конфет'],
-        mat: ['їжа', 'їжу', 'їсти', 'еда', 'еду', 'кушать', 'пити', 'пить', 'напо', 'пляшк', 'бутылк', 'воду', 'вода'], badstue: ['саун'], stup: ['стриб', 'прыг', 'вишк', 'вышк', 'трамплін', 'трамплин'],
-        vakt: ['рятувальн', 'спасател', 'безпечн', 'безопасн'], kontakt: ['номер', 'зателефон', 'подзвон', 'позвон', 'email', 'пошт', 'почт', 'контакт'], mobil: ['камер', 'фото', 'зніма', 'снима', 'відео', 'видео', 'мобільн', 'мобильн', 'телефон'],
-        royk: ['кури', 'курен', 'сигарет', 'алкогол', 'пиво', 'п’ян', 'пьян'], barnAlene: ['=сам', '=сама', '=самі', '=сами', 'без дорослих', 'без взрослых', 'вік', 'возраст', 'скільки років', 'сколько лет'],
-        baby: ['немовл', 'малюк', 'младен', 'підгузк', 'подгузник', 'памперс'], badetoy: ['купальник', 'плавк', 'бікіні', 'бикини', 'шорт', 'буркіні', 'буркини', 'одяг', 'одежд', 'футболк'],
-        hette: ['шапочк', 'шапк'], handkle: ['рушник', 'полотенц'], dusj: ['=душ', 'душі', 'душе'], salg: ['окуляр', 'очки', 'прода', 'купити', 'купить', 'магазин'],
-        garderobe: ['шафк', 'шкафчик', 'роздягаль', 'раздевал', '=фен', 'туалет', 'пеленальн', 'сповива'], vogn: ['візок', 'візк', 'коляск'],
-        bane: ['доріжк', 'дорожк'], basseng: ['глибин', 'глубин', 'температур', 'тепл', 'холодн', 'градус', 'довжин', 'длин'], pensjonist: ['пенсіонер', 'пенсионер', 'літні', 'пожил'],
-        fri: ['свят', 'праздн', 'різдв', 'рождеств', 'великдень', 'пасх', 'новий рік', 'новый год', 'влітку', 'летом'], pris: ['цін', 'цен', 'вартість', 'стоимост', 'скільки кошт', 'сколько сто', 'квиток', 'билет', 'безкоштов', 'бесплатн', 'абонемент'],
-        adresse: ['де ви', 'де знаход', 'где наход', 'где вы', 'адрес', 'як дістат', 'как добрат', 'на карті', 'на карте'], parkering: ['парков', 'стоянк'], buss: ['автобус', 'транспорт'],
-        aapen: ['відчин', 'відкри', 'открыт', 'працю', 'работает', 'годин', 'часы', 'коли', 'когда', 'зачиня', 'закрыва', 'зачинен', 'закрыт', 'сьогодні', 'сегодня', 'завтра', 'зараз', 'сейчас', 'вихідн', 'выходн']
+        uke: [['понеділ', 'понедельн'], ['вівтор', 'вторник'], ['середу', 'середа', 'среду', 'среда'], ['четвер'], ['п’ятниц', "п'ятниц", 'пятниц', 'пʼятниц'], ['субот', 'суббот'], ['неділ', 'воскресен']],
+        hils: ['привіт', 'привет', 'добрий день', 'добрый день', 'доброго дня', 'вітаю', 'здравствуйте', 'добрий вечір', 'добрый вечер', 'доброго ранку', 'доброе утро'], takk: ['дякую', 'спасибі', 'спасибо', 'дякуємо'], hade: ['до побачення', 'до свидания', 'бувай', '=пока', 'на все добре'],
+        spraak: ['українськ', 'украинск', 'російськ', 'русск', 'мовою', 'язык', 'по-русски', 'розумієш', 'понимаешь'], hitte: ['загуби', 'забу', 'забы', 'потеря', 'втрати', 'залиши', 'оставил'], hund: ['собак', '=пес', 'тварин', 'животн'],
+        rullestol: ['інвалід', 'инвалид', 'підйомник', 'подъемник', 'обмеженими', 'ограниченными', 'на візку'],
+        betaling: ['готівк', 'наличн', 'картк', 'картой', 'карточк', 'vipps', 'як оплат', 'як платити', 'як заплатити', 'чим платити', 'как оплат', 'как платить', 'чем платить', 'спосіб оплат', 'способ оплат'],
+        bursdag: ['день народження', 'день рождения', 'народжен', 'рождени', 'свято', 'святкув', 'вечірк'], org: ['садок', 'садочок', 'садик', 'школ', 'клуб', 'команд', 'федерац', 'асоціац', 'секці', 'секци', 'матч'],
+        trim: ['тренажер', 'фітнес', 'фитнес', 'качалк', '=трим', 'тримрум', 'тренуван', 'тренир'],
+        hall: ['спортивний зал', 'спортивного залу', 'спортивный зал', 'спортзал', 'оренд', 'аренд', 'футбол', 'волейбол', 'баскетбол', 'гандбол', 'бадмінтон', 'бадминтон'], bestill: ['заброн', 'бронюв', 'бронир', 'резерв'],
+        kiosk: ['кіоск', 'киоск', 'кафе', 'морозиво', 'мороженое', 'хот-дог', 'хот дог', 'вафл', 'сендвіч', 'сэндвич', 'бутерброд', 'локшин', 'лапш', 'солодощ', 'сладост', 'цукерк', 'конфет', '=кава', '=кофе', 'купити їж', 'купить еду'],
+        mat: ['їжа', 'їжу', 'їсти', '=еда', '=еду', 'кушать', 'пити', 'пить', 'напо', 'пляшк', 'бутылк', 'воду', '=вода', 'перекус'], badstue: ['саун'],
+        stup: ['стриб', 'прыг', 'вишк', 'вышк', 'трамплін', 'трамплин'], vakt: ['рятувальн', 'спасател', 'безпечн', 'безопасн', 'наглядає', 'присматрива'], hjerte: ['дефібрил', 'дефибрил', 'перша допомог', 'первая помощ'],
+        kontakt: ['номер', 'зателефон', 'подзвон', 'позвон', 'email', 'пошт', 'почт', 'контакт'], mobil: ['камер', 'фото', 'зніма', 'снима', 'відео', 'видео', 'мобільн', 'мобильн', 'телефон'],
+        royk: ['кури', 'курен', 'сигарет', 'алкогол', 'пиво', 'п’ян', 'пьян', '=вино'],
+        barnAlene: ['=сам', '=сама', '=самі', '=сами', 'без дорослих', 'без взрослых', 'без батьків', 'без родителей', 'самостійно', 'самостоятельно'],
+        alder: ['=вік', 'віку', 'возраст', 'скільки років', 'сколько лет', 'років', '=лет', 'річн', 'летн'],
+        baby: ['немовл', 'малюк', 'младен', 'підгузк', 'подгузник', 'памперс', 'груднич'], badetoy: ['купальник', 'плавк', 'бікіні', 'бикини', 'шорт', 'буркіні', 'буркини', 'одяг', 'одежд', 'футболк', 'в чому', 'в чем'],
+        hette: ['шапочк', 'шапк'], handkle: ['рушник', 'полотенц'], dusj: ['=душ', 'душі', 'душе', 'душем'], salg: ['окуляр', 'очки', 'прода', 'купити', 'купить', 'магазин', 'нарукав'],
+        garderobe: ['шафк', 'шкафчик', 'роздягаль', 'раздевал', 'переодяг', 'переоде', '=фен', 'туалет', 'пеленальн', 'сповива', 'вбиральн'], vogn: ['візок', 'візк', 'коляск'],
+        bane: ['доріжк', 'дорожк'], basseng: ['глибин', 'глубин', 'температур', 'тепл', 'холодн', 'градус', 'довжин', 'длин', 'розмір', 'размер', 'дитячий басейн', 'детский бассейн'],
+        pensjonist: ['пенсіонер', 'пенсионер', 'літні', 'пожил', 'аквааеробік', 'аквааэробик'], fri: ['свят', 'праздн', 'різдв', 'рождеств', 'великдень', 'пасх', 'новий рік', 'новый год', 'влітку', 'летом', 'канікул'],
+        pris: ['цін', 'цен', 'вартість', 'стоимост', 'кошт', 'стоит', 'квит', 'билет', 'безкоштов', 'бесплатн', 'абонемент', 'плат', 'скільки', 'сколько', 'знижк', 'скидк'],
+        adresse: ['де ви', 'де знаход', 'где наход', 'где вы', 'адрес', 'як дістат', 'как добрат', 'на карті', 'на карте', 'де це', 'где это'], parkering: ['парков', 'парку', 'стоянк', 'машин'], buss: ['автобус', 'транспорт'],
+        aapen: ['відчин', 'відкри', 'открыт', 'працю', 'работает', 'годин', 'часы', 'коли', 'когда', 'зачиня', 'закрыва', 'зачинен', 'закрыт', 'сьогодні', 'сегодня', 'завтра', 'зараз', 'сейчас', 'вихідн', 'выходн', 'розклад', 'расписан']
       },
       s: {
         hils: () => 'Привіт! Ласкаво просимо до Randaberghallen. Запитайте мене про години роботи, ціни, дні народження або правила басейну.',
@@ -3999,6 +4171,8 @@ function settOppChat() {
         adresse: v => 'Ми знаходимося за адресою: ' + v.adresse + '.',
         parkering: () => 'Безкоштовна парковка прямо перед будівлею. Більше місць є перед майданчиками для пляжного волейболу і з іншого боку вулиці Torvmyrveien, біля Vår Energi Arena Randaberg.',
         buss: () => 'Розклад автобусів можна переглянути на сайті Kolumbus.',
+        org: () => 'Дитячі садки, школи та спортивні клуби з договором самі бронюють вільні години в залі, щонайменше за день, через логін, отриманий від залу. Постійний час тренувань для клубів розподіляється на сезон за заявками спортивних федерацій. Якщо потрібна допомога в день заняття, телефонуйте черговому: ' + tlfL() + '.',
+        hjerte: () => 'Так. Дефібрилятор знаходиться біля входу до чоловічої роздягальні в басейні, одразу ліворуч від рецепції.',
         aapenNaa: (til, navn, ja) => (ja ? 'Так, зараз' : 'Зараз') + ' відчинено до ' + til + ' (' + navn + ').',
         igjen: naar => 'Знову відчиняємо ' + naar + '.',
         stengtNaa: neste => 'Зараз зачинено.' + (neste ? ' Відчиняємо ' + neste + '.' : ''),
@@ -4070,59 +4244,65 @@ function settOppChat() {
       return d;
     };
 
-    if (har('hils') && ord <= 3 && !har('aapen', 'pris')) return S.hils();
-    if (har('takk') && ord <= 4) return S.takk();
-    if (har('hade') && ord <= 4) return S.hade();
-    if (har('spraak') && ord <= 8 && !har('aapen', 'pris', 'bursdag')) return S.spraak();
-    if (har('hitte')) return S.hitte();
-    if (har('hund')) return S.hund();
-    if (har('rullestol')) return S.rullestol();
-    if (har('handkle')) return S.handkle();
-    if (har('hette')) return S.hette();
-    if (har('betaling') && !har('pris')) return S.betaling(v);
-    if (har('bursdag')) return S.bursdag(v) + bestillLenke('bursdagVann');
-    if (har('trim')) return S.trim(v);
-    if (har('hall')) return S.hall(v) + bestillLenke('idrettshall');
-    if (har('bestill')) return S.bestill() + bestillLenke('bursdagVann');
-    if (har('kiosk')) return S.kiosk();
-    if (har('badstue')) return S.badstue();
-    if (har('basseng') && !har('stup')) return S.basseng();
-    if (har('stup')) return S.stup(v);
-    if (har('vakt')) return S.vakt();
-    if (har('royk')) return S.royk();
-    if (har('mat')) return S.mat();
-    if (har('kontakt')) return S.kontakt();
-    if (har('mobil')) return S.mobil();
-    if (har('baby')) return S.baby(v);
-    if (har('barnAlene')) return S.barnAlene();
-    if (har('badetoy')) return S.badetoy();
-    if (har('dusj')) return S.dusj();
-    if (har('salg')) return S.salg();
-    if (har('garderobe')) return S.garderobe();
-    if (har('vogn')) return S.vogn();
-    if (har('bane')) return S.bane(v);
-    if (har('basseng')) return S.basseng();
-    if (har('pensjonist')) return S.pensjonist(v);
-    if (har('fri')) return S.fri(v);
-    if (har('pris')) return S.pris(v);
-    if (har('parkering')) return S.parkering();
-    if (har('buss')) return S.buss() + lenkeL('Kolumbus', 'https://www.kolumbus.no/');
-    if (har('adresse')) return S.adresse(v) + lenkeL(L.kart, 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(k2.adresse + ', ' + k2.poststed));
-    if (har('helg')) { const lor = pluss(n.dato, (5 - ukedag(n.dato) + 7) % 7); return dagSvar(lor) + ' ' + dagSvar(pluss(lor, 1)); }
-    const dag = finnDag();
-    if (dag) return dagSvar(dag);
-    if (har('aapen', 'dagI')) {
-      const ja = /^ (are|is|do|does|can|will|czy|هل|чи) /.test(r);
-      const naa = s.apent ? S.aapenNaa(klL(kl(s.hallSlutt)), navnOkt(s.okt), ja) : S.stengtNaa(s.neste ? tidL(s.neste.dato, s.neste.okt.fra) : '');
-      const resten = dagsplan(n.dato).okter.filter(x => !x.pause && tilMin(x.til) > n.min);
-      return naa + (resten.length ? ' ' + dagSvar(n.dato, n.min) : s.neste ? ' ' + dagSvar(s.neste.dato) : '') + ' ' + S.regel();
-    }
+    /* Rekkefølgen betyr noe: det mest spesifikke først. Navnet lagres i window.chatIntent, så testene kan se hva chatten forstod. */
+    const dagSp = finnDag();
+    const REKKE = [
+      ['hils', () => har('hils') && ord <= 3 && !har('aapen', 'pris'), () => S.hils()],
+      ['takk', () => har('takk') && ord <= 5, () => S.takk()],
+      ['hade', () => har('hade') && ord <= 5, () => S.hade()],
+      ['spraak', () => har('spraak') && ord <= 8 && !har('aapen', 'pris', 'bursdag'), () => S.spraak()],
+      ['hitte', () => har('hitte'), () => S.hitte()],
+      ['hund', () => har('hund'), () => S.hund()],
+      ['rullestol', () => har('rullestol'), () => S.rullestol()],
+      ['handkle', () => har('handkle'), () => S.handkle()],
+      ['hette', () => har('hette'), () => S.hette()],
+      ['betaling', () => har('betaling'), () => S.betaling(v)],
+      ['bursdag', () => har('bursdag'), () => S.bursdag(v) + bestillLenke('bursdagVann')],
+      ['org', () => har('org'), () => S.org() + lenkeL(L.bestill, '#bestilling')],
+      ['trim', () => har('trim') && !(sp === 'ar' && har('hall') && !har('alder')), () => S.trim(v)],
+      ['hall', () => har('hall'), () => S.hall(v) + bestillLenke('idrettshall')],
+      ['bestill', () => har('bestill'), () => S.bestill() + lenkeL(L.bestill, '#bestilling')],
+      ['kiosk', () => har('kiosk'), () => S.kiosk()],
+      ['badstue', () => har('badstue'), () => S.badstue()],
+      ['hjerte', () => har('hjerte'), () => S.hjerte()],
+      ['basseng', () => har('basseng') && !har('stup'), () => S.basseng()],
+      ['stup', () => har('stup'), () => S.stup(v)],
+      ['vakt', () => har('vakt'), () => S.vakt()],
+      ['royk', () => har('royk'), () => S.royk()],
+      ['garderobe', () => har('garderobe'), () => S.garderobe()],
+      ['mat', () => har('mat'), () => S.mat()],
+      ['kontakt', () => har('kontakt'), () => S.kontakt()],
+      ['mobil', () => har('mobil'), () => S.mobil()],
+      ['baby', () => har('baby'), () => S.baby(v)],
+      ['pensjonist', () => har('pensjonist') && !har('pris'), () => S.pensjonist(v)],
+      ['barnAlene', () => har('barnAlene') || (har('alder') && !har('pris')), () => S.barnAlene()],
+      ['badetoy', () => har('badetoy'), () => S.badetoy()],
+      ['dusj', () => har('dusj'), () => S.dusj()],
+      ['salg', () => har('salg'), () => S.salg()],
+      ['vogn', () => har('vogn'), () => S.vogn()],
+      ['bane', () => har('bane'), () => S.bane(v)],
+      ['helg', () => har('helg'), () => { const lor = pluss(n.dato, (5 - ukedag(n.dato) + 7) % 7); return dagSvar(lor) + ' ' + dagSvar(pluss(lor, 1)); }],
+      ['fri', () => har('fri') && !dagSp, () => S.fri(v)],
+      ['parkering', () => har('parkering'), () => S.parkering()],
+      ['pris', () => har('pris'), () => S.pris(v)],
+      ['buss', () => har('buss'), () => S.buss() + lenkeL('Kolumbus', 'https://www.kolumbus.no/')],
+      ['adresse', () => har('adresse'), () => S.adresse(v) + lenkeL(L.kart, 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(k2.adresse + ', ' + k2.poststed))],
+      ['dag', () => !!dagSp, () => dagSvar(dagSp)],
+      ['aapen', () => har('aapen', 'dagI'), () => {
+        const ja = /^ (are|is|do|does|can|will|czy|هل|чи) /.test(r);
+        const naa = s.apent ? S.aapenNaa(klL(kl(s.hallSlutt)), navnOkt(s.okt), ja) : S.stengtNaa(s.neste ? tidL(s.neste.dato, s.neste.okt.fra) : '');
+        const resten = dagsplan(n.dato).okter.filter(x => !x.pause && tilMin(x.til) > n.min);
+        return naa + (resten.length ? ' ' + dagSvar(n.dato, n.min) : s.neste ? ' ' + dagSvar(s.neste.dato) : '') + ' ' + S.regel();
+      }]
+    ];
+    for (const [navn, test, lag] of REKKE) if (test()) { window.chatIntent = navn; return lag(); }
+    window.chatIntent = 'ukjent';
     return S.ukjent();
   }
 
   /* Hovedinngangen: velger språk og sender videre */
   function finnSvar(raa) {
-    let sp = finnSpraak(raa);
+    let sp = finnSpraak(raa, chatSpraak);
     if (sp === 'no') chatSpraak = 'no';
     else if (sp && sp !== 'annet') chatSpraak = sp;
     /* Arabisk eller ukrainsk samtale, men nå kommer flere ord med latinske bokstaver som ikke er engelsk, polsk eller norsk: et annet språk */
@@ -4231,6 +4411,48 @@ function settOppChat() {
     }
 
     /* Bursdag */
+    /* Barnehager, skoler, lag og foreninger. Fra randaberghallen.no/barnehager, /skoler, /organiserte-idretts-og-kulturaktiviteter og
+       /brukstid-for-organiserte-idretts-og-kulturaktiviteter, hentet 7. november 2026. */
+    {
+      const orgOrd = har('barnehage*', 'barnehagen', 'skole', 'skolen', 'skoler', 'skolene', 'lag', 'laget', 'lagene', 'lagets', 'forening*', 'klubb*', 'idrettslag*', 'forbund*', 'rektor', 'inspektør', 'styrer*');
+      const hallOrd = har('idrettshall*', 'hall', 'hallen', 'haller', 'bestill*', 'booke*', 'treningstid*', 'rammetid*', 'brukernavn', 'passord', 'innlogging', 'logge inn', 'avtale*', 'møterom*', 'kamp', 'kamper', 'tildel*', 'søknad*', 'søke', 'sesong*', 'trene', 'trener', 'bruke');
+      const reglLenke = ' <a href="https://randaberghallen.no/brukerreglement/" target="_blank" rel="noopener">Les brukerreglementet</a>';
+      if (har('flytte kamp*', 'flytte en kamp', 'flytter vi en kamp', 'flytte kampen') || (har('kamp', 'kamper', 'kampen') && har('flytte*', 'flytter', 'endre*', 'bytte*')))
+        return 'Kamper kan flyttes innenfor forbundets rammetid. Da tar dere kontakt med forbundet. Trenger dere tid utenfor rammetiden, sjekker forbundet eller klubben ledig tid og bestiller selv.' + lenke('Bestill ledig tid', '#bestill-lag');
+      if (har('søknadsfrist*', 'søke om treningstid', 'søke treningstid', 'søknad*', 'tildel*', 'tildeler', 'rammetid*', 'fast treningstid', 'treningstid', 'treningstider') && !har('svømmeklubb*', 'ril'))
+        return 'Fast treningstid fordeles for en sesong om gangen. Rammetidene tildeles etter søknad fra idrettsforbundene. Søknadsfristen for 2026/27 er ute, og skjemaet for 2027/28 kommer i januar 2027. Andre saker går gjennom lagets leder til avdelingsleder idrett.';
+      if (har('hvilke lag', 'hvilke klubber', 'hvem trener', 'hvilke foreninger', 'lagene som'))
+        return 'I Randaberghallen holder blant andre Randaberg håndballklubb, Randaberg volleyball, Randaberg turnforening, RIL svømming, Randaberg stupeklubb, Kvitsøy og Randaberg Taekwon-Do, Randaberg musikkorps og Kor på Randen til. Vil du bli med, tar du kontakt med laget direkte.' + lenke('Se lagene', '#idrettshall');
+      if (har('kamp', 'kamper', 'kampen', 'arrangement*', 'turnering*', 'cup') && !har('svømmestevne*', 'stevne*'))
+        return 'Kamper og arrangementer i idrettshallen er lørdag 08.00–17.00 og søndag 10.00–16.30. Tidene fordeles etter søknad fra idrettsforbundene.';
+      if (har('oversikt', 'avtalene', 'avtaler', 'våre tider', 'våre timer', 'tidene våre') && (orgOrd || hallOrd))
+        return 'Logg inn i bestillingen, så ser dere alle avtalene deres. Der kan dere også bestille ledig tid og avbestille.' + lenke('Gå til bestilling', '#bestilling');
+      if (har('møterom*', 'møtesal*', 'møterommet'))
+        return 'Møterom bestilles på samme måte som ledige timer i hallen. Lagets leder har brukernavn og passord og kan bestille selv, eller dele passordet med andre i klubben.' + lenke('Bestill møterom', '#bestill-lag');
+      if (har('brukernavn', 'passord', 'innlogging', 'logge inn', 'bruker') && (orgOrd || hallOrd))
+        return har('barnehage*', 'barnehagen', 'styrer*') ? 'Styreren i barnehagen får brukernavn og passord ved å be om det på e-post til ' + esc(k.epost) + '. Barnehagene kan ikke lage bruker selv.'
+          : har('skole', 'skolen', 'skoler', 'skolene', 'rektor', 'inspektør') ? 'Rektor eller inspektør har brukernavn og passord til bestillingen. Mangler skolen bruker, send e-post til ' + esc(k.epost) + '.'
+          : 'Lagets leder har brukernavn og passord. En ny leder kan få kontaktinfo fra forrige leder eller vaktmesteren på ' + esc(k.telefon) + '.';
+      if (har('låse opp', 'låse', 'låst', 'åpne hallen', 'åpne døra', 'åpne døren', 'låse hallen', 'hjelp') && (orgOrd || har('idrettshall*', 'hall', 'hallen', 'døra', 'døren', 'trening*')) && !har('skap*', 'garderobeskap*'))
+        return 'Daglige ting, som å åpne og låse etter avtale, tar trener eller gruppeleder med vaktmesteren på ' + esc(k.telefon) + '. Større saker går til avdelingsleder idrett, via lagets leder.';
+      const kortRegel = 'Kort sagt: én voksen er ansvarlig leder, tildelt tid må holdes, og dere rydder og setter utstyret på plass etter bruk. Tid dere ikke skal bruke, avbestiller dere så snart dere vet det. Røyk og rus er forbudt.';
+      if (har('regel*', 'regler', 'reglene', 'reglement*', 'brukerreglement*') && (orgOrd || har('idrettshall*', 'idrettshallen')))
+        return 'I idrettshallen gjelder brukerreglementet. ' + kortRegel + reglLenke;
+      if (har('regel', 'regler', 'reglene') && har('hall', 'hallen') && !har('svømm*', 'bad*', 'basseng*', 'trimrom*'))
+        return 'I svømmehallen dusjer du uten badetøy før du bader, bruker badehette, og barn under 10 år må ha med en badende voksen.' + lenke('Se badereglene', '#alleregler') + '<br>I idrettshallen gjelder brukerreglementet. ' + kortRegel + reglLenke;
+      if (har('klister', 'håndballklister', 'harpiks'))
+        return 'Håndballklister er bare lov i idrettshall 1, etter eget klisterreglement.' + reglLenke;
+      if (har('idrettshall*', 'idrettshallen', 'gymsal*') && har('åpen', 'åpent', 'åpner', 'åpningstid*', 'stenger', 'stengt'))
+        return 'Randaberghallen er åpen mandag–fredag 08.00–22.15, lørdag 08.00–17.00 og søndag 10.00–17.00. I helgen stenger vi klokka 17 hvis ingen aktiviteter varer lenger. Innenfor disse tidene har lag, skoler og barnehager egne tider, og ledige timer kan leies.' + lenke('Se ledige timer', '#bestill-idrettshall');
+      if ((orgOrd && hallOrd) || (har('barnehage*', 'barnehagen', 'skole', 'skolen') && har('bestill*', 'booke*', 'leie*', 'bruke')))
+        return har('barnehage*', 'barnehagen', 'styrer*') ? 'Barnehager i Randaberg bestiller ledig tid i hallen selv, senest dagen før, når fordelingen er ferdig og sesongen har startet. Dere logger inn med brukeren styreren har fått fra hallen, og avbestiller senest 24 timer før.' + lenke('Bestill for barnehage', '#bestill-barnehage')
+          : har('skole', 'skolen', 'skoler', 'skolene', 'rektor', 'inspektør') ? 'Skolene i Randaberg kan bestille ledig tid i hallen selv, senest dagen før, når fordelingen er ferdig og sesongen har startet. Rektor eller inspektør har brukernavn og passord. Avbestill senest 24 timer før.' + lenke('Bestill for skole', '#bestill-skole')
+          : 'Lag og foreninger får fast treningstid for en sesong etter søknad fra idrettsforbundene. Ledige timer og møterom bestiller lagets leder selv, senest dagen før. Daglig drift tar dere med vaktmesteren på ' + esc(k.telefon) + '.' + lenke('Bestill ledig tid', '#bestill-lag');
+      /* Generelt om å bestille */
+      if (har('bestill*', 'booke*', 'book', 'reserver*', 'bestilling*') && !har('bursdag*', 'barnebursdag*', 'vanntastisk', 'idrettshall*', 'hall', 'hallen', 'kompis*', 'billett*', 'klipp*', 'halvår*', 'trimrom*', 'kort', 'svømmekurs*', 'kurs'))
+        return 'Du bestiller på bestillingssiden vår: bursdag i svømmehallen eller idrettshallen, kompistrening, og for barnehager, skoler og lag med avtale. Velg, finn en ledig dag og send. Bestill senest dagen før.' + lenke('Gå til bestilling', '#bestilling');
+    }
+
     if (har('bursdag*', 'barnebursdag*', 'vanntastisk', 'selskap*', 'feire*', 'kake', 'bursdagskake*')) {
       if (har('ring*', 'telefon*', 'kontakt*', 'spørre noen'))
         return 'Har du spørsmål om bursdag, kan du ringe oss på ' + esc(k.telefon) + '. Selve bestillingen gjør du på nett.' + lenke('Se bursdagene', '#bursdag');
@@ -5058,9 +5280,10 @@ function settOppChat() {
 
 /* =====================================================================
    BESTILLING
-   Egen side i stedet for det gamle bookingsystemet. Samme steg som der
-   (velg aktivitet, velg ledig dag og tid, skriv opplysninger, fullfør),
-   men samlet på én side. Demo: ledige og opptatte tider er laget her, og
+   Egen side i stedet for det gamle bookingsystemet (randaberg.bestille.no).
+   Samme gang som der: velg hva, velg ledig dag og tid, logg inn eller skriv
+   opplysninger, fullfør. Barnehager, skoler og lag logger inn med brukeren de
+   har fått fra hallen. Demo: ledige og opptatte tider er laget her, og
    ingenting sendes. I den ferdige løsningen kobles den til bookingsystemet.
    ===================================================================== */
 function settOppBestilling() {
@@ -5068,68 +5291,91 @@ function settOppBestilling() {
   if (!flyt) return;
   const bd = HALL.bursdag, ih = HALL.idrettshall;
   const vann = bd.typer.find(b => b.id === 'bursdagVann'), hallB = bd.typer.find(b => b.id === 'bursdagHall');
+  const svg = (inn, s) => '<svg width="' + (s || 22) + '" height="' + (s || 22) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inn + '</svg>';
   const ikon = {
-    vann: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c3.5 4.3 6 7.6 6 10.5a6 6 0 0 1-12 0c0-2.9 2.5-6.2 6-10.5z"/></svg>',
-    hall: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16v-8H4z"/><path d="M12 13V9M8 13v-3M16 13v-3"/><path d="M12 6.5c.8 0 1.2-.6 1.2-1.3S12 3 12 3s-1.2 1.5-1.2 2.2.4 1.3 1.2 1.3z"/></svg>',
-    leie: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9.5c3 1.2 5.5 1.2 8.5 0s5.5-1.2 8.5 0M3.5 14.5c3-1.2 5.5-1.2 8.5 0s5.5 1.2 8.5 0"/></svg>',
-    pil: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+    vann: svg('<path d="M12 3.5c3.5 4.3 6 7.6 6 10.5a6 6 0 0 1-12 0c0-2.9 2.5-6.2 6-10.5z"/>'),
+    hall: svg('<path d="M4 21h16v-8H4z"/><path d="M12 13V9M8 13v-3M16 13v-3"/><path d="M12 6.5c.8 0 1.2-.6 1.2-1.3S12 3 12 3s-1.2 1.5-1.2 2.2.4 1.3 1.2 1.3z"/>'),
+    leie: svg('<circle cx="12" cy="12" r="9"/><path d="M3.5 9.5c3 1.2 5.5 1.2 8.5 0s5.5-1.2 8.5 0M3.5 14.5c3-1.2 5.5-1.2 8.5 0s5.5 1.2 8.5 0"/>'),
+    barnehage: svg('<path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-5h6v5"/>'),
+    skole: svg('<path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M7 10v5c0 1.5 2.2 3 5 3s5-1.5 5-3v-5"/>'),
+    lag: svg('<circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M10.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/>'),
+    pil: svg('<path d="M5 12h14M13 6l6 6-6 6"/>', 16),
+    hake: svg('<path d="M5 12.5l4.5 4.5L19 7.5"/>', 16),
+    las: svg('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>', 18)
+  };
+  const ORG_INFO = {
+    barnehage: 'Hallen er åpen etter avtalene dere har. Ledige timer kan bestilles når fordelingen er ferdig og sesongen har startet.',
+    skole: 'Hallen er åpen etter avtalene skolen har. Ledige timer kan bestilles når fordelingen er ferdig og sesongen har startet.',
+    lag: 'Fast treningstid fordeles for en sesong. Her bestiller lagets leder ledige timer og møterom.'
   };
   const TYPER = {
-    bursdagVann: { navn: vann.navn, sted: vann.sted, klasse: 'vann', ikon: ikon.vann, kr: vann.krPerBarn, enhet: 'per barn', dager: [4, 5, 6], b: vann,
-      info: '1 time bading og 1 time i selskapsrom. ' + stor(vann.kort) + '. For barn som kan svømme, vanligvis fra cirka 10 år.' },
-    bursdagHall: { navn: hallB.navn, sted: hallB.sted, klasse: 'hall', ikon: ikon.hall, kr: hallB.krPerBarn, enhet: 'per barn', dager: [5, 6], b: hallB,
-      info: '1 time aktivitet i hallen og 1 time i selskapsrom. ' + stor(hallB.kort) + '. Passer for alle aldre.' },
-    idrettshall: { navn: 'Leie av idrettshall', sted: 'Kompistrening', klasse: 'leie', ikon: ikon.leie, kr: ih.leiePerTime, enhet: 'per time',
-      info: 'To store haller som kan leies hver for seg. Gruppeleder må være ' + ih.lederAlder + ' år eller eldre.' }
+    bursdagVann: { navn: vann.navn, kort: 'Bursdag i svømmehallen', sted: vann.sted, klasse: 'vann', ikon: ikon.vann, kr: vann.krPerBarn, enhet: 'per barn', dager: [4, 5, 6], b: vann,
+      info: '1 time bading og 1 time i selskapsrom. ' + stor(vann.kort) + '. For barn som kan svømme.' },
+    bursdagHall: { navn: hallB.navn, kort: hallB.navn, sted: hallB.sted, klasse: 'hall', ikon: ikon.hall, kr: hallB.krPerBarn, enhet: 'per barn', dager: [5, 6], b: hallB,
+      info: '1 time aktivitet i hallen og 1 time i selskapsrom. ' + stor(hallB.kort) + '. For alle aldre.' },
+    idrettshall: { navn: 'Kompistrening', kort: 'Leie av idrettshall', sted: 'Leie av idrettshall', klasse: 'leie', ikon: ikon.leie, kr: ih.leiePerTime, enhet: 'per time', timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2'],
+      info: 'Lei en hel hall til ballspill og trening med venner. Gruppeleder må være ' + ih.lederAlder + ' år eller eldre.' },
+    barnehage: { navn: 'Barnehage', kort: 'Barnehage', sted: 'Barnehager i Randaberg', klasse: 'org', ikon: ikon.barnehage, org: true, timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2'], hvem: 'barnehagen', bruker: 'Styreren', demo: 'Demo barnehage' },
+    skole: { navn: 'Skole', kort: 'Skole', sted: 'Skoler i Randaberg', klasse: 'org', ikon: ikon.skole, org: true, timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2'], hvem: 'skolen', bruker: 'Rektor eller inspektør', demo: 'Demo skole' },
+    lag: { navn: 'Lag og forening', kort: 'Lag og forening', sted: 'Lag og foreninger', klasse: 'org', ikon: ikon.lag, org: true, timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2', 'Møterom'], hvem: 'laget', bruker: 'Lagets leder', demo: 'Demo IL' }
   };
   const STEG = ['Velg', 'Dag og tid', 'Opplysninger', 'Bekreft'];
-  const tom = () => ({ type: null, hall: 1, dato: null, start: null, slutt: null, mnd: 0, info: { navn: '', mobil: '', epost: '', antall: '', alder: '', aktivitet: '', merknad: '', ok1: false, ok2: false }, steg: 1, nr: null });
-  let st = tom();
+  const tom = () => ({ type: null, lokale: 0, dato: null, start: null, slutt: null, mnd: 0, innlogget: false,
+    info: { navn: '', org: '', mobil: '', epost: '', antall: '', alder: '', aktivitet: '', merknad: '', ok1: false, ok2: false }, steg: 1, nr: null });
+  let st = tom(), sistePris = '', sisteDato = null, retning = 1;
 
-  /* Demo-tilgjengelighet: fast mønster per dato, så samme dag alltid ser lik ut */
+  /* ---------- Demo-tilgjengelighet: fast mønster per dato ---------- */
   const hash = s => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
   const stengtDag = d => HALL.stengteDager.some(x => x.fra <= d && d <= x.til);
-  const forste = () => pluss(tid().dato, 1);                      /* må bestilles senest dagen før */
+  const forste = () => pluss(tid().dato, 1);                    /* må bestilles senest dagen før */
   const siste = () => pluss(tid().dato, 84);
   const programFor = (b, d) => b.program.find(p => p.dager.toLowerCase().includes(UKEDAGER[ukedag(d)]));
-  function dagStatus(d) {
-    const t = TYPER[st.type];
-    if (d < forste() || d > siste()) return 'ute';
-    if (stengtDag(d)) return 'ute';
-    if (st.type === 'idrettshall') return timer(d).some(x => !x.opptatt) ? 'ledig' : 'opptatt';
-    if (!t.dager.includes(ukedag(d))) return 'ute';
-    return hash(st.type + d) % 10 < 3 ? 'opptatt' : 'ledig';
-  }
-  /* Timer i idrettshallen: skolene har hallene på dagtid på hverdager, ellers lag og noen ledige timer */
+  /* Åpningstider for hele Randaberghallen: man–fre 08.00–22.15, lør 08–17, søn 10–17 */
+  const aapen = d => { const u = ukedag(d); return u < 5 ? [8, 22] : u === 5 ? [8, 17] : [10, 17]; };
   function timer(d) {
-    const ut = [], hverdag = ukedag(d) < 5;
-    for (let h = 8; h < 22; h++) {
-      let opptatt = false, hvem = 'Ledig';
-      if (hverdag && h < 16) { opptatt = true; hvem = 'Skole'; }
-      else if (hash('hall' + st.hall + d + h) % 10 < 4) { opptatt = true; hvem = 'Lag og foreninger'; }
-      ut.push({ h, opptatt, hvem });
+    const ut = [], u = ukedag(d), hverdag = u < 5, [fra, til] = aapen(d), t = st.type, lokale = TYPER[t].lokaler[st.lokale];
+    if ((t === 'barnehage' || t === 'skole') && !hverdag) return ut;
+    const slutt = (t === 'barnehage' || t === 'skole') ? 15 : til;
+    for (let h = fra; h < slutt; h++) {
+      const r = hash(t + lokale + d + h) % 10;
+      let hvem = 'Ledig';
+      if (lokale === 'Møterom') hvem = r < 3 ? 'Opptatt' : 'Ledig';
+      else if (t === 'barnehage' || t === 'skole') hvem = r < 4 ? 'Opptatt' : 'Ledig';
+      else if (hverdag && h < 15) hvem = 'Skoler og barnehager';
+      else if (hverdag) hvem = r < (t === 'lag' ? 6 : 5) ? 'Fast trening' : 'Ledig';
+      else hvem = r < 4 ? 'Kamp eller arrangement' : 'Ledig';
+      ut.push({ h, opptatt: hvem !== 'Ledig', hvem });
     }
     return ut;
+  }
+  function dagStatus(d) {
+    const t = TYPER[st.type];
+    if (d < forste() || d > siste() || stengtDag(d)) return 'ute';
+    if (t.timer) { const tt = timer(d); return !tt.length ? 'ute' : tt.some(x => !x.opptatt) ? 'ledig' : 'opptatt'; }
+    if (!t.dager.includes(ukedag(d))) return 'ute';
+    return hash(st.type + d) % 10 < 3 ? 'opptatt' : 'ledig';
   }
   const hh = h => String(h).padStart(2, '0') + '.00';
   const datoLang = d => stor(UKEDAGER[ukedag(d)]) + ' ' + dagMnd(d);
   const krF = v => String(v).replace(/\B(?=(\d{3})+$)/g, ' ') + ' kr';
-
   function tidTekst() {
     if (!st.dato) return '';
-    if (st.type === 'idrettshall') return st.start === null ? '' : hh(st.start) + '–' + hh(st.slutt);
+    if (TYPER[st.type].timer) return st.start === null ? '' : hh(st.start) + '–' + hh(st.slutt);
     const p = programFor(TYPER[st.type].b, st.dato);
     return p ? p.steg[0][0] + '–' + p.steg[p.steg.length - 1][1] : '';
   }
   function prisTekst() {
     const t = TYPER[st.type];
-    if (st.type === 'idrettshall') return st.start === null ? krF(t.kr) + ' per time' : krF((st.slutt - st.start) * t.kr);
+    if (!t.kr) return '';
+    if (t.timer) return st.start === null ? krF(t.kr) + ' per time' : krF((st.slutt - st.start) * t.kr);
     const n = parseInt(st.info.antall, 10);
     return n > 0 ? 'ca. ' + krF(n * t.kr) : krF(t.kr) + ' per barn';
   }
 
   /* ---------- Tegning ---------- */
+  const ba = (i, html) => html.replace('class="', 'style="--i:' + i + '" class="ba ');   /* fortløpende inn-animasjon */
   function tegnSteg() {
+    stegListe.style.setProperty('--fram', Math.min(st.steg - 1, 3) / 3);
     stegListe.innerHTML = STEG.map((navn, i) => {
       const nr = i + 1, kl2 = nr === st.steg ? 'naa' : nr < st.steg ? 'ferdig' : '';
       const inn = '<i>' + (nr < st.steg ? '✓' : nr) + '</i><span>' + navn + '</span>';
@@ -5139,15 +5385,16 @@ function settOppBestilling() {
   }
   function oppsummering() {
     if (!st.type) return '';
-    const t = TYPER[st.type], rader = [['Hva', esc(t.navn)]];
-    if (st.type === 'idrettshall') rader.push(['Hall', 'Idrettshall ' + st.hall]);
+    const t = TYPER[st.type], rader = [['Hva', esc(t.kort)]];
+    if (t.lokaler) rader.push(['Sted', esc(t.lokaler[st.lokale])]);
     if (st.dato) rader.push(['Dag', esc(datoLang(st.dato))]);
     if (tidTekst()) rader.push(['Tid', tidTekst()]);
-    if (st.type !== 'idrettshall' && st.info.antall) rader.push(['Barn', 'ca. ' + esc(st.info.antall)]);
-    return '<aside class="bsum bvis" aria-label="Oppsummering"><span class="bsum__over">Din bestilling</span><h4>' + esc(t.navn) + '</h4>' +
+    if ((st.type === 'bursdagVann' || st.type === 'bursdagHall') && st.info.antall) rader.push(['Barn', 'ca. ' + esc(st.info.antall)]);
+    const pris = prisTekst(), ny = pris !== sistePris; sistePris = pris;
+    return '<aside class="bsum" aria-label="Oppsummering"><span class="bsum__over">Din bestilling</span><h4>' + esc(t.kort) + '</h4>' +
       '<dl>' + rader.map(r => '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>').join('') + '</dl>' +
-      '<div class="bsum__pris"><span>Pris</span><b>' + prisTekst() + '</b></div>' +
-      '<p class="bsum__liten">Betales når dere kommer' + (st.type === 'idrettshall' ? ', helst med kort i automaten.' : ', bare for de barna som kommer. Voksne i følget er gratis.') + ' Avbestill senest ' + ih.avbestillTimer + ' timer før.</p>' +
+      (pris ? '<div class="bsum__pris"><span>Pris</span><b class="' + (ny ? 'ny' : '') + '">' + pris + '</b></div>' : '') +
+      '<p class="bsum__liten">' + (t.org ? 'Bestillingen legges inn på avtalen til ' + t.hvem + '. ' : t.timer ? 'Betales når dere kommer, helst med kort i automaten. ' : 'Betales når dere kommer, bare for de barna som kommer. Voksne i følget er gratis. ') + 'Avbestill senest ' + ih.avbestillTimer + ' timer før.</p>' +
       (st.steg > 1 && st.steg < 5 ? '<button type="button" class="bsum__endre" data-til="1">Velg noe annet</button>' : '') + '</aside>';
   }
   function knapper(nesteTekst, kanGaa, hint) {
@@ -5156,14 +5403,20 @@ function settOppBestilling() {
       (hint ? '<span class="bhint">' + hint + '</span>' : '') + '</div>';
   }
 
+  function typeKort(id, i) {
+    const t = TYPER[id];
+    if (t.org) return ba(i, '<button type="button" class="btype btype--org" data-type="' + id + '" aria-pressed="' + (st.type === id) + '">' +
+      '<span class="btype__ikon">' + t.ikon + '</span><span class="btype__tekst"><b>' + esc(t.navn) + '</b><small>' + esc(t.sted) + '</small></span><span class="btype__pil">' + ikon.pil + '</span></button>');
+    return ba(i, '<button type="button" class="btype btype--' + t.klasse + '" data-type="' + id + '" aria-pressed="' + (st.type === id) + '">' +
+      '<span class="btype__topp"><i>' + t.ikon + '</i>' + esc(t.sted) + '</span><b>' + esc(t.navn) + '</b>' +
+      '<span class="btype__pris"><strong>' + t.kr + '</strong>kr ' + t.enhet + '</span><span class="btype__info">' + esc(t.info) + '</span>' +
+      '<span class="btype__velg">Velg' + ikon.pil + '</span></button>');
+  }
   function steg1() {
-    return '<div class="bflyt__hoved bvis"><h3>Hva vil du bestille?</h3><div class="btyper">' + Object.keys(TYPER).map(id => {
-      const t = TYPER[id];
-      return '<button type="button" class="btype btype--' + t.klasse + '" data-type="' + id + '" aria-pressed="' + (st.type === id) + '">' +
-        '<span class="btype__topp"><i>' + t.ikon + '</i>' + esc(t.sted) + '</span><b>' + esc(t.navn) + '</b>' +
-        '<span class="btype__pris"><strong>' + t.kr + '</strong>kr ' + t.enhet + '</span><span class="btype__info">' + esc(t.info) + '</span>' +
-        '<span class="btype__velg">Velg' + ikon.pil + '</span></button>';
-    }).join('') + '</div></div>';
+    return '<div class="bflyt__hoved"><h3 class="ba" style="--i:0">Hva vil du bestille?</h3>' +
+      '<div class="btyper">' + ['bursdagVann', 'bursdagHall', 'idrettshall'].map((id, i) => typeKort(id, i + 1)).join('') + '</div>' +
+      '<div class="borg ba" style="--i:4"><p class="borg__tittel">For barnehager, skoler og lag med avtale</p><p class="borg__tekst">Dere logger inn med brukeren dere har fått fra hallen.</p>' +
+      '<div class="borg__valg">' + ['barnehage', 'skole', 'lag'].map((id, i) => typeKort(id, i + 5)).join('') + '</div></div></div>';
   }
 
   function kalender() {
@@ -5177,35 +5430,38 @@ function settOppBestilling() {
     for (let i = 0; i < ukedag(forsteDag); i++) celler += '<span></span>';
     for (let d = 1; d <= dagerIMnd; d++) {
       const dato = forsteDag.slice(0, 8) + String(d).padStart(2, '0'), s2 = dagStatus(dato), valgt = st.dato === dato;
-      const kl2 = 'bkal__dag ' + (valgt ? 'valgt ' : '') + (s2 === 'ledig' ? 'ledig' : s2 === 'opptatt' ? 'opptatt' : '') + (dato === idag ? ' idag' : '');
+      const kl2 = 'ba bkal__dag ' + (valgt ? 'valgt ' : '') + (s2 === 'ledig' ? 'ledig' : s2 === 'opptatt' ? 'opptatt' : '') + (dato === idag ? ' idag' : '');
       const merk = datoLang(dato) + (s2 === 'ledig' ? ', ledig' : s2 === 'opptatt' ? ', opptatt' : ', ikke tilgjengelig');
-      celler += s2 === 'ledig' ? '<button type="button" class="' + kl2 + '" data-dato="' + dato + '" aria-label="' + merk + '"' + (valgt ? ' aria-pressed="true"' : '') + '>' + d + '</button>'
-        : '<span class="' + kl2 + '" aria-label="' + merk + '">' + d + '</span>';
+      const stil = ' style="--i:' + Math.min(d, 31) * 0.35 + '"';
+      celler += s2 === 'ledig' ? '<button type="button"' + stil + ' class="' + kl2 + '" data-dato="' + dato + '" aria-label="' + merk + '"' + (valgt ? ' aria-pressed="true"' : '') + '>' + d + '</button>'
+        : '<span' + stil + ' class="' + kl2 + '" aria-label="' + merk + '">' + d + '</span>';
     }
-    return '<div class="bkasse"><div class="bkal__topp"><button type="button" class="bkal__pil" data-mnd="-1" aria-label="Forrige måned"' + (st.mnd <= 0 ? ' disabled' : '') + '><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>' +
-      '<h4>' + MND[mnd] + ' ' + aar + '</h4><button type="button" class="bkal__pil" data-mnd="1" aria-label="Neste måned"' + (st.mnd >= maksMnd ? ' disabled' : '') + '><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>' +
+    const pil = (r, navn, av) => '<button type="button" class="bkal__pil" data-mnd="' + r + '" aria-label="' + navn + '"' + (av ? ' disabled' : '') + '>' + svg(r < 0 ? '<path d="M15 6l-6 6 6 6"/>' : '<path d="M9 6l6 6-6 6"/>', 18) + '</button>';
+    return '<div class="bkasse"><div class="bkal__topp">' + pil(-1, 'Forrige måned', st.mnd <= 0) + '<h4>' + MND[mnd] + ' ' + aar + '</h4>' + pil(1, 'Neste måned', st.mnd >= maksMnd) + '</div>' +
       '<div class="bkal__grid">' + ['man', 'tir', 'ons', 'tor', 'fre', 'lør', 'søn'].map(u => '<span class="bkal__uke">' + u + '</span>').join('') + celler + '</div>' +
       '<div class="btegn"><span><i style="background:var(--mint)"></i>Ledig</span><span><i style="background:rgba(255,107,87,.8)"></i>Opptatt</span><span><i style="background:rgba(255,255,255,.25)"></i>Ikke mulig</span></div></div>';
   }
 
   function steg2() {
-    const t = TYPER[st.type];
-    let ut = '<div class="bflyt__hoved bvis"><h3>Velg dag' + (st.type === 'idrettshall' ? ' og tid' : '') + '</h3>' +
-      '<p class="bflyt__ingress">' + (st.type === 'idrettshall' ? 'Grønne dager har ledige timer. Du må bestille senest dagen før.' : esc(t.navn) + ' holdes ' + esc(t.b.kort) + '. Grønne dager er ledige. Du må bestille senest dagen før.') + '</p>';
-    if (st.type === 'idrettshall') ut += '<div class="bkasse"><h4>Hvilken hall?</h4><div class="bvalg">' + [1, 2].map(h => '<button type="button" data-hall="' + h + '" aria-pressed="' + (st.hall === h) + '">Idrettshall ' + h + '</button>').join('') + '</div></div>';
+    const t = TYPER[st.type], nyDag = st.dato !== sisteDato;
+    sisteDato = st.dato;
+    let ut = '<div class="bflyt__hoved"><h3 class="ba" style="--i:0">Velg dag' + (t.timer ? ' og tid' : '') + '</h3>' +
+      '<p class="bflyt__ingress ba" style="--i:1">' + (t.org ? esc(ORG_INFO[st.type]) + ' ' : '') + (t.timer ? 'Grønne dager har ledige timer.' : esc(t.navn) + ' holdes ' + esc(t.b.kort) + '. Grønne dager er ledige.') + ' Du må bestille senest dagen før.</p>';
+    if (st.type === 'lag') ut += '<div class="binfo ba" style="--i:2"><b>Søke fast treningstid eller flytte en kamp?</b><span>Rammetider fordeles for en sesong etter søknad fra idrettsforbundene. Skjema for 2027/28 kommer i januar 2027. Kamper flyttes innenfor rammetiden via forbundet.</span></div>';
+    if (t.lokaler) ut += '<div class="bkasse ba" style="--i:2"><h4>Hvor?</h4><div class="bvalg">' + t.lokaler.map((l, i) => '<button type="button" data-lokale="' + i + '" aria-pressed="' + (st.lokale === i) + '">' + esc(l) + '</button>').join('') + '</div></div>';
     ut += kalender();
-    if (st.dato && st.type === 'idrettshall') {
-      ut += '<div class="bkasse bvis"><h4>' + esc(datoLang(st.dato)) + ': velg tid</h4><p class="bflyt__ingress" style="margin-bottom:12px">Trykk på starttiden, og så på siste time du vil ha. Du kan leie opptil 4 timer.</p><div class="btimer">' +
+    if (st.dato && t.timer) {
+      ut += '<div class="bkasse' + (nyDag ? ' bny' : '') + '"><h4>' + esc(datoLang(st.dato)) + ': velg tid</h4><p class="bflyt__ingress" style="margin-bottom:12px">Trykk på starttiden, og så på siste time du vil ha. Du kan ta opptil 4 timer.</p><div class="btimer">' +
         timer(st.dato).map(x => {
           const valgt = st.start !== null && x.h >= st.start && x.h < st.slutt;
           return '<button type="button" class="btime' + (x.opptatt ? ' opptatt' : '') + (valgt ? ' valgt' : '') + '" data-time="' + x.h + '"' + (x.opptatt ? ' disabled' : '') + ' aria-pressed="' + valgt + '"><b>' + hh(x.h) + '</b><small>' + (valgt ? 'Valgt' : x.hvem) + '</small></button>';
         }).join('') + '</div></div>';
     } else if (st.dato) {
       const p = programFor(t.b, st.dato);
-      ut += '<div class="bkasse bvis"><h4>' + esc(datoLang(st.dato)) + '</h4><ul class="bplan">' + p.steg.map(s2 => '<li class="' + (/rigging|rydding/i.test(s2[2]) ? '' : 'hoved') + '"><span>' + esc(s2[2]) + '</span><b>' + s2[0] + '–' + s2[1] + '</b></li>').join('') + '</ul></div>';
+      ut += '<div class="bkasse' + (nyDag ? ' bny' : '') + '"><h4>' + esc(datoLang(st.dato)) + '</h4><ul class="bplan">' + p.steg.map(s2 => '<li class="' + (/rigging|rydding/i.test(s2[2]) ? '' : 'hoved') + '"><span>' + esc(s2[2]) + '</span><b>' + s2[0] + '–' + s2[1] + '</b></li>').join('') + '</ul></div>';
     }
-    const klar = st.dato && (st.type !== 'idrettshall' || st.start !== null);
-    return ut + knapper('Gå videre', klar, klar ? '' : st.type === 'idrettshall' ? (st.dato ? 'Velg en tid' : 'Velg en dag') : 'Velg en dag') + '</div>';
+    const klar = st.dato && (!t.timer || st.start !== null);
+    return ut + knapper('Gå videre', klar, klar ? '' : t.timer && st.dato ? 'Velg en tid' : 'Velg en dag') + '</div>';
   }
 
   function felt(id, label, type, ekstra, hel) {
@@ -5216,48 +5472,61 @@ function settOppBestilling() {
     return '<div class="bfelt' + (hel ? ' hel' : '') + '" data-for="' + id + '"><label for="bf-' + id + '">' + label + '</label>' + inn + '<span class="bfelt__feil" hidden></span></div>';
   }
   function steg3() {
-    const bursdag = st.type !== 'idrettshall', i = st.info;
+    const t = TYPER[st.type], i = st.info, bursdag = !t.timer, org = !!t.org;
     const akt = ['', 'Fotball', 'Innebandy', 'Volleyball', 'Basketball', 'Håndball', 'Badminton', 'Annet'];
-    return '<div class="bflyt__hoved bvis"><h3>Dine opplysninger</h3><p class="bflyt__ingress">Vi bruker dette bare til bestillingen. Du får bekreftelse på e-post.</p><div class="bkasse"><div class="bskjema">' +
-      felt('navn', bursdag ? 'Navnet ditt (voksen som bestiller)' : 'Navn på gruppeleder', 'text', 'autocomplete="name" required') +
+    let ut = '<div class="bflyt__hoved"><h3 class="ba" style="--i:0">' + (org ? 'Logg inn og send' : 'Dine opplysninger') + '</h3>';
+    if (org) ut += '<div class="blogg ba' + (st.innlogget ? ' inne' : '') + '" style="--i:1" data-for="innlogget"><span class="blogg__ikon">' + (st.innlogget ? ikon.hake : ikon.las) + '</span><div><b>' + (st.innlogget ? 'Logget inn (demo)' : 'Logg inn med brukeren fra hallen') + '</b><span>' + esc(t.bruker) + ' har brukernavn og passord. Har dere ikke bruker? Send e-post til ' + esc(HALL.kontakt.epost) + '.</span></div>' +
+      (st.innlogget ? '' : '<button type="button" class="knapp knapp--liten" data-handling="logginn">Logg inn</button>') + '</div>';
+    else ut += '<p class="bflyt__ingress ba" style="--i:1">Vi bruker dette bare til bestillingen. Du får bekreftelse på e-post.</p>';
+    ut += '<div class="bkasse ba" style="--i:2"><div class="bskjema">' +
+      (org ? felt('org', 'Navn på ' + t.hvem, 'text', 'autocomplete="organization" required') + felt('navn', 'Kontaktperson', 'text', 'autocomplete="name" required') : felt('navn', bursdag ? 'Navnet ditt (voksen som bestiller)' : 'Navn på gruppeleder', 'text', 'autocomplete="name" required')) +
       felt('mobil', 'Mobilnummer', 'tel', 'autocomplete="tel" inputmode="tel" placeholder="8 siffer" required') +
-      felt('epost', 'E-post', 'email', 'autocomplete="email" inputmode="email" required', true) +
+      felt('epost', 'E-post', 'email', 'autocomplete="email" inputmode="email" required', !org) +
       (bursdag ? felt('antall', 'Omtrent hvor mange barn?', 'number', 'inputmode="numeric" min="1" max="60" placeholder="For eksempel 12"') + felt('alder', 'Alderen til bursdagsbarnet <small>(valgfritt)</small>', 'number', 'inputmode="numeric" min="1" max="18"')
+        : org ? felt('antall', 'Omtrent hvor mange blir dere? <small>(valgfritt)</small>', 'number', 'inputmode="numeric" min="1" max="200"')
         : felt('aktivitet', 'Aktivitet', 'select', akt.map(a => '<option value="' + a + '"' + (i.aktivitet === a ? ' selected' : '') + '>' + (a || 'Velg …') + '</option>').join('')) + felt('antall', 'Omtrent hvor mange blir dere? <small>(valgfritt)</small>', 'number', 'inputmode="numeric" min="1" max="80"')) +
-      felt('merknad', 'Melding til oss <small>(valgfritt)</small>', 'textarea', 'maxlength="300" placeholder="' + (bursdag ? 'For eksempel om dere vil låne kjøleskap eller mikrobølgeovn' : 'For eksempel om dere vil låne mål eller nett') + '"', true) +
-      '<label class="bsjekk hel" data-for="ok1"><input type="checkbox" data-felt="ok1"' + (i.ok1 ? ' checked' : '') + '><span>' + (bursdag ? 'Vi tar med nok voksne til å passe på alle barna.' + (st.type === 'bursdagVann' ? ' Alle bruker badehette og følger badereglene.' : ' Alle har rene innesko.') : 'Gruppelederen er ' + ih.lederAlder + ' år eller eldre, og alle har rene innesko.') + '</span></label>' +
-      '<label class="bsjekk hel" data-for="ok2"><input type="checkbox" data-felt="ok2"' + (i.ok2 ? ' checked' : '') + '><span>Jeg vet at avbestilling må skje senest ' + ih.avbestillTimer + ' timer før' + (bursdag ? '.' : ', ellers må vi betale vanlig pris.') + '</span></label>' +
+      felt('merknad', 'Melding til oss <small>(valgfritt)</small>', 'textarea', 'maxlength="300" placeholder="' + (bursdag ? 'For eksempel om dere vil låne kjøleskap eller mikrobølgeovn' : org ? 'For eksempel hva dere skal bruke hallen til' : 'For eksempel om dere vil låne mål eller nett') + '"', true) +
+      '<label class="bsjekk hel" data-for="ok1"><input type="checkbox" data-felt="ok1"' + (i.ok1 ? ' checked' : '') + '><span>' + (bursdag ? 'Vi tar med nok voksne til å passe på alle barna.' + (st.type === 'bursdagVann' ? ' Alle bruker badehette og følger badereglene.' : ' Alle har rene innesko.') : org ? 'Vi følger brukerreglementet, og alle har rene innesko.' : 'Gruppelederen er ' + ih.lederAlder + ' år eller eldre, og alle har rene innesko.') + '</span></label>' +
+      '<label class="bsjekk hel" data-for="ok2"><input type="checkbox" data-felt="ok2"' + (i.ok2 ? ' checked' : '') + '><span>Jeg vet at avbestilling må skje senest ' + ih.avbestillTimer + ' timer før' + (st.type === 'idrettshall' ? ', ellers må vi betale vanlig pris.' : '.') + '</span></label>' +
       '</div></div>' + knapper('Se over bestillingen', true) + '</div>';
+    return ut;
   }
 
   function steg4() {
-    const t = TYPER[st.type], i = st.info, bursdag = st.type !== 'idrettshall';
-    const rader = [['Hva', esc(t.navn)], ...(bursdag ? [] : [['Hall', 'Idrettshall ' + st.hall]]), ['Dag', esc(datoLang(st.dato))], ['Tid', tidTekst()], ['Navn', esc(i.navn)], ['Mobil', esc(i.mobil)], ['E-post', esc(i.epost)]];
+    const t = TYPER[st.type], i = st.info, bursdag = !t.timer;
+    const rader = [['Hva', esc(t.kort)], ...(t.lokaler ? [['Sted', esc(t.lokaler[st.lokale])]] : []), ['Dag', esc(datoLang(st.dato))], ['Tid', tidTekst()],
+      ...(t.org ? [[stor(t.hvem), esc(i.org)], ['Kontakt', esc(i.navn)]] : [['Navn', esc(i.navn)]]), ['Mobil', esc(i.mobil)], ['E-post', esc(i.epost)]];
     if (i.antall) rader.push([bursdag ? 'Antall barn' : 'Antall', 'ca. ' + esc(i.antall)]);
     if (i.alder) rader.push(['Bursdagsbarnet', esc(i.alder) + ' år']);
     if (i.aktivitet) rader.push(['Aktivitet', esc(i.aktivitet)]);
     if (i.merknad) rader.push(['Melding', esc(i.merknad)]);
-    return '<div class="bflyt__hoved bvis"><h3>Se over og send</h3><div class="bkasse"><dl class="bsum" style="background:none;border:0;padding:0;position:static">' +
+    return '<div class="bflyt__hoved"><h3 class="ba" style="--i:0">Se over og send</h3><div class="bkasse ba" style="--i:1"><dl class="boversikt">' +
       rader.map(r => '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>').join('') + '</dl></div>' +
-      '<p class="bflyt__ingress">Du betaler når dere kommer' + (bursdag ? ', bare for de barna som er med' : '') + '. ' + (bursdag ? 'Når dere kommer, melder du deg i resepsjonen ved svømmehallen eller ringer vaktmester på ' + esc(HALL.kontakt.telefon) + '.' : 'Garderobene kan brukes ' + ih.garderobeMin + ' minutter før og etter timen.') + '</p>' +
+      '<p class="bflyt__ingress ba" style="--i:2">' + (t.org ? 'Bestillingen legges inn på avtalen deres, og dere finner den når dere logger inn.' : 'Du betaler når dere kommer' + (bursdag ? ', bare for de barna som er med' : '') + '.') + ' ' +
+      (bursdag ? 'Når dere kommer, melder du deg i resepsjonen ved svømmehallen eller ringer vaktmester på ' + esc(HALL.kontakt.telefon) + '.' : 'Garderobene kan brukes ' + ih.garderobeMin + ' minutter før og etter timen.') + '</p>' +
       knapper('Send bestilling', true) + '</div>';
   }
 
   function kvittering() {
-    const t = TYPER[st.type], bursdag = st.type !== 'idrettshall';
-    return '<div class="bkvitt bvis"><span class="bkvitt__hake"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
-      '<h3 tabindex="-1" id="bkvitt-tittel">Takk, ' + esc(st.info.navn.split(' ')[0]) + '! Bestillingen er registrert.</h3>' +
+    const t = TYPER[st.type], bursdag = !t.timer, fornavn = (t.org ? st.info.navn : st.info.navn).trim().split(' ')[0];
+    const bobler = Array.from({ length: 14 }, (_, i) => '<span style="--x:' + (8 + (i * 37) % 86) + '%;--d:' + (0.2 + (i % 5) * 0.18).toFixed(2) + 's;--s:' + (6 + (i * 7) % 12) + 'px"></span>').join('');
+    return '<div class="bkvitt"><div class="bkvitt__bobler" aria-hidden="true">' + bobler + '</div><span class="bkvitt__hake">' + svg('<path d="M5 12.5l4.5 4.5L19 7.5"/>', 30).replace('stroke-width="2"', 'stroke-width="3"') + '</span>' +
+      '<h3 tabindex="-1" id="bkvitt-tittel">Takk, ' + esc(fornavn) + '! Bestillingen er registrert.</h3>' +
       '<span class="bkvitt__nr">Bestillingsnummer ' + st.nr + '</span>' +
-      '<dl><div><dt>Hva</dt><dd>' + esc(t.navn) + (bursdag ? '' : ', idrettshall ' + st.hall) + '</dd></div><div><dt>Dag</dt><dd>' + esc(datoLang(st.dato)) + '</dd></div><div><dt>Tid</dt><dd>' + tidTekst() + '</dd></div><div><dt>Pris</dt><dd>' + prisTekst() + '</dd></div></dl>' +
-      '<ul><li>Du får en bekreftelse på e-post til ' + esc(st.info.epost) + '.</li>' + (bursdag ? '<li>Sett oppmøtetid cirka 10 minutter før ' + (st.type === 'bursdagVann' ? 'badingen' : 'aktiviteten') + ' starter i invitasjonen.</li><li>Tallerkener, bestikk, duk og pynt tar dere med selv.</li>' : '<li>Ta med innesko. Småmål, volleyballstolper og nett kan lånes.</li>') + '<li>Må du avbestille, gjør det senest ' + ih.avbestillTimer + ' timer før.</li></ul>' +
+      '<dl><div><dt>Hva</dt><dd>' + esc(t.kort) + (t.lokaler ? ', ' + esc(t.lokaler[st.lokale].toLowerCase()) : '') + '</dd></div><div><dt>Dag</dt><dd>' + esc(datoLang(st.dato)) + '</dd></div><div><dt>Tid</dt><dd>' + tidTekst() + '</dd></div>' + (prisTekst() ? '<div><dt>Pris</dt><dd>' + prisTekst() + '</dd></div>' : '') + '</dl>' +
+      '<ul><li>Du får en bekreftelse på e-post til ' + esc(st.info.epost) + '.</li>' +
+      (bursdag ? '<li>Sett oppmøtetid cirka 10 minutter før ' + (st.type === 'bursdagVann' ? 'badingen' : 'aktiviteten') + ' starter i invitasjonen.</li><li>Tallerkener, bestikk, duk og pynt tar dere med selv.</li>'
+        : t.org ? '<li>Avtalen ligger klar når dere logger inn.</li><li>Trenger dere hjelp på dagen, ring vaktmester på ' + esc(HALL.kontakt.telefon) + '.</li>' : '<li>Ta med innesko. Småmål, volleyballstolper og nett kan lånes.</li>') +
+      '<li>Må du avbestille, gjør det senest ' + ih.avbestillTimer + ' timer før.</li></ul>' +
       '<div class="bknapper"><a class="knapp knapp--hvit" id="bkal" download="randaberghallen.ics" href="#">Legg i kalenderen</a><button type="button" class="knapp knapp--spok" data-handling="ny">Ny bestilling</button><a class="knapp knapp--spok" href="#topp">Til forsiden</a></div></div>';
   }
 
-  function tegn(fokus) {
+  /* anim: true når et nytt steg vises (alt glir inn), false når noe endres inne i samme steg */
+  function tegn(fokus, anim) {
     tegnSteg();
     const hoved = st.steg === 1 ? steg1() : st.steg === 2 ? steg2() : st.steg === 3 ? steg3() : st.steg === 4 ? steg4() : kvittering();
     const medSum = st.steg >= 2 && st.steg <= 4;
-    flyt.className = 'bflyt' + (medSum ? ' bflyt--med' : '');
+    flyt.className = 'bflyt' + (medSum ? ' bflyt--med' : '') + (anim ? ' animer' + (retning < 0 ? ' tilbake' : '') : '');
     flyt.innerHTML = hoved + (medSum ? oppsummering() : '');
     if (st.steg === 5) lagKalenderfil();
     if (fokus) {
@@ -5274,22 +5543,24 @@ function settOppBestilling() {
     const a = $('bkal'); if (!a) return;
     const t = TYPER[st.type], d = st.dato.replace(/-/g, '');
     let fra, til;
-    if (st.type === 'idrettshall') { fra = hh(st.start); til = hh(st.slutt); }
+    if (t.timer) { fra = hh(st.start); til = hh(st.slutt); }
     else { const p = programFor(t.b, st.dato); fra = p.steg[0][0]; til = p.steg[p.steg.length - 1][1]; }
     const ts = x => d + 'T' + x.replace('.', '') + '00';
     const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Randaberghallen//Demo//NO', 'BEGIN:VEVENT', 'UID:' + st.nr + '@randaberghallen.no',
       'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z', 'DTSTART;TZID=Europe/Oslo:' + ts(fra), 'DTEND;TZID=Europe/Oslo:' + ts(til),
-      'SUMMARY:' + t.navn + ' – Randaberghallen', 'LOCATION:' + HALL.kontakt.adresse + '\\, ' + HALL.kontakt.poststed, 'DESCRIPTION:Bestillingsnummer ' + st.nr, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+      'SUMMARY:' + t.kort + ' – Randaberghallen', 'LOCATION:' + HALL.kontakt.adresse + '\\, ' + HALL.kontakt.poststed, 'DESCRIPTION:Bestillingsnummer ' + st.nr, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
     try { a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })); } catch (e) { a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics); }
   }
 
   /* ---------- Sjekk av skjema ---------- */
   function sjekkSkjema() {
-    const i = st.info, feil = {};
-    if (i.navn.trim().length < 2) feil.navn = 'Skriv navnet ditt.';
+    const t = TYPER[st.type], i = st.info, feil = {};
+    if (t.org && !st.innlogget) feil.innlogget = true;
+    if (t.org && i.org.trim().length < 2) feil.org = 'Skriv navnet på ' + t.hvem + '.';
+    if (i.navn.trim().length < 2) feil.navn = t.org ? 'Skriv navnet på kontaktpersonen.' : 'Skriv navnet ditt.';
     if (!/^[49]\d{7}$/.test(i.mobil.replace(/[\s-]/g, '').replace(/^(\+47|0047)/, ''))) feil.mobil = 'Skriv et norsk mobilnummer med 8 siffer.';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(i.epost.trim())) feil.epost = 'Skriv en gyldig e-postadresse.';
-    if (st.type !== 'idrettshall' && !(parseInt(i.antall, 10) > 0)) feil.antall = 'Skriv omtrent hvor mange barn som kommer.';
+    if (!t.timer && !(parseInt(i.antall, 10) > 0)) feil.antall = 'Skriv omtrent hvor mange barn som kommer.';
     if (st.type === 'idrettshall' && !i.aktivitet) feil.aktivitet = 'Velg aktivitet.';
     if (!i.ok1) feil.ok1 = true;
     if (!i.ok2) feil.ok2 = true;
@@ -5297,35 +5568,40 @@ function settOppBestilling() {
       const f = feil[el.dataset.for]; el.classList.toggle('feil', !!f);
       const m = el.querySelector('.bfelt__feil'); if (m) { m.hidden = !f; m.textContent = typeof f === 'string' ? f : ''; }
     });
-    const forsteFeil = flyt.querySelector('.feil input, .feil select, .feil textarea');
+    const forsteFeil = flyt.querySelector('.feil [data-handling="logginn"], .feil input, .feil select, .feil textarea');
     if (forsteFeil) forsteFeil.focus();
     return !Object.keys(feil).length;
   }
 
   /* ---------- Hendelser ---------- */
-  function gaaTil(n) { st.steg = n; tegn(true); }
+  function gaaTil(n) { retning = n >= st.steg ? 1 : -1; st.steg = n; tegn(true, true); }
   flyt.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
-    if (b.dataset.type) { if (st.type !== b.dataset.type) { const info = st.info; st = tom(); st.info = info; st.type = b.dataset.type; } gaaTil(2); return; }
-    if (b.dataset.hall) { st.hall = +b.dataset.hall; st.start = st.slutt = null; tegn(); return; }
-    if (b.dataset.mnd) { st.mnd += +b.dataset.mnd; tegn(); return; }
+    if (b.dataset.type) { if (st.type !== b.dataset.type) { const info = st.info, inne = st.innlogget; st = tom(); st.info = info; st.innlogget = inne && TYPER[b.dataset.type].org; st.type = b.dataset.type; sisteDato = null; } gaaTil(2); return; }
+    if (b.dataset.lokale) { st.lokale = +b.dataset.lokale; st.start = st.slutt = null; if (st.dato && dagStatus(st.dato) !== 'ledig') st.dato = null; tegn(); return; }
+    if (b.dataset.mnd) { st.mnd += +b.dataset.mnd; tegn(false, true); return; }
     if (b.dataset.dato) { st.dato = b.dataset.dato; st.start = st.slutt = null; tegn(); const k2 = flyt.querySelector('.btimer, .bplan'); if (k2 && k2.getBoundingClientRect().top > window.innerHeight - 120) k2.scrollIntoView({ behavior: ROLIG ? 'auto' : 'smooth', block: 'center' }); return; }
     if (b.dataset.time) {
       const h = +b.dataset.time, liste = timer(st.dato);
       const ledigMellom = (a, z) => liste.filter(x => x.h >= a && x.h <= z).every(x => !x.opptatt);
-      if (st.start !== null && h === st.start && st.slutt === st.start + 1) st.start = st.slutt = null;          /* trykk på valgt time igjen: fjern */
+      if (st.start !== null && h === st.start && st.slutt === st.start + 1) st.start = st.slutt = null;            /* trykk på valgt time igjen: fjern */
       else if (st.start !== null && h > st.start && h < st.start + 4 && ledigMellom(st.start, h)) st.slutt = h + 1;   /* utvid eller kort ned */
-      else { st.start = h; st.slutt = h + 1; }                                                                       /* ny starttid */
+      else { st.start = h; st.slutt = h + 1; }                                                                         /* ny starttid */
       tegn(); return;
     }
     if (b.dataset.til) { gaaTil(+b.dataset.til); return; }
     const h2 = b.dataset.handling;
     if (h2 === 'tilbake') gaaTil(st.steg - 1);
+    else if (h2 === 'logginn') {
+      st.innlogget = true;
+      const t = TYPER[st.type]; if (!st.info.org) st.info.org = t.demo;
+      tegn(); const f = $('bf-navn'); if (f && !f.value) f.focus();
+    }
     else if (h2 === 'neste') {
       if (st.steg === 3 && !sjekkSkjema()) return;
       if (st.steg === 4) { st.nr = 'RH-' + String(hash(st.type + st.dato + st.info.epost + Date.now()) % 90000 + 10000); gaaTil(5); return; }
       gaaTil(st.steg + 1);
-    } else if (h2 === 'ny') { st = tom(); gaaTil(1); }
+    } else if (h2 === 'ny') { st = tom(); sisteDato = null; gaaTil(1); }
   });
   stegListe.addEventListener('click', e => { const b = e.target.closest('[data-til]'); if (b) gaaTil(+b.dataset.til); });
   flyt.addEventListener('input', e => {
@@ -5334,17 +5610,37 @@ function settOppBestilling() {
     const el = e.target.closest('[data-for]'); if (el && el.classList.contains('feil')) { el.classList.remove('feil'); const m = el.querySelector('.bfelt__feil'); if (m) m.hidden = true; }
     if (f === 'antall') oppdaterSum();
   });
-  flyt.addEventListener('change', e => { const f = e.target.dataset.felt; if (f) { st.info[f] = e.target.type === 'checkbox' ? e.target.checked : e.target.value; } });
+  flyt.addEventListener('change', e => { const f = e.target.dataset.felt; if (f) st.info[f] = e.target.type === 'checkbox' ? e.target.checked : e.target.value; });
 
   /* Kommer du fra en «Bestill»-knapp, er valget allerede gjort */
   function fraAdresse() {
-    const m = (location.hash || '').match(/^#bestill-(bursdagVann|bursdagHall|idrettshall)$/);
-    if (m) { if (st.type !== m[1] || st.steg === 5) { st = tom(); st.type = m[1]; } st.steg = Math.max(st.steg, 2); tegn(); }
-    else if (location.hash === '#bestilling' && st.steg === 5) { st = tom(); tegn(); }
+    const m = (location.hash || '').match(/^#bestill-(bursdagVann|bursdagHall|idrettshall|barnehage|skole|lag)$/);
+    if (m) { if (st.type !== m[1] || st.steg === 5) { st = tom(); st.type = m[1]; sisteDato = null; } st.steg = Math.max(st.steg, 2); retning = 1; tegn(false, true); }
+    else if (location.hash === '#bestilling' && st.steg === 5) { st = tom(); tegn(false, true); }
   }
   window.addEventListener('hashchange', fraAdresse);
-  tegn();
+  tegn(false, true);
   fraAdresse();
+}
+
+/* Idrettshall: faner for hvem som skal bruke hallen, og «Spør chatten» */
+function settOppHallFaner() {
+  const faner = [...document.querySelectorAll('.ivelg__knapper [role="tab"]')];
+  const velg = (f, fokus) => {
+    faner.forEach(x => { const valgt = x === f; x.setAttribute('aria-selected', valgt); x.tabIndex = valgt ? 0 : -1; $(x.getAttribute('aria-controls')).hidden = !valgt; });
+    if (fokus) f.focus();
+    f.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: ROLIG ? 'auto' : 'smooth' });
+  };
+  faner.forEach((f, i) => {
+    f.addEventListener('click', () => velg(f));
+    f.addEventListener('keydown', e => {
+      const steg = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (steg) { e.preventDefault(); velg(faner[(i + steg + faner.length) % faner.length], true); }
+      else if (e.key === 'Home') { e.preventDefault(); velg(faner[0], true); }
+      else if (e.key === 'End') { e.preventDefault(); velg(faner[faner.length - 1], true); }
+    });
+  });
+  document.querySelectorAll('[data-apnechat]').forEach(b => b.addEventListener('click', () => $('chatknapp').click()));
 }
 
 /* ---------- Start ---------- */
@@ -5360,6 +5656,7 @@ if (window.ResizeObserver) { const ro = new ResizeObserver(maalTopp); ro.observe
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(maalTopp);
 window.addEventListener('load', maalTopp);
 settOppBestilling();
+settOppHallFaner();
 settOppSider();
 setInterval(visAlt, 30000);
 let planBredde = 0;
