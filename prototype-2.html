@@ -35,7 +35,7 @@ a{color:var(--bla-tekst)}
 .morkt :focus-visible{outline-color:#fff}
 [hidden]{display:none!important}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.hopp{position:absolute;left:12px;top:-70px;z-index:900;background:#fff;color:var(--blekk);padding:12px 16px;border-radius:10px;font-weight:600}
+.hopp{position:fixed;left:12px;top:-70px;z-index:900;background:#fff;color:var(--blekk);padding:12px 16px;border-radius:10px;font-weight:600}
 .hopp:focus{top:12px}
 .inn{max-width:var(--maks);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 .tall{font-variant-numeric:tabular-nums}
@@ -293,16 +293,16 @@ a:hover .pil,button:hover .pil{transform:translateX(5px)}
 .side.aktiv{animation:sideinn .6s cubic-bezier(.2,.7,.2,1)}
 @keyframes sideinn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .side--forside.aktiv{animation:none}
-html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
+html.paa-forside,html.paa-forside body{overflow-x:hidden;overscroll-behavior:none}
 .paa-forside .snarvei,.paa-forside .bunn{display:none}
 .side--forside{display:flex;flex-direction:column}
-.paa-forside .side--forside{height:calc(100vh - var(--over,108px));height:calc(100svh - var(--over,108px))}
+.paa-forside .side--forside{min-height:calc(100vh - var(--over,108px));min-height:calc(100svh - var(--over,108px))}
 .paa-forside .hero--basseng{min-height:0;height:auto;flex:1 1 46%}
 .paa-forside .hero__inn{padding-top:28px;padding-bottom:clamp(40px,11vh,130px)}
 @media (max-height:760px){.paa-forside .hero__tekst{margin:14px 0 18px}.paa-forside .hero__hint{display:none}}
 @media (max-width:599px) and (max-height:820px){.paa-forside .hero__tekst{display:none}.paa-forside .hero h1{font-size:clamp(3rem,15vw,4.6rem)}}
-.hurtig a.hurtig__fremhevet{background:linear-gradient(135deg,#FF8A5B,#F2547D);border-color:transparent;color:#fff;box-shadow:0 12px 26px -12px rgba(242,84,125,.8)}
-.hurtig a.hurtig__fremhevet:hover{background:linear-gradient(135deg,#FF9B70,#F5668C);border-color:transparent}
+.hurtig a.hurtig__fremhevet{background:linear-gradient(135deg,#C9450F,#BE1E5A);border-color:transparent;color:#fff;box-shadow:0 12px 26px -12px rgba(190,30,90,.8)}
+.hurtig a.hurtig__fremhevet:hover{background:linear-gradient(135deg,#B83E0D,#AA1A50);border-color:transparent}
 .hero__knapper .knapp--glass{gap:9px}
 @media (max-width:599px){.hero__knapper .knapp{flex:1 1 auto;padding:14px 16px;font-size:.95rem}}
 .bursdagside .bursdag{margin-top:0}
@@ -371,7 +371,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .toppinfo .hurtig a{flex:0 0 auto;min-height:40px;padding:7px 15px;font-size:.9rem;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.28)}
 .toppinfo .naa{align-self:flex-start}
 @media (max-width:699px){.paa-forside .chatknapp{padding:8px;gap:0}.paa-forside .chatknapp__tekst{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.paa-forside .chatknapp::before{display:none}}
-.toppinfo .hurtig a.hurtig__fremhevet{background:linear-gradient(135deg,#FF8A5B,#F2547D);border-color:transparent}
+.toppinfo .hurtig a.hurtig__fremhevet{background:linear-gradient(135deg,#C9450F,#BE1E5A);border-color:transparent}
 .toppkort{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-height:0}
 .tkort{position:relative;display:flex;align-items:flex-end;min-height:118px;border-radius:20px;overflow:hidden;isolation:isolate;color:#fff;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 18px 40px -24px rgba(0,0,0,.8);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
 .tkort--idrett{background:radial-gradient(120% 90% at 80% 0%,#D07726 0%,#6A3410 46%,#1A0D05 100%)}
@@ -713,12 +713,12 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .bunn__inn{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 30px}
 
 /* ---------- Chat og beskjed ---------- */
-.chatknapp{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:450;display:inline-flex;align-items:center;gap:11px;min-height:58px;padding:8px 26px 8px 8px;border:0;border-radius:40px;background:linear-gradient(135deg,#2392F5,#0A4FC4);color:#fff;font-weight:800;font-size:1.02rem;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),0 18px 40px -10px rgba(4,30,90,.85);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.chatknapp{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:450;display:inline-flex;align-items:center;gap:11px;min-height:58px;padding:8px 26px 8px 8px;border:0;border-radius:40px;background:linear-gradient(135deg,#0F6FD8,#0A4FC4);color:#fff;font-weight:800;font-size:1.02rem;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),0 18px 40px -10px rgba(4,30,90,.85);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
 .chatknapp::before{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid rgba(92,200,255,.85);animation:halo 3.8s ease-out infinite;pointer-events:none}
 .chatknapp[aria-expanded="true"]::before{display:none}
 @keyframes halo{0%{transform:scale(1);opacity:.75}42%,100%{transform:scale(1.16,1.42);opacity:0}}
 .chatknapp:hover{transform:translateY(-3px) scale(1.02);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4),0 24px 50px -10px rgba(10,132,255,.8)}
-.chat__avatar{position:relative;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(150deg,#2392F5,#0A49B4);box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.chat__avatar{position:relative;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(150deg,#0F6FD8,#0A49B4);box-shadow:0 0 0 1px rgba(255,255,255,.18)}
 .chat__avatar{color:#fff;font-family:var(--display);font-weight:800;font-size:.95rem;line-height:1}
 .chat__avatar img{display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit;background:#fff}
 .chat__avatar.harbilde{border-radius:30%;background:#fff}
@@ -731,8 +731,8 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .chat{position:fixed;right:16px;left:16px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:450;display:flex;flex-direction:column;height:min(660px,calc(100vh - 112px));height:min(660px,calc(100svh - 112px));background:radial-gradient(120% 60% at 50% 0%,#0E2C66 0%,#081328 62%);color:#EAF1FF;border-radius:28px;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 30px 90px rgba(1,6,20,.75),0 0 90px -20px rgba(10,132,255,.55);overflow:hidden;transform-origin:100% 100%;animation:chatinn .34s cubic-bezier(.2,.9,.2,1)}
 @keyframes chatinn{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
 @media (min-width:520px){.chat{left:auto;width:410px}}
-.chat__topp{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;gap:14px;padding:18px 12px 18px 18px;background:linear-gradient(150deg,#2392F5,#0A3F9E);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.14)}
-.chat__topp::before{content:"";position:absolute;z-index:-1;inset:-300px 0 0 -300px;background-image:var(--kaustikk);background-size:300px 300px;mix-blend-mode:screen;opacity:.85;animation:chatvann 26s linear infinite}
+.chat__topp{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;gap:14px;padding:18px 12px 18px 18px;background:linear-gradient(150deg,#0F6FD8,#0A3F9E);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.14)}
+.chat__topp::before{content:"";position:absolute;z-index:-1;inset:-300px 0 0 -300px;background-image:var(--kaustikk);background-size:300px 300px;mix-blend-mode:screen;opacity:.3;animation:chatvann 26s linear infinite}
 @keyframes chatvann{to{transform:translate(300px,300px)}}
 .chat__topp div{flex:1;min-width:0}
 .chat__topp h2{font-family:var(--display);font-weight:800;font-size:1.28rem;line-height:1.1;letter-spacing:-.015em}
@@ -745,7 +745,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .rad--meg{justify-content:flex-end}
 .boble{max-width:84%;padding:12px 16px;border-radius:20px 20px 20px 6px;background:rgba(255,255,255,.085);box-shadow:inset 0 0 0 1px rgba(255,255,255,.11);font-size:.97rem;line-height:1.5;color:#EAF1FF}
 .boble a{color:var(--aqua);font-weight:700;text-underline-offset:3px}
-.rad--meg .boble{border-radius:20px 20px 6px 20px;background:linear-gradient(135deg,#2392F5,#0A5FD6);color:#fff;box-shadow:0 10px 24px -12px rgba(10,132,255,.9)}
+.rad--meg .boble{border-radius:20px 20px 6px 20px;background:linear-gradient(135deg,#0F6FD8,#0A5FD6);color:#fff;box-shadow:0 10px 24px -12px rgba(10,132,255,.9)}
 .ord{opacity:0;animation:ordinn .4s ease forwards;animation-delay:calc(var(--i) * 26ms)}
 @keyframes ordinn{from{opacity:0;filter:blur(4px)}to{opacity:1;filter:blur(0)}}
 .boble--skriver{display:inline-flex;align-items:center;padding:13px 16px}
@@ -781,7 +781,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .chat__skriv:focus-within{background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1.5px var(--aqua),0 0 30px -8px rgba(92,200,255,.7)}
 .chat__skriv input{flex:1;min-width:0;height:46px;border:0;outline:0;background:transparent;font:inherit;font-size:1rem;color:#fff}
 .chat__skriv input::placeholder{color:rgba(234,241,255,.6)}
-.chat__skriv button{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border:0;border-radius:50%;background:linear-gradient(135deg,#2392F5,#0A5FD6);color:#fff;cursor:pointer;box-shadow:0 8px 20px -8px rgba(10,132,255,.9);transition:transform .2s,opacity .2s}
+.chat__skriv button{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border:0;border-radius:50%;background:linear-gradient(135deg,#0F6FD8,#0A5FD6);color:#fff;cursor:pointer;box-shadow:0 8px 20px -8px rgba(10,132,255,.9);transition:transform .2s,opacity .2s}
 .chat__skriv button:hover{transform:scale(1.07)}
 .chat__skriv button:disabled{opacity:.4;cursor:default;transform:none}
 .chat__bunn{padding:10px 18px 14px;font-size:.74rem;color:rgba(234,241,255,.6)}
@@ -1067,7 +1067,7 @@ html.paa-forside,html.paa-forside body{overflow:hidden;overscroll-behavior:none}
 .paa-forside .hero__inn{padding-top:28px;padding-bottom:clamp(40px,11vh,130px)}
 .side--forside>.hero .hero__slor{background:linear-gradient(0deg,rgba(4,14,34,.55) 0%,rgba(4,14,34,0) 30%),linear-gradient(90deg,rgba(4,14,34,.5) 0%,rgba(4,14,34,.22) 45%,rgba(4,14,34,0) 70%)}
 @media (max-width:759px){
-  .side--forside>.hero .hero__slor{background:linear-gradient(180deg,rgba(4,14,34,.35),rgba(4,14,34,.2) 60%,rgba(4,14,34,0))}
+  .side--forside>.hero .hero__slor{background:linear-gradient(0deg,rgba(4,14,34,.82) 0%,rgba(4,14,34,.7) 50%,rgba(4,14,34,.55) 76%,rgba(4,14,34,.15) 93%,rgba(4,14,34,0))}
   .side--forside .hero .hurtig{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:calc(-1 * var(--kant,20px));padding-right:20px;padding-bottom:2px}
   .side--forside .hero .hurtig::-webkit-scrollbar{display:none}
   .side--forside .hero .hurtig a{flex:0 0 auto}
@@ -1430,6 +1430,40 @@ html[data-side="svommehall"] #bestill{display:none}
 .bestill__smaa{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 4px 4px}
 .bestill__liten{display:grid;place-items:center;min-height:46px;padding:8px 6px;border-radius:12px;background:rgba(255,255,255,.06);color:#fff;font-weight:700;font-size:.875rem;line-height:1.2;text-align:center;text-decoration:none;transition:background .18s}
 .bestill__liten:hover,.bestill__liten:focus-visible{background:rgba(255,255,255,.12);color:#fff}
+
+/* ---------- Stopp bevegelse (universell utforming) ---------- */
+.bevegelse{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:440;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(4,14,34,.78);color:#fff;cursor:pointer;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 10px 24px -12px rgba(0,0,0,.7);transition:background .25s,transform .25s}
+.bevegelse:hover{background:rgba(4,14,34,.94);transform:translateY(-1px)}
+.bevegelse .spill,html.stille .bevegelse .pause{display:none}
+html.stille .bevegelse .spill{display:block}
+@media print{.bevegelse{display:none!important}}
+html.stille .hurtig__fremhevet svg,
+html.stille .toppinfo::before,
+html.stille .apent .prikk::after,
+html.stille .kant__spor,
+html.stille .gruppe::before,
+html.stille .anlegg--basseng::before,
+html.stille .chatknapp::before,
+html.stille .skriver .chat__avatar::before,
+html.stille .chat__topp::before,
+html.stille .prikker i,
+html.stille .foto::before,
+html.stille .hero__hint svg,
+html.stille .plan__vann::before,
+html.stille .bane__okt.pagar::after,
+html.stille .plan__naa,
+html.stille .her::before,
+html.stille .her::after,
+html.stille .bestilling::before,
+html.stille .bobler span,
+html.stille .bsteg li.naa i,
+html.stille .bestilling__lys::before,
+html.stille .bestilling__lys::after,
+html.stille #bestilling-tittel,
+html.stille .btype::before,
+html.stille .bflyt [data-handling="neste"]::after,
+html.stille .sporres::after,
+html.stille .sporres__ikon::after{animation:none!important}
 </style>
 </head>
 <body>
@@ -1551,7 +1585,7 @@ html[data-side="svommehall"] #bestill{display:none}
     </div>
   </nav>
 
-  <div class="side" data-side="svommehall" id="svommehall">
+  <div class="side" data-side="svommehall" id="svommehall"><h1 class="vh">Svømmehallen</h1>
   <div class="kant" data-kant="svommehall" aria-hidden="true"><div class="kant__spor"><ul></ul><ul></ul></div></div>
   <section class="seksjon dyp morkt" id="hvem">
     <div class="inn">
@@ -1636,7 +1670,7 @@ html[data-side="svommehall"] #bestill{display:none}
 
   </div>
 
-  <div class="side" data-side="bursdag">
+  <div class="side" data-side="bursdag"><h1 class="vh">Barnebursdag</h1>
   <section class="seksjon dyp2 morkt bursdagside" id="bursdag" aria-labelledby="bursdag-tittel">
     <div class="inn">
       <div class="hode rv">
@@ -1669,7 +1703,7 @@ html[data-side="svommehall"] #bestill{display:none}
   </section>
   </div>
 
-  <div class="side" data-side="idrettshall">
+  <div class="side" data-side="idrettshall"><h1 class="vh">Idrettshallen</h1>
   <section class="seksjon fas fas--idrett morkt" id="idrettshall" aria-labelledby="idrett-tittel">
     <div class="inn">
       <div class="hode rv">
@@ -1721,7 +1755,7 @@ html[data-side="svommehall"] #bestill{display:none}
 
   </div>
 
-  <div class="side" data-side="trimrom">
+  <div class="side" data-side="trimrom"><h1 class="vh">Trimrommet</h1>
   <section class="seksjon fas fas--trim hvit" id="trimrom" aria-labelledby="trim-tittel">
     <div class="inn">
       <div class="hode rv">
@@ -1774,7 +1808,7 @@ html[data-side="svommehall"] #bestill{display:none}
 
   </div>
 
-  <div class="side" data-side="sporsmal">
+  <div class="side" data-side="sporsmal"><h1 class="vh">Ofte besvarte spørsmål</h1>
   <section class="seksjon lys" id="sporsmal">
     <div class="inn todelt">
       <div class="hode rv">
@@ -1788,7 +1822,7 @@ html[data-side="svommehall"] #bestill{display:none}
 
   </div>
 
-  <div class="side" data-side="her">
+  <div class="side" data-side="her"><h1 class="vh">Finn fram</h1>
   <section class="seksjon her morkt" id="her" aria-labelledby="her-tittel">
     <div class="inn">
       <h2 class="her__tittel rv" id="her-tittel">Finn fram</h2>
@@ -1805,7 +1839,7 @@ html[data-side="svommehall"] #bestill{display:none}
   </section>
   </div>
 
-  <div class="side" data-side="bestilling">
+  <div class="side" data-side="bestilling"><h1 class="vh">Bestilling</h1>
   <section class="seksjon dyp2 morkt bestilling" id="bestilling" aria-labelledby="bestilling-tittel">
     <span class="bestilling__anker" id="bestill-bursdagVann"></span><span class="bestilling__anker" id="bestill-bursdagHall"></span><span class="bestilling__anker" id="bestill-idrettshall"></span><span class="bestilling__anker" id="bestill-barnehage"></span><span class="bestilling__anker" id="bestill-skole"></span><span class="bestilling__anker" id="bestill-lag"></span>
     <div class="bestilling__lys" aria-hidden="true"><i class="bestilling__spot"></i></div>
@@ -1836,6 +1870,7 @@ html[data-side="svommehall"] #bestill{display:none}
   </div>
 </footer>
 
+<button type="button" class="bevegelse" id="bevegelse" aria-pressed="false" aria-label="Stopp bevegelse" title="Stopp bevegelse"><svg class="pause" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.4" height="12" rx="1" fill="currentColor"/><rect x="9.6" y="2" width="3.4" height="12" rx="1" fill="currentColor"/></svg><svg class="spill" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.2v11.6c0 .6.7 1 1.2.6l8.4-5.8a.75.75 0 0 0 0-1.2L5.2 1.6C4.7 1.2 4 1.6 4 2.2z" fill="currentColor"/></svg></button>
 <button class="chatknapp" type="button" id="chatknapp" aria-expanded="false" aria-controls="chat">
   <span class="chat__avatar chat__avatar--stor" aria-hidden="true"><img data-bilde="ikon" alt="" hidden><b>R</b></span>
   <span class="chatknapp__tekst">Spør oss</span>
@@ -1883,6 +1918,34 @@ async function hentInnhold() {
    Vil dere heller følge den innstillingen, bytt false med:
    window.matchMedia('(prefers-reduced-motion: reduce)').matches */
 const ROLIG = false;
+
+/* Bevegelse kan stoppes med knappen nede til venstre (krav om universell utforming: bevegelse som varer
+   mer enn fem sekunder, må kunne stoppes). Valget huskes. Ber datamaskinen om mindre bevegelse, starter siden stoppet. */
+let STOPP = false;
+try { const lagret = localStorage.getItem('rh-bevegelse'); STOPP = lagret ? lagret === 'av' : window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+catch (e) { STOPP = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+document.documentElement.classList.toggle('stille', STOPP);
+function settOppBevegelseknapp() {
+  const b = document.getElementById('bevegelse'); if (!b) return;
+  const vis = () => { b.setAttribute('aria-pressed', String(STOPP)); b.title = STOPP ? 'Bevegelsen er stoppet. Trykk for å starte den igjen.' : 'Stopp bevegelse'; };
+  vis();
+  b.addEventListener('click', () => {
+    STOPP = !STOPP;
+    document.documentElement.classList.toggle('stille', STOPP);
+    try { localStorage.setItem('rh-bevegelse', STOPP ? 'av' : 'på'); } catch (e) { /* nettleseren husker ikke valget, men knappen virker */ }
+    vis();
+  });
+}
+/* «Hopp til innholdet»: går til innholdet på siden du er på, uten å bytte side */
+function settOppHopp() {
+  const h = document.querySelector('.hopp'); if (!h) return;
+  h.addEventListener('click', e => {
+    e.preventDefault();
+    const side = document.querySelector('.side.aktiv') || document.getElementById('innhold');
+    const f = side.querySelector('h1, h2') || side;
+    f.setAttribute('tabindex', '-1'); f.focus();
+  });
+}
 
 /* =====================================================================
    ALT INNHOLD OM SVØMMEHALLEN LIGGER I innhold.json.
@@ -2263,8 +2326,8 @@ function visDager(n) {
   let h = '';
   for (let i = 0; i < 7; i++) {
     const d = pluss(n.dato, i), plan = dagsplan(d), har = plan.okter.some(o => gjelder(o, valgt));
-    h += '<button type="button" class="dag' + (har ? '' : ' tom') + '" data-dag="' + i + '" aria-pressed="' + (i === dagNr) + '" aria-label="' + (i === 0 ? 'I dag, ' : '') + UKEDAGER[ukedag(d)] + ' ' + dagMnd(d) + (har ? '' : ', ingen tider') + '">' +
-      '<b>' + (i === 0 ? 'I dag' : stor(UKEDAGER[ukedag(d)].slice(0, 3))) + '</b><span class="tall">' + somDato(d).getUTCDate() + '. ' + MND[somDato(d).getUTCMonth()].slice(0, 3) + '</span><i></i></button>';
+    h += '<button type="button" class="dag' + (har ? '' : ' tom') + '" data-dag="' + i + '" aria-pressed="' + (i === dagNr) + '">' +
+      '<b>' + (i === 0 ? 'I dag' : stor(UKEDAGER[ukedag(d)].slice(0, 3))) + '</b> <span class="tall">' + somDato(d).getUTCDate() + '. ' + MND[somDato(d).getUTCMonth()].slice(0, 3) + '</span><span class="vh">, ' + UKEDAGER[ukedag(d)] + ' ' + dagMnd(d) + (har ? '' : ', ingen tider') + '</span><i></i></button>';
   }
   sett('dager', h);
 }
@@ -3280,9 +3343,11 @@ function settOppVann() {
     tegnTau(); tegnAktorer();
   }
 
+  let harTegnet = false;
   function ramme(na) {
     requestAnimationFrame(ramme);
-    if (!synlig || document.hidden) { t0 = na; return; }
+    if (!synlig || document.hidden || (STOPP && harTegnet)) { t0 = na; return; }
+    harTegnet = true;
     const t = na / 1000, dt = Math.min(.05, (na - t0) / 1000 || .016); t0 = na;
     /* Svømmerne flyttes og tegnes i hvert bilde, så de glir jevnt.
        Er enheten treg, regnes bare vannet under dem annethvert bilde. */
@@ -3348,7 +3413,7 @@ function flyt(el, spor, alle, antall) {
   (function gaa(na) {
     requestAnimationFrame(gaa);
     const dt = Math.min(.05, (na - sist) / 1000 || 0); sist = na;
-    if (!synlig || document.hidden || !dt) return;
+    if (!synlig || document.hidden || !dt || STOPP) return;
     fart += (maal - fart) * Math.min(1, dt * 2.5);           /* myk start og stopp */
     const runde = alle[antall].offsetLeft;                  /* bredden av én hel runde med bilder */
     if (!runde) return;
@@ -3379,7 +3444,7 @@ function settOppSlidere() {
     };
     /* Når vi har glidd inn på kopiene, hopper vi usynlig tilbake til originalen */
     spor.addEventListener('transitionend', e => { if (e.target === spor && i >= antall) flytt(i - antall, false); });
-    const start = () => { clearInterval(tid); if (!rolig) tid = setInterval(() => { if (!pause && synlig && !document.hidden) neste(1); }, VENT); };
+    const start = () => { clearInterval(tid); if (!rolig) tid = setInterval(() => { if (!pause && synlig && !document.hidden && !STOPP) neste(1); }, VENT); };
     el.querySelectorAll('.slider__knapp').forEach(b => b.addEventListener('click', () => { neste(+b.dataset.retning); start(); }));
     prikker.forEach((p, k) => p.addEventListener('click', () => { flytt(k, true); start(); }));
     el.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') pause = true; });
@@ -3554,7 +3619,7 @@ function settOppBevegelse() {
       requestAnimationFrame(rull);
       const dt = Math.min(.05, (na - sistT) / 1000 || 0); sistT = na;
       const y = window.scrollY, dy = Math.abs(y - sistY); sistY = y;
-      if (!synlig || document.hidden || !dt) return;
+      if (!synlig || document.hidden || !dt || STOPP) return;
       if (!bredde) { maal(); if (!bredde) return; }
       ekstra += ((rolig ? 0 : Math.min(520, dy / dt * .22)) - ekstra) * .1;
       fart += ((peker ? 0 : FART) - fart) * .07;
@@ -5720,6 +5785,8 @@ if (document.readyState === 'complete') maalTopp(); else window.addEventListener
 settOppBestilling();
 settOppHallFaner();
 settOppSider();
+settOppBevegelseknapp();
+settOppHopp();
 setInterval(visAlt, 30000);
 let planBredde = 0;
 window.addEventListener('resize', () => { const b = $('plan').clientWidth; if (Math.abs(b - planBredde) > 30) { planBredde = b; visDag(tid()); } });
