@@ -119,7 +119,7 @@
     "lørdag": [
       {
         "fra": "10.00",
-        "til": "16.00",
+        "til": "17.00",
         "gruppe": "familie-mosjon",
         "merknad": "To baner i 25 m-bassenget er reservert RIL svømming 10–11."
       }
@@ -127,7 +127,7 @@
     "søndag": [
       {
         "fra": "10.00",
-        "til": "16.00",
+        "til": "17.00",
         "gruppe": "familie-mosjon"
       }
     ]
@@ -711,12 +711,5 @@
       "søndag": []
     }
   },
-  "chatSvar": [
-    {
-      "ord": [
-        "kiosk*"
-      ],
-      "svar": "Kiosken er åpen 17–20 på hverdager og 11–15 i helgene."
-    }
-  ]
+  "chatSvar": []
 }
