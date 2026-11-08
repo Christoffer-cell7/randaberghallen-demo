@@ -1464,6 +1464,56 @@ html.stille .btype::before,
 html.stille .bflyt [data-handling="neste"]::after,
 html.stille .sporres::after,
 html.stille .sporres__ikon::after{animation:none!important}
+
+/* ---------- Mobil: luftigere og uten sidelengs bla ---------- */
+/* iPhone og iPad tegner ikke SVG-filteret på logoen, så den ble usynlig. Samme lyse logo med vanlige CSS-filtre: */
+@supports (-webkit-touch-callout:none){
+  .logo--lys .logo__bilde{filter:contrast(.24) brightness(2)}
+}
+@media (max-width:759px){
+  /* Menyen: plass til logoen ved siden av knappene */
+  .logo{flex:0 0 auto}
+  .logo__bilde{height:34px;max-width:38vw}
+  .nav .bestill__knapp{min-height:42px;padding:9px 14px;font-size:.9rem}
+  .menyknapp{min-height:42px}
+
+  /* Forsiden: alle snarveiene synes, to og to, uten å bla sidelengs */
+  html .side--forside .hurtig{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;overflow:visible!important;flex-wrap:wrap;margin-left:0!important;margin-right:0!important;padding:0!important;-webkit-mask-image:none!important;mask-image:none!important}
+  html .side--forside .hurtig a{justify-content:center;min-height:44px;width:auto;padding:8px 10px;font-size:.88rem;line-height:1.15;text-align:center;white-space:normal}
+  /* Kortene om idrettshall og trimrom: ett per rad, så teksten får plass */
+  html .side--forside .toppkort{grid-template-columns:minmax(0,1fr);flex:0 0 auto}
+  html .side--forside .tkort{min-height:132px}
+  /* Prototype 2: litt mindre tittel, så det blir plass til resten */
+  html.paa-forside .side--forside .hero h1{font-size:clamp(2.5rem,12.5vw,3.4rem)}
+  /* Teksten står nå litt høyere i bildet, så den mørke sløyfen går litt høyere opp (kontrast) */
+  html .side--forside>.hero .hero__slor{background:linear-gradient(0deg,rgba(4,14,34,.82) 0%,rgba(4,14,34,.7) 50%,rgba(4,14,34,.66) 87%,rgba(4,14,34,.3) 97%,rgba(4,14,34,.1))}
+
+  /* Undersidene: snarveiene i et rutenett øverst, ikke klistret til toppen */
+  .snarvei{position:static}
+  .snarvei__inn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;overflow:visible}
+  .snarvei a{justify-content:center;min-height:42px;padding:6px;gap:0;font-size:.8rem;line-height:1.15;text-align:center;white-space:normal}
+  .snarvei a svg{display:none}
+  /* Mindre luft over «Tilbake» */
+  .side:not(.side--forside)>section:first-of-type{padding-top:32px}
+
+  /* Åpningstider: alle sju dagene synes på én rad */
+  .dager{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;width:100%;overflow:visible;margin:0;padding:4px 0 6px}
+  .dag{min-width:0;min-height:56px;padding:6px 2px}
+  .dag b{font-size:.82rem}
+  .dag span.tall{font-size:.66rem;white-space:nowrap}
+  /* Hvordan bassengene deles: fire valg i to rader */
+  .deling__valg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;margin:16px 0 0;padding:0}
+  .deling__valg button{justify-content:flex-start;min-height:46px;padding:8px 12px;font-size:.86rem;line-height:1.2;text-align:left;white-space:normal}
+  /* Idrettshallen: valgene to og to */
+  .ivelg__knapper{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible!important;margin:0!important;padding:0!important}
+  .ivelg__knapper button{text-align:center;white-space:normal;padding:10px 12px}
+  .ivelg__knapper button:last-child:nth-child(odd){grid-column:1/-1}
+
+  /* Knappene som ligger nederst: mindre, så de dekker mindre av siden */
+  .chatknapp{padding:8px;gap:0}
+  .chatknapp__tekst{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .bevegelse{width:40px;height:40px}
+}
 </style>
 </head>
 <body>
