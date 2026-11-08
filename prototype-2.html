@@ -4284,6 +4284,11 @@ function settOppChat() {
     if (HILS.test(t) && t.replace(HILS, ' ').trim() === '') { const g = t.match(/god (morgen|dag|ettermiddag|kveld)/); return (g ? 'God ' + g[1] : n.min < 600 ? 'God morgen' : n.min >= 1080 ? 'God kveld' : 'Hei') + '! Hva kan jeg hjelpe deg med?'; }
     t = t.replace(HILS, ' ');
 
+    /* Egne svar fra innhold.json (chatSvar). Sjekkes før alt annet, så lederen kan bestemme hva chatboten svarer. */
+    const egetSvar = (HALL.chatSvar || []).find(c => c && c.svar && Array.isArray(c.ord) && c.ord.length
+      && har(...c.ord.map(o => String(o).toLowerCase())) && (!Array.isArray(c.ogsa) || !c.ogsa.length || har(...c.ogsa.map(o => String(o).toLowerCase()))));
+    if (egetSvar) return esc(egetSvar.svar);
+
     /* Småprat */
     const ordene = t.trim().split(' ');
     if (ordene.length <= 4 && ordene.every(o => ['ok', 'okei', 'okay', 'oki', 'greit', 'flott', 'supert', 'perfekt', 'skjønner', 'den', 'er', 'grei', 'fint', 'ja', 'nei', 'ålreit', 'nice', 'kult', 'aha', 'åh', 'ah', 'jaha', 'javel', 'da', 'så'].includes(o)))
