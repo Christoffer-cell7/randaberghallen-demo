@@ -710,5 +710,13 @@
       ],
       "søndag": []
     }
-  }
+  },
+  "chatSvar": [
+    {
+      "ord": [
+        "kiosk*"
+      ],
+      "svar": "Kiosken er åpen 17–20 på hverdager og 11–15 i helgene."
+    }
+  ]
 }
