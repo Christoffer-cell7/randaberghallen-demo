@@ -1,0 +1,714 @@
+{
+  "beskjeder": [],
+  "kontakt": {
+    "adresse": "Torvmyrveien 13",
+    "poststed": "4070 Randaberg",
+    "telefon": "958 98 295",
+    "epost": "post@randaberghallen.no",
+    "bestilling": "#bestilling",
+    "bestillValg": {
+      "bursdagHall": "#bestill-bursdagHall",
+      "bursdagVann": "#bestill-bursdagVann",
+      "idrettshall": "#bestill-idrettshall",
+      "barnehage": "#bestill-barnehage",
+      "skole": "#bestill-skole",
+      "lag": "#bestill-lag"
+    },
+    "parkering": "Gratis parkering rett utenfor. Flere plasser foran sandvolleyballbanene og på andre siden av Torvmyrveien, ved Vår Energi Arena Randaberg."
+  },
+  "grupper": [
+    {
+      "id": "familie-mosjon",
+      "navn": "Familiebading og mosjonssvømming",
+      "om": "Én bane er satt av til mosjonssvømming. Resten av bassenget er til lek, stup og hopp og rolig svømming, også for barn som øver til svømmemerker. Barnebassenget er åpent for de som ikke kan svømme, sammen med en voksen."
+    },
+    {
+      "id": "mosjon",
+      "navn": "Mosjonssvømming for voksne",
+      "tillegg": "18+",
+      "om": "Hele 25 m-bassenget er for mosjonssvømmere over 18 år, med én bane for raske, én for middels og en bred sone for rolig svømming. Barn under 18 år kan ikke bade da, og barnebassenget er vanligvis stengt."
+    },
+    {
+      "id": "pensjonist",
+      "navn": "Pensjonistsvømming",
+      "om": "25 m-bassenget er reservert pensjonister, uten baneskiller. Vanligvis vanngymnastikk på grunn del 10.00–10.30. Da kan du bare svømme på tvers på dyp del, eventuelt i én bane."
+    },
+    {
+      "id": "baby",
+      "navn": "Babybading",
+      "om": "Barnebassenget er reservert baby og småbarn med voksen. Ingen instruktør."
+    }
+  ],
+  "ordinareTider": {
+    "mandag": [
+      {
+        "fra": "19.00",
+        "til": "20.00",
+        "gruppe": "familie-mosjon"
+      },
+      {
+        "fra": "20.00",
+        "til": "21.00",
+        "gruppe": "mosjon"
+      }
+    ],
+    "tirsdag": [],
+    "onsdag": [
+      {
+        "fra": "06.20",
+        "til": "08.00",
+        "gruppe": "mosjon",
+        "resepsjonStengt": {
+          "fra": "06.30",
+          "til": "08.00"
+        }
+      },
+      {
+        "fra": "08.00",
+        "til": "09.30",
+        "gruppe": "familie-mosjon"
+      },
+      {
+        "fra": "09.30",
+        "til": "10.30",
+        "gruppe": [
+          "pensjonist",
+          "baby"
+        ],
+        "navn": "Pensjonistsvømming i 25 m-bassenget og babybading i barnebassenget (uten instruktør)",
+        "resepsjonStengt": {
+          "fra": "09.45",
+          "til": "11.00"
+        }
+      },
+      {
+        "fra": "10.30",
+        "til": "11.00",
+        "pause": true,
+        "navn": "Stengt (pause)"
+      },
+      {
+        "fra": "11.00",
+        "til": "14.00",
+        "gruppe": "familie-mosjon"
+      },
+      {
+        "fra": "17.00",
+        "til": "19.30",
+        "gruppe": "familie-mosjon"
+      },
+      {
+        "fra": "19.30",
+        "til": "21.00",
+        "gruppe": "mosjon"
+      }
+    ],
+    "torsdag": [],
+    "fredag": [
+      {
+        "fra": "15.00",
+        "til": "19.30",
+        "gruppe": "familie-mosjon"
+      },
+      {
+        "fra": "19.30",
+        "til": "21.00",
+        "gruppe": "mosjon"
+      }
+    ],
+    "lørdag": [
+      {
+        "fra": "10.00",
+        "til": "16.00",
+        "gruppe": "familie-mosjon",
+        "merknad": "To baner i 25 m-bassenget er reservert RIL svømming 10–11."
+      }
+    ],
+    "søndag": [
+      {
+        "fra": "10.00",
+        "til": "16.00",
+        "gruppe": "familie-mosjon"
+      }
+    ]
+  },
+  "spesialuker": [
+    {
+      "navn": "Høstferien",
+      "fra": "2026-10-05",
+      "til": "2026-10-11",
+      "dager": {
+        "2026-10-05": [
+          {
+            "fra": "11.00",
+            "til": "15.30",
+            "gruppe": "familie-mosjon"
+          },
+          {
+            "fra": "19.00",
+            "til": "20.00",
+            "gruppe": "familie-mosjon"
+          },
+          {
+            "fra": "20.00",
+            "til": "21.00",
+            "gruppe": "mosjon"
+          }
+        ],
+        "2026-10-06": [
+          {
+            "fra": "11.00",
+            "til": "19.00",
+            "gruppe": "familie-mosjon"
+          }
+        ],
+        "2026-10-07": "ordinær",
+        "2026-10-08": [
+          {
+            "fra": "11.00",
+            "til": "15.30",
+            "gruppe": "familie-mosjon"
+          }
+        ],
+        "2026-10-09": [
+          {
+            "fra": "11.00",
+            "til": "19.30",
+            "gruppe": "familie-mosjon"
+          },
+          {
+            "fra": "19.30",
+            "til": "21.00",
+            "gruppe": "mosjon"
+          }
+        ],
+        "2026-10-10": [
+          {
+            "fra": "10.00",
+            "til": "16.00",
+            "gruppe": "familie-mosjon",
+            "merknad": "To baner i 25 m-bassenget er reservert RIL svømming 10–11."
+          }
+        ],
+        "2026-10-11": [
+          {
+            "fra": "10.00",
+            "til": "16.00",
+            "gruppe": "familie-mosjon"
+          }
+        ]
+      }
+    }
+  ],
+  "stengteDager": [
+    {
+      "fra": "2026-12-24",
+      "til": "2026-12-26",
+      "navn": "Jul"
+    },
+    {
+      "fra": "2026-12-31",
+      "til": "2027-01-01",
+      "navn": "Nyttår"
+    },
+    {
+      "fra": "2027-02-07",
+      "til": "2027-02-07",
+      "navn": "Svømmestevne"
+    },
+    {
+      "fra": "2027-03-25",
+      "til": "2027-03-29",
+      "navn": "Påske"
+    },
+    {
+      "fra": "2027-05-01",
+      "til": "2027-05-01",
+      "navn": "Arbeidernes dag"
+    },
+    {
+      "fra": "2027-05-06",
+      "til": "2027-05-06",
+      "navn": "Kristi himmelfartsdag"
+    },
+    {
+      "fra": "2027-05-16",
+      "til": "2027-05-17",
+      "navn": "Pinse og 17. mai"
+    },
+    {
+      "fra": "2027-06-21",
+      "til": "2027-08-15",
+      "navn": "Sommerstengt"
+    }
+  ],
+  "priser": {
+    "grupper": [
+      {
+        "navn": "Enkeltbillett",
+        "linjer": [
+          {
+            "navn": "Voksne (18 år og eldre)",
+            "kr": 70
+          },
+          {
+            "navn": "Barn, student, honnør og ikke-badende",
+            "kr": 50
+          },
+          {
+            "navn": "Barn 0–9 år bosatt i Randaberg, med Barnas badekort",
+            "kr": 0
+          }
+        ]
+      },
+      {
+        "navn": "Periodebillett",
+        "linjer": [
+          {
+            "navn": "12 klipp, voksne",
+            "kr": 700
+          },
+          {
+            "navn": "12 klipp, barn, student og honnør",
+            "kr": 500
+          },
+          {
+            "navn": "6 måneder, voksne",
+            "kr": 1400
+          },
+          {
+            "navn": "6 måneder, barn, student og honnør",
+            "kr": 1000
+          }
+        ]
+      }
+    ],
+    "merknader": [
+      "Er det lite folk, kan du være lenger enn 1,5 time etter avtale med de ansatte.",
+      "Nytt billettarmbånd koster 60 kr når du kjøper periodebillett og ikke har armbånd fra før.",
+      "Klipp gjelder i to år fra kjøpsdato. Halvårskort er personlig og kan ikke brukes av andre.",
+      "Halvårskort forlenges automatisk med sommerstengingen. Stengte høytidsdager og stevnedager kompenseres ikke."
+    ]
+  },
+  "toppsporsmal": [
+    {
+      "sp": "Må babyer betale?",
+      "svar": "Ja, babyer betaler barnepris, 50 kr. Barn fra 0 til og med 9 år som bor i Randaberg kommune, bader gratis med Barnas badekort."
+    },
+    {
+      "sp": "Selger dere badehetter og badebukser?",
+      "svar": "Vi selger badebleier, badebukser til baby, svømmebriller, badehetter og armvinger i resepsjonen. Badedrakter, og badebukser til større barn og voksne, selger vi ikke."
+    },
+    {
+      "sp": "Når stenger dere?",
+      "svar": "Resepsjonen stenger cirka 45 minutter før stengetid. Alle må opp av bassenget 15 minutter før stengetid og være ute av garderoben innen vi stenger.",
+      "lenke": {
+        "tekst": "Se åpningstidene",
+        "til": "#hvem"
+      }
+    },
+    {
+      "sp": "Hva koster det å komme inn?",
+      "svar": "Voksne betaler 70 kr. Barn, studenter, honnør og ikke-badende betaler 50 kr.",
+      "lenke": {
+        "tekst": "Se alle priser",
+        "til": "#billetter"
+      }
+    }
+  ],
+  "sporsmal": [
+    {
+      "vis": true,
+      "sp": "Hva er Barnas badekort?",
+      "svar": "Barn fra 0 til og med 9 år som bor i Randaberg kommune, bader gratis under publikumsbading. En foresatt henter kortet på servicetorget på kommunehuset og må ta med gyldig ID. Kortet vises i resepsjonen. Det er personlig, og barnet må ha med en badende voksen som betaler vanlig billett."
+    },
+    {
+      "sp": "Hvor gamle må barn være for å bade alene?",
+      "svar": "Barn som har fylt 10 år og kan svømme, kan bade alene. Yngre barn må ha følge av en badende voksen over 18 år."
+    },
+    {
+      "sp": "Hvor gamle kan barn være med foreldre av motsatt kjønn i garderoben?",
+      "svar": "Fra barna begynner på skolen, og senest når de fyller 7 år, bruker de garderoben for sitt eget kjønn. Blir det vanskelig, kan du spørre de ansatte om hjelp eller tilrettelegging."
+    },
+    {
+      "sp": "Forlenges halvårskortet når hallen er sommerstengt?",
+      "svar": "Ja, automatisk. Dager som er stengt på grunn av helligdager, høytider eller stevner, kompenseres ikke."
+    },
+    {
+      "sp": "Hvorfor stemmer ikke åpningstidene på Google?",
+      "svar": "Vi styrer ikke åpningstidene på Google, og Google viser ikke hvilke grupper som har åpent. Sjekk alltid åpningstidene her på nettsiden."
+    },
+    {
+      "sp": "Hvordan deles bassengene under de ulike tidene?",
+      "visGrupper": true
+    },
+    {
+      "sp": "Er det noen generelle regler for bruk av svømmehallen?",
+      "svar": "Ja.",
+      "lenke": {
+        "tekst": "Se alle badereglene",
+        "til": "#alleregler"
+      }
+    }
+  ],
+  "regler": [
+    "Bading skjer på eget ansvar. Hallen er ikke ansvarlig for ting som blir borte.",
+    "Barn under 3 år må ha badebleie.",
+    "Alle må bruke badehette og vanlig badetøy: badedrakt, bikini, badebukse, badeshorts eller burkini. Vanlige klær er ikke lov i bassenget.",
+    "Barn under 10 år må ha med en badende voksen over 18 år. Barn fra 10 år kan bade alene, men må være svømmedyktige for å bade alene i det store bassenget.",
+    "Dusj uten badetøy og vask hele kroppen før bading og badstue. Dusj etter badstue.",
+    "Stup bare fra stupebrettene, og bare når de ansatte sier det er lov. Du kan sprette maks tre ganger på brettet før du hopper av.",
+    "Stupetårnet på 5 meter åpnes hver time klokka XX.45. Det er ingen aldersgrense, men du må være svømmedyktig for å hoppe.",
+    "Armvinger er lov når du hopper fra 1-meteren, men ikke fra 3- og 5-meteren.",
+    "Drikkeflaske med vann er lov. Annen drikke og mat er ikke lov i svømmehallen.",
+    "Har du en smittsom sykdom, åpne sår eller bandasjer, kan du ikke bade.",
+    "Fra skolestart, og senest fra 7 år, bruker barn garderoben for sitt eget kjønn.",
+    "Ta hensyn til andre badende.",
+    "Følg skilting og anvisninger fra betjeningen."
+  ],
+  "ikkeTillatt": [
+    "Dykkermaske som dekker nesen, og snorkel",
+    "Store medbrakte badeleker (armringer er lov)",
+    "Tyggegummi og snus",
+    "Røyk, e-sigarett og alkohol. Berusede personer blir avvist",
+    "Hunder",
+    "Løping, dytting og å dra andre under vann",
+    "Å sitte eller henge på baneskillene",
+    "Mobil og kamera inne i svømmehallen, også for dem som sitter og ser på"
+  ],
+  "trimrom": {
+    "tider": "8–22 mandag til fredag, 8–17 lørdag og 10–17 søndag",
+    "uke": [
+      {
+        "dager": "Mandag–fredag",
+        "fra": 8,
+        "til": 22,
+        "gjelder": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "dager": "Lørdag",
+        "fra": 8,
+        "til": 17,
+        "gjelder": [
+          5
+        ]
+      },
+      {
+        "dager": "Søndag",
+        "fra": 10,
+        "til": 17,
+        "gjelder": [
+          6
+        ]
+      }
+    ],
+    "stengteDager": [
+      {
+        "fra": "2026-12-24",
+        "til": "2026-12-26",
+        "navn": "Jul"
+      },
+      {
+        "fra": "2026-12-31",
+        "til": "2027-01-01",
+        "navn": "Nyttår"
+      },
+      {
+        "fra": "2027-03-25",
+        "til": "2027-03-29",
+        "navn": "Påske"
+      },
+      {
+        "fra": "2027-05-01",
+        "til": "2027-05-01",
+        "navn": "Arbeidernes dag"
+      },
+      {
+        "fra": "2027-05-06",
+        "til": "2027-05-06",
+        "navn": "Kristi himmelfartsdag"
+      },
+      {
+        "fra": "2027-05-16",
+        "til": "2027-05-17",
+        "navn": "Pinse og 17. mai"
+      },
+      {
+        "fra": "2027-06-21",
+        "til": "2027-08-15",
+        "navn": "Sommerstengt"
+      }
+    ],
+    "aldersgrense": 16,
+    "halvaarskort": 900,
+    "kort": [
+      {
+        "hvem": "Bare trimrom",
+        "note": "Halvårskort, 16 år og eldre",
+        "kr": 900
+      },
+      {
+        "hvem": "Trimrom og svømmehall",
+        "note": "Halvårskort, voksen 18+",
+        "kr": 1700,
+        "mork": true
+      },
+      {
+        "hvem": "Trimrom og svømmehall",
+        "note": "Halvårskort, ungdom 16+, student og honnør",
+        "kr": 1300
+      }
+    ],
+    "armbaand": 60
+  },
+  "bursdag": {
+    "typer": [
+      {
+        "id": "bursdagVann",
+        "navn": "Vanntastisk bursdag",
+        "sted": "Bursdag i svømmehallen",
+        "krPerBarn": 80,
+        "innhold": [
+          "1 time bading sammen med andre besøkende",
+          "1 time i selskapslokale på cirka 150 m²",
+          "Egen mat og drikke"
+        ],
+        "hvem": "For barn som kan svømme, vanligvis fra cirka 10 år.",
+        "tider": [
+          {
+            "dager": "Fredag",
+            "tid": "Bading 18–19"
+          },
+          {
+            "dager": "Lørdag og søndag",
+            "tid": "Bading 14–15"
+          }
+        ],
+        "kort": "fre, lør og søn",
+        "program": [
+          {
+            "dager": "Fredag",
+            "steg": [
+              [
+                "17.30",
+                "18.00",
+                "Rigging og pynting"
+              ],
+              [
+                "18.00",
+                "19.00",
+                "Bading"
+              ],
+              [
+                "19.00",
+                "20.00",
+                "Selskap"
+              ],
+              [
+                "20.00",
+                "20.30",
+                "Rydding"
+              ]
+            ]
+          },
+          {
+            "dager": "Lørdag og søndag",
+            "steg": [
+              [
+                "13.30",
+                "14.00",
+                "Rigging og pynting"
+              ],
+              [
+                "14.00",
+                "15.00",
+                "Bading"
+              ],
+              [
+                "15.00",
+                "16.00",
+                "Selskap"
+              ],
+              [
+                "16.00",
+                "16.30",
+                "Rydding"
+              ]
+            ]
+          }
+        ],
+        "laan": "fryseboks, kjøleskap og mikrobølgeovn",
+        "merInfo": "https://randaberghallen.no/bursdag-svommehall/"
+      },
+      {
+        "id": "bursdagHall",
+        "navn": "Bursdag i idrettshallen",
+        "sted": "Aktivitet og selskap",
+        "krPerBarn": 60,
+        "innhold": [
+          "1 time aktivitet i hallen",
+          "1 time i møterom på cirka 150 m²",
+          "Egen mat og drikke"
+        ],
+        "hvem": "Ta med rene innesko.",
+        "tider": [
+          {
+            "dager": "Lørdag og søndag",
+            "tid": "Aktivitet 15–16, selskap 16–17"
+          }
+        ],
+        "kort": "lør og søn",
+        "program": [
+          {
+            "dager": "Lørdag og søndag",
+            "steg": [
+              [
+                "14.30",
+                "15.00",
+                "Rigging og pynting"
+              ],
+              [
+                "15.00",
+                "16.00",
+                "Aktivitet i idrettshallen"
+              ],
+              [
+                "16.00",
+                "17.00",
+                "Selskap i møtesalen"
+              ],
+              [
+                "17.00",
+                "17.30",
+                "Rydding"
+              ]
+            ]
+          }
+        ],
+        "laan": "innebandykøller, innefotballer, små mål, fryseboks, kjøleskap og mikrobølgeovn",
+        "merInfo": "https://randaberghallen.no/barnebursdag-idrettshall/"
+      }
+    ],
+    "voksne": "Voksne i følget er gratis.",
+    "felles": [
+      {
+        "tittel": "Ta med",
+        "tekst": "Mat, drikke, tallerkener, bestikk, duk og pynt.",
+        "ikon": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 3v8a3 3 0 0 0 6 0V3M9 3v18M17 3c-1.7 1.5-2.5 3.5-2.5 6s.8 3.5 2.5 3.5V21\"/></svg>"
+      },
+      {
+        "tittel": "I rommet",
+        "tekst": "Bord, stoler, projektor og høyttaler. Cirka 150 m².",
+        "ikon": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"12\" rx=\"2\"/><path d=\"M8 20h8M12 16v4\"/></svg>"
+      },
+      {
+        "tittel": "Kan lånes",
+        "tekst": "Kjøleskap, fryser og mikro. I idrettshallen også innebandykøller, fotballer og små mål.",
+        "ikon": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"6\" y=\"3\" width=\"12\" height=\"18\" rx=\"2\"/><path d=\"M6 10h12M9 6.5v1M9 13v2\"/></svg>"
+      },
+      {
+        "tittel": "Oppmøte",
+        "tekst": "Cirka 10 minutter før. Meld dere i resepsjonen eller ring vaktmester.",
+        "ikon": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/></svg>"
+      },
+      {
+        "tittel": "Voksne",
+        "tekst": "Ta med nok voksne til å passe på barna. Voksne er gratis.",
+        "ikon": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"8\" r=\"3\"/><path d=\"M3.5 20c.6-3.4 2.8-5.5 5.5-5.5s4.9 2.1 5.5 5.5\"/><circle cx=\"17\" cy=\"9\" r=\"2.3\"/><path d=\"M15.5 14.6c2.3.1 4.2 2 4.8 5.4\"/></svg>"
+      },
+      {
+        "tittel": "Betaling",
+        "tekst": "Kun barn betaler, og dere betaler når dere kommer. Avbestill senest 24 timer før.",
+        "ikon": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"12\" rx=\"2\"/><path d=\"M3 10h18M7 15h3\"/></svg>"
+      }
+    ]
+  },
+  "idrettshall": {
+    "leiePerTime": 300,
+    "haller": 2,
+    "lederAlder": 18,
+    "garderobeMin": 15,
+    "avbestillTimer": 24
+  },
+  "klubb": {
+    "navn": "RIL svømming",
+    "nettsted": "http://randabergsvommerne.no",
+    "tider": {
+      "mandag": [
+        {
+          "fra": "15.45",
+          "til": "17.00",
+          "hvem": "Rekrutt"
+        },
+        {
+          "fra": "17.00",
+          "til": "19.00",
+          "hvem": "ABC-gjengen, A og B"
+        }
+      ],
+      "tirsdag": [
+        {
+          "fra": "05.30",
+          "til": "08.00",
+          "hvem": "ABC-gjengen, A-gruppa"
+        },
+        {
+          "fra": "19.00",
+          "til": "21.00",
+          "hvem": "ABC-gjengen, A og B"
+        }
+      ],
+      "onsdag": [
+        {
+          "fra": "15.00",
+          "til": "17.00",
+          "hvem": "ABC-gjengen, A-gruppa"
+        }
+      ],
+      "torsdag": [
+        {
+          "fra": "05.30",
+          "til": "08.00",
+          "hvem": "ABC-gjengen, A-gruppa"
+        },
+        {
+          "fra": "15.45",
+          "til": "17.00",
+          "hvem": "Rekrutt"
+        },
+        {
+          "fra": "17.00",
+          "til": "19.00",
+          "hvem": "ABC-gjengen, A og B"
+        }
+      ],
+      "fredag": [
+        {
+          "fra": "05.30",
+          "til": "08.00",
+          "hvem": "ABC-gjengen, A-gruppa"
+        }
+      ],
+      "lørdag": [
+        {
+          "fra": "08.00",
+          "til": "10.00",
+          "hvem": "ABC-gjengen, A og B"
+        },
+        {
+          "fra": "10.00",
+          "til": "11.00",
+          "hvem": "ABC-gjengen, A og B",
+          "del": "to baner"
+        }
+      ],
+      "søndag": []
+    }
+  }
+}
