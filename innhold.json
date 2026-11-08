@@ -1,5 +1,11 @@
 {
-  "beskjeder": [],
+  "beskjeder": [
+    {
+      "tekst": "Badstua er stengt i to uker, til og med lørdag 21. november.",
+      "fra": "2026-11-08",
+      "til": "2026-11-21"
+    }
+  ],
   "kontakt": {
     "adresse": "Torvmyrveien 13",
     "poststed": "4070 Randaberg",
