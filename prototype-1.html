@@ -732,7 +732,7 @@ html.paa-forside,html.paa-forside body{overflow-x:hidden;overscroll-behavior:non
 @keyframes chatinn{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
 @media (min-width:520px){.chat{left:auto;width:410px}}
 .chat__topp{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;gap:14px;padding:18px 12px 18px 18px;background:linear-gradient(150deg,#0F6FD8,#0A3F9E);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.14)}
-.chat__topp::before{content:"";position:absolute;z-index:-1;inset:-300px 0 0 -300px;background-image:var(--kaustikk);background-size:300px 300px;mix-blend-mode:screen;opacity:.3;animation:chatvann 26s linear infinite}
+.chat__topp::before{content:"";position:absolute;z-index:-1;inset:-300px 0 0 -300px;background-image:var(--kaustikk);background-size:300px 300px;mix-blend-mode:screen;opacity:.36;animation:chatvann 26s linear infinite}
 @keyframes chatvann{to{transform:translate(300px,300px)}}
 .chat__topp div{flex:1;min-width:0}
 .chat__topp h2{font-family:var(--display);font-weight:800;font-size:1.28rem;line-height:1.1;letter-spacing:-.015em}
@@ -1929,10 +1929,9 @@ async function hentInnhold() {
 const ROLIG = false;
 
 /* Bevegelse kan stoppes med knappen nede til venstre (krav om universell utforming: bevegelse som varer
-   mer enn fem sekunder, må kunne stoppes). Valget huskes. Ber datamaskinen om mindre bevegelse, starter siden stoppet. */
+   mer enn fem sekunder, må kunne stoppes). Siden starter alltid med bevegelse. Trykker noen på knappen, huskes valget. */
 let STOPP = false;
-try { const lagret = localStorage.getItem('rh-bevegelse'); STOPP = lagret ? lagret === 'av' : window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
-catch (e) { STOPP = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+try { STOPP = localStorage.getItem('rh-bevegelse') === 'av'; } catch (e) { /* nettleseren husker ikke valget, siden starter med bevegelse */ }
 document.documentElement.classList.toggle('stille', STOPP);
 function settOppBevegelseknapp() {
   const b = document.getElementById('bevegelse'); if (!b) return;
@@ -3293,8 +3292,8 @@ function settOppVann() {
 
   /* Skyggen av alle svømmerne på bunnen, samlet på ett lag så overlapp ikke blir mørkere */
   const skyggeLag = document.createElement('canvas'), sctx = skyggeLag.getContext('2d');
-  function tegnAktorer() {
-    const k = ctx2, tid = performance.now() / 1000, deler = [];
+  function tegnAktorer(fastTid) {
+    const k = ctx2, tid = fastTid !== undefined ? fastTid : performance.now() / 1000, deler = [];
     if (!aktorer.length) return;
     if (skyggeLag.width !== c2.width || skyggeLag.height !== c2.height) { skyggeLag.width = c2.width; skyggeLag.height = c2.height; }
     for (let n = 0; n < aktorer.length; n++) lagDeler(aktorer[n], tid, deler);
@@ -3342,12 +3341,23 @@ function settOppVann() {
     tegnTau(); tegnAktorer();
   }
 
-  let harTegnet = false;
+  let stoppTegnet = 0, sisteT = 0;
   function ramme(na) {
     requestAnimationFrame(ramme);
-    if (!synlig || document.hidden || (STOPP && harTegnet)) { t0 = na; return; }
-    harTegnet = true;
-    const t = na / 1000, dt = Math.min(.05, (na - t0) / 1000 || .016); t0 = na;
+    if (!synlig || document.hidden) { t0 = na; return; }
+    if (STOPP) {
+      /* Stoppet: ingenting flytter seg, men bildet tegnes på nytt hvert halve sekund, så vannet og svømmerne alltid synes */
+      t0 = na;
+      if (na - stoppTegnet < 500) return;
+      stoppTegnet = na;
+      sjekkBaner(); aktorer.forEach(a => { if (a.maalY !== undefined) a.y = a.maalY; });   /* svømmerne står i sin egen bane */
+      tegnVann(sisteT * .5);
+      ctx2.setTransform(1, 0, 0, 1, 0, 0); ctx2.clearRect(0, 0, c2.width, c2.height); ctx2.setTransform(dpr, 0, 0, dpr, 0, 0);
+      tegnTau(0); tegnAktorer(sisteT);
+      return;
+    }
+    stoppTegnet = 0;
+    const t = na / 1000, dt = Math.min(.05, (na - t0) / 1000 || .016); t0 = na; sisteT = t;
     /* Svømmerne flyttes og tegnes i hvert bilde, så de glir jevnt.
        Er enheten treg, regnes bare vannet under dem annethvert bilde. */
     oppdater(dt);
