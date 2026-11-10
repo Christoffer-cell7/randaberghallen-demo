@@ -1526,9 +1526,7 @@ html.stille .sporres__ikon::after{animation:none!important}
   </filter>
 </svg>
 <div class="demo">
-  <span class="demo__merke">Demo.<span class="demo__lang"> Ikke den offisielle nettsiden.</span></span>
   <a class="demo__bytt" href="prototype-2.html">Se prototype 2 →</a>
-  <b id="bildevarsel" hidden style="font-weight:600;color:#FFE7A1">Bilder og logo vises ikke<span class="demo__lang"> i denne forhåndsvisningen</span>.</b>
   <label><span><span class="demo__lang2">Vis siden som om </span>klokka er</span>
     <select id="demotid">
       <option value="">nå</option>
@@ -1912,7 +1910,6 @@ html.stille .sporres__ikon::after{animation:none!important}
       </div>
       <ol class="bsteg" id="bestillsteg" aria-label="Steg i bestillingen"></ol>
       <div class="bflyt" id="bestillflyt" aria-live="polite"></div>
-      <p class="bestilling__demo">Demo. Bestillingen sendes ikke noe sted. I den ferdige løsningen kobles den til bookingsystemet til Randaberg kommune, og du får bekreftelse på e-post.</p>
     </div>
   </section>
   </div>
@@ -1921,7 +1918,6 @@ html.stille .sporres__ikon::after{animation:none!important}
 <footer class="bunn morkt">
   <div class="inn bunn__inn">
     <span>Randaberghallen eies og drives av Randaberg kommune.</span>
-    <span>Demo. Innholdet er hentet fra randaberghallen.no og randabergsvommerne.no i oktober 2026.</span>
     <nav class="bunn__lenker" aria-label="Erklæringer">
       <a href="https://randaberghallen.no/personvernerklaering/" target="_blank" rel="noopener">Personvernerklæring<span class="vh"> (åpnes i ny fane)</span></a>
       <a href="https://uustatus.no/nb/erklaringer/publisert/7ee313d1-11dd-47e3-8139-ac79200737f1" target="_blank" rel="noopener">Tilgjengelighetserklæring<span class="vh"> (åpnes i ny fane)</span></a>
@@ -1952,7 +1948,7 @@ html.stille .sporres__ikon::after{animation:none!important}
     </button>
   </form>
   <p class="chat__spraak" lang="en"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.7 3.9 5.9 3.9 9.5s-1.3 6.8-3.9 9.5c-2.6-2.7-3.9-5.9-3.9-9.5s1.3-6.8 3.9-9.5z"/></svg>Type in your language</p>
-  <p class="chat__bunn">Demo. Svarene bygger på informasjonen på denne siden. Ikke skriv personopplysninger.</p>
+  <p class="chat__bunn">Svarene bygger på informasjonen på denne siden. Ikke skriv personopplysninger.</p>
 </section>
 <p class="beskjed" id="beskjed" role="status" hidden></p>
 
@@ -2323,7 +2319,7 @@ const HAKE = '<svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke
 
 /* Bilder: vises bare hvis de faktisk lastes */
 let bildefeilMeldt = false;
-function bildeFeil() { if (bildefeilMeldt) return; bildefeilMeldt = true; $('bildevarsel').hidden = false; }
+function bildeFeil() { if (bildefeilMeldt) return; bildefeilMeldt = true; }
 /* Alle bilder og logoer er merket med data-bilde="navn" og får adressen sin fra BILDER.
    Lastes et bilde ikke, fjernes det, og reserven vises: navnet i menyen, en R i chatten, vann bak bildetekstene. */
 const bildeStatus = {};
@@ -5501,9 +5497,9 @@ function settOppBestilling() {
       info: '1 time aktivitet i hallen og 1 time i selskapsrom. ' + stor(hallB.kort) + '. For alle aldre.' },
     idrettshall: { navn: 'Kompistrening', kort: 'Leie av idrettshall', sted: 'Leie av idrettshall', klasse: 'leie', ikon: ikon.leie, kr: ih.leiePerTime, enhet: 'per time', timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2'],
       info: 'Lei en hel hall til ballspill og trening med venner. Gruppeleder må være ' + ih.lederAlder + ' år eller eldre.' },
-    barnehage: { navn: 'Barnehage', kort: 'Barnehage', sted: 'Barnehager i Randaberg', klasse: 'org', ikon: ikon.barnehage, org: true, timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2'], hvem: 'barnehagen', bruker: 'Styreren', demo: 'Demo barnehage' },
-    skole: { navn: 'Skole', kort: 'Skole', sted: 'Skoler i Randaberg', klasse: 'org', ikon: ikon.skole, org: true, timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2'], hvem: 'skolen', bruker: 'Rektor eller inspektør', demo: 'Demo skole' },
-    lag: { navn: 'Lag og forening', kort: 'Lag og forening', sted: 'Lag og foreninger', klasse: 'org', ikon: ikon.lag, org: true, timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2', 'Møterom'], hvem: 'laget', bruker: 'Lagets leder', demo: 'Demo IL' }
+    barnehage: { navn: 'Barnehage', kort: 'Barnehage', sted: 'Barnehager i Randaberg', klasse: 'org', ikon: ikon.barnehage, org: true, timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2'], hvem: 'barnehagen', bruker: 'Styreren', demo: 'Din barnehage' },
+    skole: { navn: 'Skole', kort: 'Skole', sted: 'Skoler i Randaberg', klasse: 'org', ikon: ikon.skole, org: true, timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2'], hvem: 'skolen', bruker: 'Rektor eller inspektør', demo: 'Din skole' },
+    lag: { navn: 'Lag og forening', kort: 'Lag og forening', sted: 'Lag og foreninger', klasse: 'org', ikon: ikon.lag, org: true, timer: true, lokaler: ['Idrettshall 1', 'Idrettshall 2', 'Møterom'], hvem: 'laget', bruker: 'Lagets leder', demo: 'Ditt idrettslag' }
   };
   const STEG = ['Velg', 'Dag og tid', 'Opplysninger', 'Bekreft'];
   const tom = () => ({ type: null, lokale: 0, dato: null, start: null, slutt: null, mnd: 0, innlogget: false,
@@ -5661,7 +5657,7 @@ function settOppBestilling() {
     const t = TYPER[st.type], i = st.info, bursdag = !t.timer, org = !!t.org;
     const akt = ['', 'Fotball', 'Innebandy', 'Volleyball', 'Basketball', 'Håndball', 'Badminton', 'Annet'];
     let ut = '<div class="bflyt__hoved"><h3 class="ba" style="--i:0">' + (org ? 'Logg inn og send' : 'Dine opplysninger') + '</h3>';
-    if (org) ut += '<div class="blogg ba' + (st.innlogget ? ' inne' : '') + '" style="--i:1" data-for="innlogget"><span class="blogg__ikon">' + (st.innlogget ? ikon.hake : ikon.las) + '</span><div><b>' + (st.innlogget ? 'Logget inn (demo)' : 'Logg inn med brukeren fra hallen') + '</b><span>' + esc(t.bruker) + ' har brukernavn og passord. Har dere ikke bruker? Send e-post til ' + esc(HALL.kontakt.epost) + '.</span></div>' +
+    if (org) ut += '<div class="blogg ba' + (st.innlogget ? ' inne' : '') + '" style="--i:1" data-for="innlogget"><span class="blogg__ikon">' + (st.innlogget ? ikon.hake : ikon.las) + '</span><div><b>' + (st.innlogget ? 'Logget inn' : 'Logg inn med brukeren fra hallen') + '</b><span>' + esc(t.bruker) + ' har brukernavn og passord. Har dere ikke bruker? Send e-post til ' + esc(HALL.kontakt.epost) + '.</span></div>' +
       (st.innlogget ? '' : '<button type="button" class="knapp knapp--liten" data-handling="logginn">Logg inn</button>') + '</div>';
     else ut += '<p class="bflyt__ingress ba" style="--i:1">Vi bruker dette bare til bestillingen. Du får bekreftelse på e-post.</p>';
     ut += '<div class="bkasse ba" style="--i:2"><div class="bskjema">' +
