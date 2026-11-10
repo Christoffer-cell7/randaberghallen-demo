@@ -5,14 +5,14 @@
     "poststed": "4070 Randaberg",
     "telefon": "958 98 295",
     "epost": "post@randaberghallen.no",
-    "bestilling": "#bestilling",
+    "bestilling": "https://randaberg.bestille.no/",
     "bestillValg": {
-      "bursdagHall": "#bestill-bursdagHall",
-      "bursdagVann": "#bestill-bursdagVann",
-      "idrettshall": "#bestill-idrettshall",
-      "barnehage": "#bestill-barnehage",
-      "skole": "#bestill-skole",
-      "lag": "#bestill-lag"
+      "bursdagHall": "https://randaberg.bestille.no/",
+      "bursdagVann": "https://randaberg.bestille.no/",
+      "idrettshall": "https://randaberg.bestille.no/",
+      "barnehage": "https://randaberg.bestille.no/",
+      "skole": "https://randaberg.bestille.no/",
+      "lag": "https://randaberg.bestille.no/"
     },
     "parkering": "Gratis parkering rett utenfor. Flere plasser foran sandvolleyballbanene og på andre siden av Torvmyrveien, ved Vår Energi Arena Randaberg."
   },
