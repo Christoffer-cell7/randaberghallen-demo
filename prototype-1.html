@@ -4950,9 +4950,9 @@ function settOppChat() {
         : 'Ja, drikkeflaske med vann er lov. Annen drikke og mat er ikke lov i svømmehallen.';
 
     /* Badstue */
-    /* To badstuer (bekreftet av Christoffer 11. november 2026) */
+    /* To badstuer, én i hver garderobe (bekreftet av Christoffer 11. november 2026) */
     if (har('badstu*', 'sauna*'))
-      return (janei ? 'Ja, vi har to badstuer, og de' : 'De to badstuene') + ' kan du bruke når du bader hos oss. Dusj uten badetøy før du går inn i badstuen, og dusj igjen etter.';
+      return (janei ? 'Ja, vi' : 'Vi') + ' har to badstuer – én i herregarderoben og én i damegarderoben. Du kan bruke badstuen når du bader hos oss. Dusj uten badetøy før du går inn, og dusj igjen etter.';
 
     /* Stupebrett og stupetårn: 1, 3 og 5 meter */
     const hoyde = /(?:^|\s)[135](?:\s|-)?(?:m|meter\w*|meters\w*)(?=\s|$)/.test(t) && !har('dyp*', 'dybde*', 'lang*', 'lengde*');
