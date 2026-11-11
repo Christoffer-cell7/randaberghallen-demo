@@ -4925,7 +4925,6 @@ function settOppChat() {
       const ps = finnStatus(n, 'pensjonist');
       return 'Under pensjonistsvømmingen er det vanligvis vanngymnastikk på grunn del 10.00–10.30.' + (ps.neste ? ' Neste pensjonistsvømming er ' + naarTekst(ps.neste) + '.' : '') + ' Andre timer med vanntrening har vi ikke i timeplanen.';
     }
-    /* Kiosk. SJEKK: åpningstidene og hva kiosken selger. */
     /* Kiosken (varene bekreftet av de ansatte 7. nov 2026). SJEKK: åpningstidene. */
     const KIOSKVARER = [
       { ord: ['is', 'iskrem', 'isen', 'softis'], navn: 'is' }, { ord: ['pølse*', 'grillpølse*', 'pølser'], navn: 'pølser' }, { ord: ['vaffel*', 'vafler', 'vaflene'], navn: 'vafler' },
@@ -4952,9 +4951,9 @@ function settOppChat() {
         : 'Ja, drikkeflaske med vann er lov. Annen drikke og mat er ikke lov i svømmehallen.';
 
     /* Badstue */
-    /* SJEKK: svom.no skriver at anlegget har to badstuer. Står ikke på randaberghallen.no, så svaret nevner ikke antallet. */
+    /* To badstuer (bekreftet av Christoffer 11. november 2026) */
     if (har('badstu*', 'sauna*'))
-      return (janei ? 'Ja, vi har badstue, og den' : 'Badstuen') + ' kan du bruke når du bader hos oss. Dusj uten badetøy før du går inn i badstuen, og dusj igjen etter.';
+      return (janei ? 'Ja, vi har to badstuer, og de' : 'De to badstuene') + ' kan du bruke når du bader hos oss. Dusj uten badetøy før du går inn i badstuen, og dusj igjen etter.';
 
     /* Stupebrett og stupetårn: 1, 3 og 5 meter */
     const hoyde = /(?:^|\s)[135](?:\s|-)?(?:m|meter\w*|meters\w*)(?=\s|$)/.test(t) && !har('dyp*', 'dybde*', 'lang*', 'lengde*');
