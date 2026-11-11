@@ -4925,7 +4925,7 @@ function settOppChat() {
       const ps = finnStatus(n, 'pensjonist');
       return 'Under pensjonistsvømmingen er det vanligvis vanngymnastikk på grunn del 10.00–10.30.' + (ps.neste ? ' Neste pensjonistsvømming er ' + naarTekst(ps.neste) + '.' : '') + ' Andre timer med vanntrening har vi ikke i timeplanen.';
     }
-    /* Kiosken (varene bekreftet av de ansatte 7. nov 2026). SJEKK: åpningstidene. */
+    /* Kiosken (varene bekreftet av de ansatte 7. nov 2026, åpningstidene fra skiltet i hallen 11. nov 2026). */
     const KIOSKVARER = [
       { ord: ['is', 'iskrem', 'isen', 'softis'], navn: 'is' }, { ord: ['pølse*', 'grillpølse*', 'pølser'], navn: 'pølser' }, { ord: ['vaffel*', 'vafler', 'vaflene'], navn: 'vafler' },
       { ord: ['sandwich*', 'sandwitch*', 'smørbrød*', 'baguett*', 'toast*'], navn: 'sandwicher' }, { ord: ['nudler', 'nudel*', 'mr lee', 'nudlene'], navn: 'nudler' },
@@ -4933,7 +4933,7 @@ function settOppChat() {
     const kioskListe = 'drikke, pølser, vafler, sandwicher, nudler, is og litt godteri';
     if ((har('kiosk*', 'kafe*', 'kafé*', 'kafeteria*', 'kantine*', 'café', 'cafe') || (har('kjøpe*', 'kjøpt', 'selger', 'selge*', 'får man', 'får jeg', 'har dere') && (KIOSKVARER.some(v => har(...v.ord)) || har('mat', 'spise*', 'noe å spise', 'noe å drikke'))) || har('pølse*', 'vaffel*', 'vafler', 'nudler', 'sandwich*', 'godteri*', 'godis', 'iskrem'))
         && !har('ta med', 'ha med', 'tar med', 'medbrakt*', 'lov å', 'lov med')) {
-      if (har('når', 'åpen', 'åpent', 'åpner', 'åpningstid*', 'stenger', 'tider')) return 'Åpningstidene til kiosken har jeg ikke her ennå. Ring oss på ' + esc(k.telefon) + ', så sier vi når den er åpen. Kiosken selger ' + kioskListe + '.';
+      if (har('når', 'åpen', 'åpent', 'åpner', 'åpningstid*', 'stenger', 'tider')) return 'Kiosken er åpen mandag, onsdag og fredag kl. 17.00–20.00, og lørdag og søndag kl. 10.00–15.00. Tirsdag og torsdag er den stengt, og den er stengt fra 1. juni til 1. september. Kiosken selger ' + kioskListe + '.';
       const funn = KIOSKVARER.filter(v => har(...v.ord)).map(v => v.navn);
       if (!funn.length && har('mat', 'spise*', 'noe å spise')) return 'Ja, i kiosken kan du kjøpe pølser, vafler, sandwicher, nudler, is og litt godteri, og drikke.';
       if (har('kaffe', 'te', 'kakao') && !funn.length) return 'Kiosken selger litt forskjellig drikke, men om den har kaffe, vet jeg ikke sikkert. Den har også pølser, vafler, sandwicher, nudler, is og litt godteri.';
