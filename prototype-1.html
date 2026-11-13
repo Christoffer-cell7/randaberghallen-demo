@@ -1509,6 +1509,24 @@ html.stille .sporres__ikon::after{animation:none!important}
   .chatknapp__tekst{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .bevegelse{width:40px;height:40px}
 }
+
+/* ---------- Mobil: færre ting å se på samtidig ---------- */
+@media (max-width:759px){
+  /* Snarveiene øverst er nøyaktig de samme seks lenkene som ligger i Meny-knappen.
+     To rader med knapper rett under logoen ble mye å se på i ett jafs, så på
+     telefon holder menyen alene. */
+  .snarvei{display:none}
+  /* Faktastripen blir lavere og mindre dominerende */
+  .kant{padding:12px 0}
+  .kant li{font-size:.75rem;letter-spacing:.12em}
+  /* Tavlen med åpningstider: litt mer luft mellom delene, så de ikke blir én vegg */
+  .tavle__topp{gap:26px}
+  .plan{margin-top:24px}
+  .plan__under{margin-top:14px}
+  .okter{margin-top:24px}
+  /* Egen stripe øverst i bassenget til «Nå», så merket ikke dekker navnet på den øverste banen */
+  .plan__vann{padding-top:20px}
+}
 </style>
 </head>
 <body>
@@ -2715,6 +2733,8 @@ function settOppVann() {
   let halv = false, teller = 0, bilder = 0, jsSum = 0, dtSum = 0, nMaal = 0;
 
   /* Svømmerne: hud, badehette og badetøy. Fart i piksler per sekund, rolig tempo. */
+  /* På telefon og nettbrett svømmer de halvt så fort. Små skjermer gir mye bevegelse på lite plass. */
+  const SAKTE = lett ? .5 : 1;
   const TYPER = [
     { stil: 'crawl', hud: '#E9BE9A', hette: '#F4F6F8', drakt: '#0B1F4D', bukse: true, v: 37.5 },
     { stil: 'crawl', hud: '#8E5F41', hette: '#FFC53D', drakt: '#0E6F7A', bukse: false, v: 45, svommefotter: true },   /* litt raskere enn de andre, med svømmeføtter */
@@ -2787,7 +2807,7 @@ function settOppVann() {
     for (let i = 0; i < antall; i++) {
       const ty = hvem[i], ret = i % 2 ? Math.PI : 0;
       aktorer.push({ bane: i, x: 110 + ((i * 0.37 + .22) % 1) * (W - 220), y: baner[i].y, ret: ret, vinkel: ret, sving: i % 2 ? -1 : 1,
-        v: ty.v * (.9 + s * .22) * .95, fart: ty.v * .95, fase: i * 1.9, takt: ty.stil === 'bryst' ? 2.75 - i * .03 : 2.9 - i * .1,
+        v: ty.v * (.9 + s * .22) * .95 * SAKTE, fart: ty.v * .95 * SAKTE, fase: i * 1.9, takt: (ty.stil === 'bryst' ? 2.75 - i * .03 : 2.9 - i * .1) * SAKTE,
         tilstand: 'svom', tt: 0, fra: 0, s: s, ty: ty });
     }
   }
