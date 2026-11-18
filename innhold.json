@@ -118,7 +118,7 @@
     ],
     "lørdag": [
       {
-        "fra": "09.00",
+        "fra": "10.00",
         "til": "16.00",
         "gruppe": "familie-mosjon",
         "merknad": "To baner i 25 m-bassenget er reservert RIL svømming 10–11."
@@ -126,7 +126,7 @@
     ],
     "søndag": [
       {
-        "fra": "09.00",
+        "fra": "10.00",
         "til": "16.00",
         "gruppe": "familie-mosjon"
       }
